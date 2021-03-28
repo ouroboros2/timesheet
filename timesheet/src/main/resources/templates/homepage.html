@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Time Sheet</title>
+</head>
+<body>
+
+<div th:each= "task: ${tasks}"  >
+	<br/><br/>
+	<div th:text= "${task.title}"></div>
+	<div th:text= "${task.taskDescription}"></div>
+	<div th:text= "${task.date}"></div>
+	<br/><br/>
+</div>
+
+ <table class="center" border="3" bordercolor="black">
+  <tr>
+	  <th>Project Description</th>
+	  <th>Project</th>
+	  <th>Sun</th>
+	  <th>Mon</th>
+	  <th>Tue</th>
+	  <th>Wed</th>
+	  <th>Thur</th>
+	  <th>Fri</th>
+	  <th>Sat</th>
+  </tr>
+</table> 
+
+</body>
+</html>
