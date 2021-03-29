@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.timesheet.model.Task;
-import com.java.timesheet.service.TaskService;
+import com.java.timesheet.service.ProjectService;
 
 @Controller
-public class TaskController {
+public class ProjectController {
 
 	@Autowired
-	TaskService taskService;
+	ProjectService taskService;
 
 	@RequestMapping("/viewTask")
 	public ModelAndView getAllTasks() {

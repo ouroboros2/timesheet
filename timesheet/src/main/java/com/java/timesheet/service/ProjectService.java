@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java.timesheet.model.Task;
-import com.java.timesheet.repository.TaskRepository;
+import com.java.timesheet.repository.ProjectRepository;
 
 @Service
-public class TaskService {
+public class ProjectService {
 
 	@Autowired
-	TaskRepository taskRepository;
+	ProjectRepository taskRepository;
 
 	public List<Task> getAllTasks() {
 

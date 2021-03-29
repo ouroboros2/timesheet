@@ -30,6 +30,9 @@ public class Employee {
 	@Column(name = "password")
 	private String password;
 
+	@Column(name = "managerId")
+	private String managerId;
+
 	public int getEmployeeid() {
 		return employeeid;
 	}
