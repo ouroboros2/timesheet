@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity(name = "task")
 @Table(name = "task")
-public class Task {
+public class Project {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_seq")
@@ -21,10 +21,31 @@ public class Task {
 	@Column(name = "project")
 	private String project;
 
-	@Column(name = "taskDescription")
-	private String taskDescription;
-
 	@Column(name = "category")
 	private String category;
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 }

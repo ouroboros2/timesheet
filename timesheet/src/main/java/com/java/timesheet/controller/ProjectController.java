@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.java.timesheet.model.Task;
+import com.java.timesheet.model.Project;
 import com.java.timesheet.service.ProjectService;
 
 @Controller
@@ -20,7 +20,7 @@ public class ProjectController {
 	public ModelAndView getAllTasks() {
 
 		ModelAndView modelAndView = new ModelAndView("homepage");
-		List<Task> tasks = taskService.getAllTasks();
+		List<Project> tasks = taskService.getAllTasks();
 
 		modelAndView.addObject("tasks", tasks);
 
