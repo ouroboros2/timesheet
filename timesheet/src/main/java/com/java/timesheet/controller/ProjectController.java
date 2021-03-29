@@ -14,15 +14,15 @@ import com.java.timesheet.service.ProjectService;
 public class ProjectController {
 
 	@Autowired
-	ProjectService taskService;
+	ProjectService projectService;
 
 	@RequestMapping("/viewTask")
 	public ModelAndView getAllTasks() {
 
 		ModelAndView modelAndView = new ModelAndView("homepage");
-		List<Project> tasks = taskService.getAllTasks();
+		List<Project> project = projectService.getAllTasks();
 
-		modelAndView.addObject("tasks", tasks);
+		modelAndView.addObject("projects", project);
 
 		return modelAndView;
 

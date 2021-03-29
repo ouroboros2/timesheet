@@ -8,21 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity(name = "task")
-@Table(name = "task")
+@Entity(name = "project")
+@Table(name = "project")
 public class Project {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_seq")
-	@SequenceGenerator(name = "task_seq", sequenceName = "task_seq", initialValue = 1550, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_seq")
+	@SequenceGenerator(name = "project_seq", sequenceName = "project_seq", initialValue = 1550, allocationSize = 1)
 	@Column(name = "projectId")
 	private int projectId;
 
-	@Column(name = "project")
-	private String project;
+	@Column(name = "projectCode")
+	private String projectCode;
+
+	@Column(name = "projectDesc")
+	private String projectDesc;
 
 	@Column(name = "category")
 	private String category;
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
 
 	public int getProjectId() {
 		return projectId;
@@ -30,14 +41,6 @@ public class Project {
 
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
-	}
-
-	public String getProject() {
-		return project;
-	}
-
-	public void setProject(String project) {
-		this.project = project;
 	}
 
 	public String getCategory() {
@@ -48,4 +51,11 @@ public class Project {
 		this.category = category;
 	}
 
+	public String getProjectDesc() {
+		return projectDesc;
+	}
+
+	public void setProjectDesc(String projectDesc) {
+		this.projectDesc = projectDesc;
+	}
 }

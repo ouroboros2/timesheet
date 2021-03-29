@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity(name = "task")
-@Table(name = "task")
+@Entity(name = "employee")
+@Table(name = "employee")
 public class Employee {
 
 	@Id
