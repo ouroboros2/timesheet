@@ -9,33 +9,35 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </head>
 <body>
-
+ 
 <div th:each= "project: ${projects}"  >
 	<br/><br/>
-	
-	
-	<input type="checkbox" id="${project.projectId}">
+	<input	 type="checkbox"
+			 class="tasks" 
+			 id="${project.projectId}" 
+			 th:name="tasks"
+			 th:value="${project.projectCode} + '-' + ${project.projectId} + '-' + ${project.projectDesc} + '-' + ${project.category}">
+			 
 		<div th:text= "${project.projectCode} + ${project.projectId}"></div>
 	<div th:text= "${project.projectDesc}"></div>
 	<div th:text= "${project.category}"></div>
 	<br/>
 </div>
 
-<button type="button">Add to timesheet</button> 
-
+<button th:onclick="addToTimesheet()">Add to timesheet</button> 
 <br>
- <table class="center" border="3" bordercolor="black">
+ <table id="taskTable" class="center table-striped table-responsive" border="3" bordercolor="black">
   <tr>
-	  <th>ProjectID</th>
-	  <th>Project</th>
-	  <th>Category<th>
-	  <th>Sun</th>
-	  <th>Mon</th>
-	  <th>Tue</th>
-	  <th>Wed</th>
-	  <th>Thur</th>
-	  <th>Fri</th>
-	  <th>Sat</th>
+	  <td>ProjectID</td>
+	  <td>Project</td>
+	  <td>Category</td>
+	  <td>Sun</td>
+	  <td>Mon</td>
+	  <td>Tue</td>
+	  <td>Wed</td>
+	  <td>tdur</td>
+	  <td>Fri</td>
+	  <td>Sat</td>
   </tr>
 </table> 
 
