@@ -49,7 +49,7 @@ public class LoginController {
 	@RequestMapping("/getNewEmployeeForm")
 	public ModelAndView getNewEmployeeForm() {
 
-		ModelAndView model = new ModelAndView("addProfile");
+		ModelAndView model = new ModelAndView("admin_addProfile");
 		model.addObject("employee", new Employee());
 
 		return model;

@@ -81,7 +81,7 @@ form>:nth-child(2)>.form-control, form>:nth-child(3)>.form-control, form>:nth-ch
 					<div class="row w-50 shadow p-2 bg-body rounded overflow-auto"
 						style="max-height: 70vh;">
 
-						<form action="" method="post">
+						<form action="@{/saveProject}" method="post" th:object="${project}">
 							<div class="form-group">
 								<label for="tskTitle">Project Title</label> <input
 									class="form-control" type="text" name="tskTitle"
