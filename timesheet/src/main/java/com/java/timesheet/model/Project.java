@@ -1,5 +1,7 @@
 package com.java.timesheet.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +28,15 @@ public class Project {
 
 	@Column(name = "category")
 	private String category;
+
+	@Column(name = "startDate")
+	private Date startDate;
+
+	@Column(name = "endDate")
+	private Date endDate;
+
+	@Column(name = "description")
+	private String description;
 
 	public String getProjectCode() {
 		return projectCode;
@@ -57,5 +68,29 @@ public class Project {
 
 	public void setProjectDesc(String projectDesc) {
 		this.projectDesc = projectDesc;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

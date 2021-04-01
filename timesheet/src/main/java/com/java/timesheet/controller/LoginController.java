@@ -65,7 +65,7 @@ public class LoginController {
 
 		boolean success = employeeService.createEmployee(employee);
 		if (success) {
-			model = new ModelAndView("homepage");
+			model = new ModelAndView("employee_homepage");
 			model.addObject("employee", employee);
 			return model;
 		} else {
