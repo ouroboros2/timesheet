@@ -32,8 +32,15 @@ public class LoginController {
 	@RequestMapping("/validateEmployee")
 	public ModelAndView validateEmployee(@ModelAttribute Employee employee) {
 
-		ModelAndView model = new ModelAndView("homepage"); // employee =
+		ModelAndView model;
 		employee = employeeService.findyByUsername(employee);
+
+		if (employee.getRole().equalsIgnoreCase("admin")) {
+			model = new ModelAndView("admin_homepage");
+
+		} else {
+			model = new ModelAndView("homepage");
+		}
 		model.addObject("employee", employee);
 
 		return model;
@@ -54,7 +61,7 @@ public class LoginController {
 		ModelAndView model;
 
 		employee.setManagerId(2);
-		employee.setRole("Manager");
+		employee.setRole("admin");
 
 		boolean success = employeeService.createEmployee(employee);
 		if (success) {
