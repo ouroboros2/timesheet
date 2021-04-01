@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,10 +22,19 @@ public class ProjectController {
 
 		ModelAndView modelAndView = new ModelAndView("homepage");
 		List<Project> project = projectService.getAllTasks();
-
 		modelAndView.addObject("projects", project);
 
 		return modelAndView;
+
+	}
+
+	@RequestMapping("/saveProject")
+	public ModelAndView createProject(@ModelAttribute Project project) {
+
+		ModelAndView model = new ModelAndView("blank");
+		projectService.createProject(project);
+
+		return model;
 
 	}
 }

@@ -15,8 +15,11 @@ public class ProjectService {
 	ProjectRepository taskRepository;
 
 	public List<Project> getAllTasks() {
-
 		return taskRepository.findAll();
+	}
+
+	public void createProject(Project project) {
+		taskRepository.save(project);
 	}
 
 }
