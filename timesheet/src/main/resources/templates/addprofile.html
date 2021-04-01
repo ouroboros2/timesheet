@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>New Profile | TimeSheet</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+<style>
+body {
+	background-color: #eeeeee;
+}
+
+form>:nth-child(3)>.form-control, form>:nth-child(4)>.form-control, form>:nth-child(5)>.form-control
+	{
+	cursor: pointer;
+}
+
+.container-fluid {
+	color: #4a4a4a;
+}
+
+.form-group {
+	margin-bottom: 10px;
+}
+</style>
+
+</head>
+<body>
+
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-lg navbar-dark"
+		style="background-color: #2b3e40;">
+		<div class="container-fluid">
+			<a href="admin.jsp" class="navbar-brand fw-bold">TimeSheet Portal</a>
+			<ul class="navbar-nav">
+				<li class="nav-item dropdown"><a href="#"
+					class="nav-link dropdown-toggle" data-toggle="dropdown"><i
+						class="fas fa-user" style="padding-right: 10px;"></i>${loggedUserName}</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">Logout</a>
+					</div></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- CONTENT -->
+	<div class="container-fluid">
+		<div class="row mx-2 mt-3">
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-12 pt-3 px-4">
+				<div
+					class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+					<h4>New Employee</h4>
+				</div>
+
+				<div class="d-flex justify-content-center">
+
+					<div class="row w-50 shadow p-2 bg-body rounded overflow-auto"
+						style="max-height: 70vh;">
+
+						<form th:action="@{/saveNewEmployee}"
+							method="post" th:object="${employee}">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="userFname">First Name</label> <input
+											th:field="*{firstName}"
+											class="form-control" type="text" name="userFname"
+											placeholder="First Name" required>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="userLname">Last Name</label> <input
+											th:field="*{lastName}"
+											class="form-control" type="text" name="userLname"
+											placeholder="Last Name" required>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="type">Role</label> <select class="form-control"
+									id="field_type" name="userType" required>
+									<option></option>
+									<option>Manager</option>
+									<option>Employee</option>
+								</select>
+							</div>
+
+							<div class="form-group" id="field_manager">
+								<label for="userManager">Manager</label> <select
+									id="field_manager" class="form-control" name="userManager">
+									<option></option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<div class="form-group">
+									<label for="userUname">Username</label> <input
+										th:field="*{userName}"
+										class="form-control" type="text" name="userUname"
+										placeholder="Username" required>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<div class="form-group">
+											<label for="userPass">Password</label> <input
+												th:field="*{password}"
+												class="form-control" type="password" id="field_pass"
+												name="userPass" placeholder="Password" required>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<div class="form-group">
+											<label for="confpass">Confirm Password</label> <input
+												class="form-control" type="password" id="field_confpass"
+												placeholder="Password" required>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<input class="form-control" type="hidden"
+								id="managerid_container" name="userManagerId">
+
+							<div class="col-md d-flex justify-content-end">
+								<button type="submit" class="btn btn-sm btn-success mt-4 me-3">Add</button>
+								<a href="">Cancel</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</main>
+		</div>
+	</div>
+
+<!--  
+	<script>
+		$(document).ready(
+				function() {
+
+					getRole();
+					matchPass();
+					cancelAdd();
+
+					$(function() {
+						$('#field_manager').change(
+								function() {
+									let managerID = $(this).find(
+											'option:selected').attr("name");
+									$('#managerid_container').val(managerID);
+								});
+					});
+
+				});
+
+		function getRole() {
+			$('#field_type').change(function() {
+				if ($(this).val() == "Manager") {
+					$("#field_manager").hide();
+				} else if ($(this).val() == "Employee") {
+					$("#field_manager").show();
+				}
+			});
+
+			$("#field_manager").hide();
+		}
+
+		function matchPass() {
+			$('#field_confpass').focusout(function() {
+				let pass = $('#field_pass').val();
+				let pass2 = $('#field_confpass').val();
+				if (pass != pass2) {
+					$.alert({
+						title : 'Alert!',
+						content : 'Passwords doesn\'t match!',
+					});
+
+					$(':input[type="submit"]').prop('disabled', true);
+				} else {
+					$(':input[type="submit"]').prop('disabled', false);
+				}
+			});
+		}
+
+		function cancelAdd() {
+			$('a.btn')
+					.confirm(
+							{
+								title : '',
+								content : 'Are you sure you want to cancel? Your inputs will not be saved.',
+
+								buttons : {
+									yes : function() {
+										location.href = this.$target
+												.attr('href');
+									},
+									no : {}
+								}
+							});
+		}
+	</script>
+-->
+</body>
+</html>

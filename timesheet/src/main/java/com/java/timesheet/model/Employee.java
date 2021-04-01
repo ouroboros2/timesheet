@@ -31,7 +31,10 @@ public class Employee {
 	private String password;
 
 	@Column(name = "manager_id")
-	private String managerId;
+	private int managerId;
+
+	@Column(name = "role")
+	private String role;
 
 	public int getEmployeeid() {
 		return employeeid;
@@ -73,4 +76,19 @@ public class Employee {
 		this.password = password;
 	}
 
+	public int getManagerId() {
+		return managerId;
+	}
+
+	public void setManagerId(int managerId) {
+		this.managerId = managerId;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 }
