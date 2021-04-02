@@ -33,7 +33,7 @@
 <style>
 body {
 	background-color: #eeeeee;
-}
+}ca
 
 form>:nth-child(2)>.form-control, form>:nth-child(3)>.form-control, form>:nth-child(4)>.form-control
 	{
@@ -124,9 +124,9 @@ form>:nth-child(2)>.form-control, form>:nth-child(3)>.form-control, form>:nth-ch
 							</div>
 
 							<div class="col-md d-flex justify-content-end">
-								<button type="submit" class="btn btn-sm btn-success mt-4 me-2">Add</button>
-								<a href="#"
-									class="btn btn-sm btn-secondary mt-4">Cancel</a>
+								<button type="submit" class="btn btn-sm btn-success mt-4 me-2">Submit</button>
+								<a th:href="@{/newProject}"
+									class="btn btn-sm btn-secondary mt-4">Back to Homepage</a>
 							</div>
 						</form>
 					</div>

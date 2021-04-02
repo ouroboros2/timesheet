@@ -11,7 +11,7 @@ import com.java.timesheet.service.EmployeeService;
 import com.java.timesheet.service.ProjectService;
 
 @Controller
-public class LoginController {
+public class EmployeeController {
 
 	@Autowired
 	EmployeeService employeeService;

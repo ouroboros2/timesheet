@@ -100,10 +100,11 @@ form>:nth-child(3)>.form-control, form>:nth-child(4)>.form-control, form>:nth-ch
 
 							<div class="form-group">
 								<label for="type">Role</label> <select class="form-control"
+									th:field="*{Role}"
 									id="field_type" name="userType" required>
-									<option></option>
-									<option>Manager</option>
-									<option>Employee</option>
+									<option th:value="manager">Manager</option>
+									<option th:value="employee">Employee</option>
+									<option th:value="admin">Admin</option>
 								</select>
 							</div>
 
@@ -149,8 +150,8 @@ form>:nth-child(3)>.form-control, form>:nth-child(4)>.form-control, form>:nth-ch
 								id="managerid_container" name="userManagerId">
 
 							<div class="col-md d-flex justify-content-end">
-								<button type="submit" class="btn btn-sm btn-success mt-4 me-3">Add</button>
-								<a href="">Cancel</a>
+								<button type="submit" class="btn btn-sm btn-success mt-4 me-3">Submit</button>
+								<a th:href="@{/getNewEmployeeForm}">Back to homepage</a>
 							</div>
 						</form>
 					</div>
