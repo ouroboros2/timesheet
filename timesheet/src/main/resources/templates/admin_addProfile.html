@@ -100,7 +100,7 @@ form>:nth-child(3)>.form-control, form>:nth-child(4)>.form-control, form>:nth-ch
 
 							<div class="form-group">
 								<label for="type">Role</label> <select class="form-control"
-									th:field="*{Role}"
+									th:field="*{role}"
 									id="field_type" name="userType" required>
 									<option th:value="manager">Manager</option>
 									<option th:value="employee">Employee</option>
@@ -110,8 +110,12 @@ form>:nth-child(3)>.form-control, form>:nth-child(4)>.form-control, form>:nth-ch
 
 							<div class="form-group" id="field_manager">
 								<label for="userManager">Manager</label> <select
+									th:field="*{managerId}"
 									id="field_manager" class="form-control" name="userManager">
-									<option></option>
+									<option th:each = "manager: ${managers}"
+									        th:value = "${manager.employeeid}" 
+									        th:text = "${manager.firstName} + ' ' + ${manager.lastName}">	        
+									</option>
 								</select>
 							</div>
 

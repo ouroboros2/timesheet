@@ -1,5 +1,7 @@
 package com.java.timesheet.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,7 +39,6 @@ public class EmployeeController {
 
 		if (employee.getRole().equalsIgnoreCase("admin")) {
 			model = new ModelAndView("admin_homepage");
-
 		} else {
 			model = new ModelAndView("homepage");
 		}
@@ -50,18 +51,17 @@ public class EmployeeController {
 	public ModelAndView getNewEmployeeForm() {
 
 		ModelAndView model = new ModelAndView("admin_addProfile");
+		ArrayList<Employee> managers = employeeService.getManagerList();
 		model.addObject("employee", new Employee());
+		model.addObject("managers", managers);
 
 		return model;
 	}
 
 	@RequestMapping("/saveNewEmployee")
-	public ModelAndView saveNewEmployee(Employee employee) {
+	public ModelAndView saveNewEmployee(@ModelAttribute Employee employee) {
 
 		ModelAndView model;
-
-		employee.setManagerId(2);
-		employee.setRole("admin");
 
 		boolean success = employeeService.createEmployee(employee);
 		if (success) {

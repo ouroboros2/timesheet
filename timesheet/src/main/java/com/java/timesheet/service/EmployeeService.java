@@ -1,5 +1,7 @@
 package com.java.timesheet.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +35,12 @@ public class EmployeeService {
 			return employee;
 		}
 		return null;
+	}
 
+	public ArrayList<Employee> getManagerList() {
+
+		ArrayList<Employee> managers = employeeRepository.findByRole("manager");
+		return managers;
 	}
 
 }
