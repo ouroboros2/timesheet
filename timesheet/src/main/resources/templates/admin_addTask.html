@@ -100,16 +100,18 @@ form>:nth-child(2)>.form-control, form>:nth-child(3)>.form-control, form>:nth-ch
 							<div class="form-group">
 								<label for="tskStartDate">Start Date</label> <input
 									th:field="*{startDate}"
-									class="form-control" type="text" id="tskStartDate"
+									type="date"
+									class="form-control" id="tskStartDate"
 									name="tskStartDate" data-toggle="datepicker"
 									placeholder="YYYY-MM-DD" required>
 								<div data-toggle="datepicker"></div>
 							</div>
-
+							
 							<div class="form-group">
 								<label for="tskEndDate">End Date</label> <input
 									th:field="*{endDate}"
-									class="form-control" type="text" id="tskEndDate"
+									type="date"
+									class="form-control" id="tskEndDate"
 									name="tskEndDate" data-toggle="datepicker"
 									placeholder="YYYY-MM-DD" required>
 								<div data-toggle="datepicker"></div>
@@ -117,7 +119,7 @@ form>:nth-child(2)>.form-control, form>:nth-child(3)>.form-control, form>:nth-ch
 
 							<div class="form-group">
 								<label for="tskDesc">Description</label>
-								<textarea th:field="*{description}" class="form-control" name="tskDesc" rows="3"
+								<textarea th:field="*{projectDesc}" class="form-control" name="tskDesc" rows="3"
 									maxlength="300"></textarea>
 							</div>
 

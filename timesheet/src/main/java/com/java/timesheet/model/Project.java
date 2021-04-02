@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity(name = "project")
 @Table(name = "project")
 public class Project {
@@ -29,14 +31,13 @@ public class Project {
 	@Column(name = "category")
 	private String category;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "startDate")
 	private Date startDate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "endDate")
 	private Date endDate;
-
-	@Column(name = "description")
-	private String description;
 
 	public String getProjectCode() {
 		return projectCode;
@@ -84,13 +85,5 @@ public class Project {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 }

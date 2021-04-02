@@ -31,6 +31,7 @@ public class ProjectController {
 	// Creating new Projects
 	@RequestMapping("/newProject")
 	public ModelAndView getNewProjectForm() {
+
 		ModelAndView model = new ModelAndView("admin_addTask");
 		Project project = new Project();
 		model.addObject("project", project);
