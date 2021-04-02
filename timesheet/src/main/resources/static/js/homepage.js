@@ -1,17 +1,17 @@
 function addToTimesheet() {
-		getCheckedTasks();	
-}
-
-function getCheckedTasks() {
+	
 	
 	var taskList = [];
 	var taskListObjs = [];
 	$('input[name=tasks]:checked').map(function() {
 		taskList.push($(this).val());
-	
+		$(this).parent().hide();
+		$(this).prop("checked",false);	
+	});
+
 	for(var i= 0; i<taskList.length; i++) {
 		
-		var taskDetails = taskList[i].split("-");
+		var taskDetails = taskList[i].split("|");
 		var taskobj = {
 			projectCode:taskDetails[0],
 			projectId:taskDetails[1],
@@ -22,13 +22,12 @@ function getCheckedTasks() {
 		taskListObjs.push(taskobj);
 	}
 	
-	for(var i= 0; i<taskListObjs.length; i++) {
+		for(var i= 0; i<taskListObjs.length; i++) {
 		
 		const cprojectId = document.createElement('td');
 		const cprojectDesc = document.createElement('td');
 		const cprojectCategory = document.createElement('td');
 		
-		//comment here
 		cprojectId.textContent = taskListObjs[i].projectCode + taskListObjs[i].projectId;
 		cprojectDesc.textContent = taskListObjs[i].projectDesc;
 		cprojectCategory.textContent = taskListObjs[i].projectCategory;
@@ -38,12 +37,13 @@ function getCheckedTasks() {
 		);
 		
 		var count = 0
-		while(count < 7) {
+		while(count < 9) {
 			$("#" + "data" + taskListObjs[i].projectId).append("<td><input size='2'></td>");	
 			count++;
 		}
+		
+		
 	}
 	taskList = [];
-});
-	
+	taskListObjs = [];
 }

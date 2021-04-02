@@ -16,17 +16,17 @@
  <a href="@{/getDirectReports}" class="btn btn-success">View employees</a>
  
 <div th:each= "project: ${projects}"  >
-	<br/><br/>
-	<input	 type="checkbox"
-			 class="tasks" 
-			 id="${project.projectId}" 
-			 th:name="tasks"
-			 th:value="${project.projectCode} + '-' + ${project.projectId} + '-' + ${project.projectDesc} + '-' + ${project.category}">
-			 
-		<div th:text= "${project.projectCode} + ${project.projectId}"></div>
-	<div th:text= "${project.projectDesc}"></div>
-	<div th:text= "${project.category}"></div>
 	<br/>
+	<div id="task + ${project.projectId}">
+		<input type="checkbox" 
+			   id="${project.projectId}" 
+			   th:name="tasks"
+			   th:value="${project.projectCode} + '|' + ${project.projectId} + '|' + ${project.projectDesc} + '|' + ${project.category}">
+				 
+			<div th:text= "${project.projectCode} + ${project.projectId}"></div>
+		<div th:text= "${project.projectDesc}"></div>
+		<div th:text= "${project.category}"></div>
+	</div>
 </div>
 
 <button th:onclick="addToTimesheet()">Add to timesheet</button> 
@@ -43,6 +43,8 @@
 	  <td>tdur</td>
 	  <td>Fri</td>
 	  <td>Sat</td>
+	  <td>Total</td>
+	  <td>Actions</td>
   </tr>
 </table> 
 
