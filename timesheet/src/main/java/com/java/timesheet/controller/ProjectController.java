@@ -20,7 +20,7 @@ public class ProjectController {
 	@RequestMapping("/viewTask")
 	public ModelAndView getAllTasks() {
 
-		ModelAndView modelAndView = new ModelAndView("homepage");
+		ModelAndView modelAndView = new ModelAndView("employee_homepage");
 		List<Project> project = projectService.getAllTasks();
 		modelAndView.addObject("projects", project);
 

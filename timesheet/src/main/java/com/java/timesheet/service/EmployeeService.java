@@ -17,7 +17,6 @@ public class EmployeeService {
 	public boolean createEmployee(Employee employee) {
 
 		boolean successInd = false;
-
 		try {
 			employeeRepository.save(employee);
 			successInd = true;
@@ -30,7 +29,12 @@ public class EmployeeService {
 
 	public Employee findyByUsername(Employee employee) {
 
-		employee = employeeRepository.findByUserName(employee.getUserName());
+		try {
+			employee = employeeRepository.findByUserName(employee.getUserName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		if (employee != null && employee.getPassword().equals(employee.getPassword())) {
 			return employee;
 		}
@@ -41,6 +45,12 @@ public class EmployeeService {
 
 		ArrayList<Employee> managers = employeeRepository.findByRole("manager");
 		return managers;
+	}
+
+	public ArrayList<Employee> getDirectReports(int managerId) {
+
+		ArrayList<Employee> employees = employeeRepository.findByManagerId(managerId);
+		return employees;
 	}
 
 }

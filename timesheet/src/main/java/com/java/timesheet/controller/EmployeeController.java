@@ -27,7 +27,6 @@ public class EmployeeController {
 		ModelAndView model = new ModelAndView("login");
 		Employee employee = new Employee();
 		model.addObject("employee", employee);
-
 		return model;
 	}
 
@@ -43,7 +42,6 @@ public class EmployeeController {
 			model = new ModelAndView("homepage");
 		}
 		model.addObject("employee", employee);
-
 		return model;
 	}
 
@@ -73,5 +71,14 @@ public class EmployeeController {
 			model.addObject("employee", new Employee());
 			return model;
 		}
+	}
+
+	@RequestMapping("/getDirectReports")
+	public ModelAndView getDirectReports() {
+
+		ModelAndView model = new ModelAndView("manager_directReports");
+		ArrayList<Employee> employees = employeeService.getDirectReports(5554);
+		model.addObject("employees", employees);
+		return model;
 	}
 }
