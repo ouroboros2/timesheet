@@ -3,8 +3,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login</title>
-<link th:href="@{/css/login.css}" rel="stylesheet">
-<link th:href="@{https://fonts.googleapis.com/css?family=Poppins:600&display=swap}" rel="stylesheet">
+<link th:href="@{/css/login.css}" rel="stylesheet" />
+<link th:href="@{https://fonts.googleapis.com/css?family=Poppins:600&display=swap}" rel="stylesheet" />
+<link th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -14,8 +15,7 @@
 			<img th:src="@{images/bg.svg}">
 		</div>
 		<div class="login-content">
-			<form th:action="@{/validateEmployee}" method="post"
-				th:object="${employee}">
+			<form th:action="@{/validateEmployee}" method="post" th:object="${employee}">
 				<img th:src="@{images/avatar.svg}">
 				<h2>Welcome</h2>
 				<div class="input-div one">
@@ -27,6 +27,7 @@
 						<input type="text" class="input" th:field="*{userName}">
 					</div>
 				</div>
+				
 				<div class="input-div pass">
 					<div class="i">
 						<i class="fas fa-lock"></i>
@@ -38,7 +39,7 @@
 				</div>
 
 				<div class="div-chk">
-					<input type="checkbox" id="chkShowPass" onclick="showPass()">
+					<input type="checkbox" id="chkShowPass" th:onclick="showPass()">
 					Show Password
 				</div>
 
