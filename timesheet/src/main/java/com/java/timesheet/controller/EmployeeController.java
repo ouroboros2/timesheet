@@ -39,7 +39,7 @@ public class EmployeeController {
 		if (employee.getRole().equalsIgnoreCase("admin")) {
 			model = new ModelAndView("admin_homepage");
 		} else {
-			model = new ModelAndView("homepage");
+			model = new ModelAndView("employee_homepage");
 		}
 		model.addObject("employee", employee);
 		return model;
