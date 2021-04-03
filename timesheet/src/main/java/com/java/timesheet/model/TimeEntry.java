@@ -67,12 +67,20 @@ public class TimeEntry {
 	@Column(name = "status")
 	private String status;
 
-	public int getTimEntryId() {
+	public int getTimeEntryId() {
 		return timeEntryId;
 	}
 
-	public void setTimEntryId(int timEntryId) {
-		timeEntryId = timEntryId;
+	public void setTimeEntryId(int timeEntryId) {
+		this.timeEntryId = timeEntryId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getProjectCode() {

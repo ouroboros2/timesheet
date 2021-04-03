@@ -35,4 +35,5 @@ public class TaskController {
 		model.addObject("timeEntries", timeEntries);
 		return model;
 	}
+
 }

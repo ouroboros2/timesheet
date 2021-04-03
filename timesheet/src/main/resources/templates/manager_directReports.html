@@ -3,47 +3,97 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Direct Reports</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 
-  
-<div th:each= "employee:${employees}">
-	<br>
-	
-	<div>EmployeeId: </div>
-	<div th:text="${employee.employeeid}"></div>
-	<div>Last Name: </div>
-	<div th:text="${employee.lastName}"></div>
-	<div>First Name: </div>
-	<div th:text="${employee.firstName}"></div>
-	
-	<div>Action</div>
-	<button>View Details</button>
-	<button>Approve</button>
-	<button>Reject</button>
-</div>
+	<div th:each="timeEntry:${timeEntries}">
+
+		<br> <br>
+
+		<div th:text="'ProjectCode: ' + ${timeEntry.projectCode}"></div>
+		<div th:text="'EmployeeId: ' + ${timeEntry.employeeId}"></div>
+		<div th:text="'ManagerId: ' + ${timeEntry.managerId}"></div>
+		<div th:text="'Sunday: ' + ${timeEntry.sunday}"></div>
+		<div th:text="'Monday: ' + ${timeEntry.monday}"></div>
+		<div th:text="'Tuesday: ' + ${timeEntry.tuesday}"></div>
+		<div th:text="'Wednesday: ' + ${timeEntry.wednesday}"></div>
+		<div th:text="'Thursday: ' + ${timeEntry.thursday}"></div>
+		<div th:text="'Friday: ' + ${timeEntry.friday}"></div>
+		<div th:text="'Saturday: ' + ${timeEntry.saturday}"></div>
+		<div th:text="'Start Date: ' + ${timeEntry.startDate}"></div>
+		<div th:text="'End Date: ' + ${timeEntry.endDate}"></div>
+		<div th:text="'Status: ' + ${timeEntry.status}"></div>
+	</div>
 
 
-<div th:each= "timeEntry:${timeEntries}">
-	
-	<br>
-	<br>
-	
-	<div th:text="'ProjectCode: ' + ${timeEntry.projectCode}"></div>
-	<div th:text="'EmployeeId: ' + ${timeEntry.employeeId}"></div>
-	<div th:text="'ManagerId: ' + ${timeEntry.managerId}"></div>
-	<div th:text="'Sunday: ' + ${timeEntry.sunday}"></div>
-	<div th:text="'Monday: ' + ${timeEntry.monday}"></div>
-	<div th:text="'Tuesday: ' + ${timeEntry.tuesday}"></div>
-	<div th:text="'Wednesday: ' + ${timeEntry.wednesday}"></div>
-	<div th:text="'Thursday: ' + ${timeEntry.thursday}"></div>
-	<div th:text="'Friday: ' + ${timeEntry.friday}"></div>
-	<div th:text="'Saturday: ' + ${timeEntry.saturday}"></div>
-	<div th:text="'Start Date: ' + ${timeEntry.startDate}"></div>
-	<div th:text="'End Date: ' + ${timeEntry.endDate}"></div>
-	<div th:text="'Status: ' + ${timeEntry.status}"></div>
-</div>
+	<div th:each="employee:${employees}">
+		<br>
 
+		<div>EmployeeId:</div>
+		<div th:text="${employee.employeeid}"></div>
+		<div>Last Name:</div>
+		<div th:text="${employee.lastName}"></div>
+		<div>First Name:</div>
+		<div th:text="${employee.firstName}"></div>
+
+		<div>Action</div>
+		<button type="button" class="btn btn-primary" data-toggle="modal"
+			data-target=".bd-example-modal-lg">View Details</button>
+		<button type="button" class="btn btn-primary">Approve</button>
+		<button type="button" class="btn btn-primary">Reject</button>
+
+		<div class="modal fade bd-example-modal-lg" tabindex="-1"
+			role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<table>
+						<tr>
+							<td>EmployeeId</td>
+							<td>ProjectCode</td>
+							<td>Category</td>
+							<td>Sunday</td>
+							<td>Monday</td>
+							<td>Tuesday</td>
+							<td>Wednesday</td>
+							<td>Thursday</td>
+							<td>Saturday</td>
+							<td>Sunday</td>
+							<td>Total Hours</td>
+						</tr>
+						<tr th:each="timeEntry:${timeEntries}">
+							<td th:text="${timeEntry.employeeId}"></td>
+							<td th:text="${timeEntry.projectCode}"></td>
+							<td th:text="${timeEntry.category}"></td>
+							<td th:text="${timeEntry.sunday}"></td>
+							<td th:text="${timeEntry.monday}"></td>
+							<td th:text="${timeEntry.tuesday}"></td>
+							<td th:text="${timeEntry.wednesday}"></td>
+							<td th:text="${timeEntry.thursday}"></td>
+							<td th:text="${timeEntry.friday}"></td>
+							<td th:text="${timeEntry.saturday}"></td>
+							<td> Some function to add</td>
+						</tr>
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
