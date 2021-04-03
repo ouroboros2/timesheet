@@ -1,6 +1,5 @@
 function addToTimesheet() {
 	
-	
 	var taskList = [];
 	var taskListObjs = [];
 	$('input[name=tasks]:checked').map(function() {

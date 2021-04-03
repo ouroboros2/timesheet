@@ -5,48 +5,105 @@
 <title>Homepage</title>
 <script type="application/javascript" th:src="@{js/jquery-3.5.1.min.js}"></script>
 <script type="application/javascript" th:src="@{js/homepage.js}"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+<link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css}" rel="stylesheet">
+<script type="application/javascript" th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script type="application/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
+<link th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" rel="stylesheet">
 </head>
-<body>
 
-<div>Button will only display if role is manager</div>
- <a href="@{/getDirectReports}" class="btn btn-success">View employees</a>
- 
-<div th:each= "project: ${projects}"  >
-	<br/>
-	<div id="task + ${project.projectId}">
-		<input type="checkbox" 
-			   id="${project.projectId}" 
-			   th:name="tasks"
-			   th:value="${project.projectCode} + '|' + ${project.projectId} + '|' + ${project.projectDesc} + '|' + ${project.category}">
-				 
-			<div th:text= "${project.projectCode} + ${project.projectId}"></div>
-		<div th:text= "${project.projectDesc}"></div>
-		<div th:text= "${project.category}"></div>
+<body style="background-color: #eeeeee;">
+
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b3e40;">
+		<div class="container-fluid">
+			<a href="#" class="navbar-brand fw-bold">Timesheet Portal</a>
+			<ul class="navbar-nav">
+				<li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+					<i class="fas fa-user" style="padding-right: 10px;"></i>Username</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#" id="logout">Logout</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div>Button will only display if role is manager</div>
+	<a href="@{/getDirectReports}" class="btn btn-success">View
+		employees</a>
+
+
+	<!-- MAIN CONTENT -->
+	<div class="row mx-4 mt-4">
+
+		<!-- NAVIGATION TABS -->
+        <div class="col-md-3" style="--bs-gutter-x: 0;">
+            <ul class="nav nav-tabs text-center" style="font-size: 15px;">
+                <li class="nav-item w-50">
+                    <a href="#billable" class="nav-link active" data-toggle="tab" style="color:#4a4a4a;">Billable</a>
+                </li>
+                <li class="nav-item w-50">
+                    <a href="#nonbillable" class="nav-link" data-toggle="tab" style="color:#4a4a4a;">Non-Billable</a>
+                </li>
+            </ul>
+
+            <div class="tab-content overflow-auto mt-4" style="max-height: 68vh; color:#4a4a4a">
+
+				<!-- TASKS CONTAINER -->
+				<div class="tab-pane fade show active" id="billable">
+
+					<br />
+					<div th:each="project: ${projects}">
+						<div id="task + ${project.projectId}">
+							<input type="checkbox" id="${project.projectId}" th:name="tasks"
+								th:value="${project.projectCode} + '|' + ${project.projectId} + '|' + ${project.projectDesc} + '|' + ${project.category}">
+
+							<div th:text="${project.projectCode} + ${project.projectId}"></div>
+							<div th:text="${project.projectDesc}"></div>
+							<div th:text="${project.category}"></div>
+						</div>
+					</div>
+
+					<button th:onclick="addToTimesheet()">Add to timesheet</button>
+				</div>
+
+				<!-- GROUP TASKS CONTAINER -->
+                <div class="tab-pane fade" id="nonbillable">
+                </div>
+            </div>
+        </div>
+        
+        
+		<!-- TASKS TABLE -->
+		<div class="col-md-9">
+
+			<div class="container overflow-auto" style="max-height: 80vh;">
+				<table class="table table-hover bg-white" id="taskTable"
+					style="color: #4a4a4a; font-size: small;">
+					<thead>
+						<tr>
+							<th>ProjectID</th>
+							<th>Project</th>
+							<th>Category</th>
+							<th>Sun</th>
+							<th>Mon</th>
+							<th>Tue</th>
+							<th>Wed</th>
+							<th>Thu</th>
+							<th>Fri</th>
+							<th>Sat</th>
+							<th>Total</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- added projects go here -->
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
-</div>
-
-<button th:onclick="addToTimesheet()">Add to timesheet</button> 
-<br>
- <table id="taskTable" class="center table-striped table-responsive" border="3" bordercolor="black">
-  <tr>
-	  <td>ProjectID</td>
-	  <td>Project</td>
-	  <td>Category</td>
-	  <td>Sun</td>
-	  <td>Mon</td>
-	  <td>Tue</td>
-	  <td>Wed</td>
-	  <td>tdur</td>
-	  <td>Fri</td>
-	  <td>Sat</td>
-	  <td>Total</td>
-	  <td>Actions</td>
-  </tr>
-</table> 
 
 </body>
 </html>

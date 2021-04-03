@@ -147,18 +147,14 @@ form{
 	margin-bottom: 4px;
 }
 
-a{
-	display: block;
-	text-align: right;
-	text-decoration: none;
+.div-chk{
+	text-align: end;
 	color: #999;
-	font-size: 0.9rem;
-	transition: .3s;
 }
 
-a:hover{
-	color: #38d39f;
-} 
+#chkShowPass {
+	background-color: #333;
+}
 
 .btn{
 	display: block;

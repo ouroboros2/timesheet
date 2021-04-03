@@ -1,22 +1,10 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Login | TimeSheet</title>
-
-<link
-	th:href="@{https://fonts.googleapis.com/css?family=Poppins:600&display=swap}"
-	rel="stylesheet">
-<link
-	th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}"
-	rel="stylesheet">
-<link
-	th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css}"
-	rel="stylesheet">
+<title>Login</title>
 <link th:href="@{/css/login.css}" rel="stylesheet">
+<link th:href="@{https://fonts.googleapis.com/css?family=Poppins:600&display=swap}" rel="stylesheet">
 </head>
 
 <body>
@@ -45,36 +33,20 @@
 					</div>
 					<div class="div">
 						<h5>Password</h5>
-						<input type="password" class="input" th:field="*{password}">
+						<input type="password" class="input" id="txtPass" th:field="*{password}">
 					</div>
 				</div>
-				<a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
-					title="Please contact you local administrator">Forgot Password?</a>
+
+				<div class="div-chk">
+					<input type="checkbox" id="chkShowPass" onclick="showPass()">
+					Show Password
+				</div>
 
 				<input type="submit" class="btn" value="Login">
 			</form>
 		</div>
 	</div>
-
-	<script>
-		const inputs = document.querySelectorAll(".input");
-
-		function addcl() {
-			let parent = this.parentNode.parentNode;
-			parent.classList.add("focus");
-		}
-
-		function remcl() {
-			let parent = this.parentNode.parentNode;
-			if (this.value == "") {
-				parent.classList.remove("focus");
-			}
-		}
-
-		inputs.forEach(input => {
-			input.addEventListener("focus", addcl);
-			input.addEventListener("blur", remcl);
-		});
-	</script>
+	
+	<script type="application/javascript" th:src="@{js/login.js}"></script>
 </body>
 </html>
