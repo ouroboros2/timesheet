@@ -10,9 +10,9 @@ import com.java.timesheet.model.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-	public Employee findByUserName(String username);
+	Employee findByUserName(String username);
 
-	public ArrayList<Employee> findByRole(String role);
+	ArrayList<Employee> findByRole(String role);
 
-	public ArrayList<Employee> findByManagerId(int managerId);
+	ArrayList<Employee> findByManagerId(int managerId);
 }
