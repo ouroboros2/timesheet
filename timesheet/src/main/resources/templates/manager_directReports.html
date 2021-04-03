@@ -6,6 +6,7 @@
 </head>
 <body>
 
+  
 <div th:each= "employee:${employees}">
 	<br>
 	
@@ -20,6 +21,27 @@
 	<button>View Details</button>
 	<button>Approve</button>
 	<button>Reject</button>
+</div>
+
+
+<div th:each= "timeEntry:${timeEntries}">
+	
+	<br>
+	<br>
+	
+	<div th:text="'ProjectCode: ' + ${timeEntry.projectCode}"></div>
+	<div th:text="'EmployeeId: ' + ${timeEntry.employeeId}"></div>
+	<div th:text="'ManagerId: ' + ${timeEntry.managerId}"></div>
+	<div th:text="'Sunday: ' + ${timeEntry.sunday}"></div>
+	<div th:text="'Monday: ' + ${timeEntry.monday}"></div>
+	<div th:text="'Tuesday: ' + ${timeEntry.tuesday}"></div>
+	<div th:text="'Wednesday: ' + ${timeEntry.wednesday}"></div>
+	<div th:text="'Thursday: ' + ${timeEntry.thursday}"></div>
+	<div th:text="'Friday: ' + ${timeEntry.friday}"></div>
+	<div th:text="'Saturday: ' + ${timeEntry.saturday}"></div>
+	<div th:text="'Start Date: ' + ${timeEntry.startDate}"></div>
+	<div th:text="'End Date: ' + ${timeEntry.endDate}"></div>
+	<div th:text="'Status: ' + ${timeEntry.status}"></div>
 </div>
 
 
