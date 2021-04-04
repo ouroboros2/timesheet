@@ -13,7 +13,7 @@ $('#field_confpass').focusout(function() {
 	let pass2 = $('#field_confpass').val();
 	if (pass !== pass2) {
 		$.alert({
-			title: 'Alert!',
+			title: 'Alert',
 			content: 'Passwords doesn\'t match!',
 		});
 
