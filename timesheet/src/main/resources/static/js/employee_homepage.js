@@ -82,7 +82,7 @@ function displayWeek() {
 	$("#weekfromdate").text("Week " + begin.getWeek());
 	$("#daterange").text(begin.toDateString() + " - " + end.toDateString());
 	
-	//formatted date for sql
+	//formatted date for db
 	console.log(begin.toString("yyyy-MM-dd"));
 	console.log(end.toString("yyyy-MM-dd"));
 }

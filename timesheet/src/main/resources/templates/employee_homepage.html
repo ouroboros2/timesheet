@@ -10,6 +10,9 @@
 <script type="application/javascript" th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script type="application/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
 <script type="application/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js}"></script>
+
+<link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css}" rel="stylesheet" />
+<script type="application/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js}"></script>
 </head>
 
 <body style="background-color: #eeeeee;">
@@ -31,11 +34,14 @@
 
 
 	<!-- SECONDARY NAVBAR -->
-	<div class="row shadow p-1 ps-4 mx-1 my-4 bg-body rounded" style="color: #4a4a4a">
+	<div class="row shadow p-1 ps-3 mx-4 my-4 bg-body rounded" style="color: #4a4a4a">
 
 		<div class="col-md">
 			<span class="align-middle fw-bold"><i class="far fa-calendar-alt pe-2"></i></span>
 			<span class="align-middle fw-bold" id="weekfromdate">Week</span>
+			
+			<span class="badge bg-secondary ms-2">Ongoing</span>
+            <!-- <span class="badge bg-success ms-2">Submitted</span> -->
 		</div>
 
 		<div class="col-md d-flex justify-content-center">
@@ -65,7 +71,7 @@
 
 		<!-- NAVIGATION TABS -->
         <div class="col-md-3" style="--bs-gutter-x: 0;">
-            <ul class="nav nav-tabs text-center" style="font-size: 15px;">
+            <ul class="nav nav-tabs text-center" style="font-size: small;">
                 <li class="nav-item w-50">
                     <a href="#billable" class="nav-link active" data-toggle="tab" style="color:#4a4a4a;">Billable</a>
                 </li>
@@ -133,33 +139,80 @@
         
 		<!-- TASKS TABLE -->
 		<div class="col-md-9">
-			<div class="container overflow-auto" style="max-height: 80vh;">
-				<table class="table table-hover bg-white" id="taskTable"
-					style="color: #4a4a4a; font-size: small;">
-					<thead>
-						<tr>
-							<th>ProjectID</th>
-							<th>Project</th>
-							<th>Category</th>
-							<th>Sun</th>
-							<th>Mon</th>
-							<th>Tue</th>
-							<th>Wed</th>
-							<th>Thu</th>
-							<th>Fri</th>
-							<th>Sat</th>
-							<th>Total</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						<!-- added projects go here -->
-					</tbody>
-				</table>
+			<div class="container">
+			
+                <!-- TIMESHEET BREAKDOWN -->
+                <table class="table text-center bg-white" style="color: #4a4a4a; font-size: small;">
+                    <thead>
+                        <tr>
+                            <td>Sun</td>
+                            <td>Mon</td>
+                            <td>Tue</td>
+                            <td>Wed</td>
+                            <td>Thu</td>
+                            <td>Fri</td>
+                            <td>Sat</td>
+                            <td class="fw-bold text-start">Timesheet breakdown
+                            <span class="badge bg-secondary">0  hrs</span></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fs-6" style="height: 60px; vertical-align: middle;">
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td class="text-light text-center" style="font-size: small; background-color: #246358;">
+                                Project Tasks<br>(0 hrs)</td>
+                        </tr>
+                        <tr class="bg-secondary text-light">
+                            <td>0 tasks</td>
+                            <td>0 tasks</td>
+                            <td>0 tasks</td>
+                            <td>0 tasks</td>
+                            <td>0 tasks</td>
+                            <td>0 tasks</td>
+                            <td>0 tasks</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+               	
+                <!-- TIME CARD -->
+				<p class="fw-bold pt-2">Logged Time Cards</p>
+				
+				<div class="overflow-auto" style="max-height: 50vh;">
+					<table class="table table-hover bg-white" id="taskTable"
+						style="color: #4a4a4a; font-size: small;">
+						<thead>
+							<tr>
+								<th>ProjectID</th>
+								<th>Project</th>
+								<th>Category</th>
+								<th>Sun</th>
+								<th>Mon</th>
+								<th>Tue</th>
+								<th>Wed</th>
+								<th>Thu</th>
+								<th>Fri</th>
+								<th>Sat</th>
+								<th>Total</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- added projects go here -->
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
 	
-	<script type="application/javascript" th:src="@{js/homepage.js}"></script>
+	<script type="application/javascript" th:src="@{js/employee_homepage.js}"></script>
 </body>
 </html>

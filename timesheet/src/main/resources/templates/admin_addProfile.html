@@ -92,8 +92,8 @@ select
 
 								<div class="col-md-6">
 									<div class="form-group" id="field_manager">
-										<label for="userManager">Manager</label> <select
-											th:field="*{managerId}" id="field_manager"
+										<label for="userManager">Manager</label>
+										<select th:field="*{managerId}" id="field_manager"
 											class="form-control" name="userManager">
 											<option th:each="manager: ${managers}"
 												th:value="${manager.employeeid}"
