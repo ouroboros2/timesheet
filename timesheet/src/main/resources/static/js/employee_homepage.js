@@ -27,6 +27,7 @@ function addToTimesheet() {
 		const cprojectDesc = document.createElement('td');
 		const cprojectCategory = document.createElement('td');
 		const cpInput = document.createElement('input');
+		const separator = document.createElement('input');
 		
 
 		cprojectId.textContent = taskListObjs[i].projectCode + taskListObjs[i].projectId;
@@ -35,16 +36,20 @@ function addToTimesheet() {
 		cpInput.value = taskListObjs[i].projectId;
 		cpInput.className = "parse" + taskListObjs[i].projectId;
 		cpInput.hidden = true;
+		separator.value = "|"
+		separator.className = "parse" + taskListObjs[i].projectId;
+		separator.hidden = true;
 
 		$("#taskTable").append(
 			$('<tr>', { id: "data" + taskListObjs[i].projectId }).append(cprojectId, cprojectDesc, cprojectCategory,cpInput)			
 		);
 		
 		var count = 0
-		while (count < 9) {
+		while (count < 7) {
 			$("#" + "data" + taskListObjs[i].projectId).append("<td><input class='" + "parse" + taskListObjs[i].projectId + "' size='2'></td>");
 			count++;
 		}
+		$("#" + "data" + taskListObjs[i].projectId).append(separator);
 	}
 	taskList = [];
 	taskListObjs = [];
@@ -91,11 +96,15 @@ function displayWeek() {
 }
 
 function insert() {
-	var entry = {};
 	var time = [];
+	
 	$('[class^="parse"]').map(function() {		
 		time.push($(this).val());
 	});
 	
-	alert(JSON.stringify(time));
+	var data = JSON.stringify(time);
+	data = data.replace(/\"/g, "");
+	data = data.replace(/[\[\]']+/g,'');
+	var projects = data.split("|");
+	
 }
