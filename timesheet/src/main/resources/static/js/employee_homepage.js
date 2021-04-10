@@ -26,22 +26,26 @@ function addToTimesheet() {
 		const cprojectId = document.createElement('td');
 		const cprojectDesc = document.createElement('td');
 		const cprojectCategory = document.createElement('td');
+		const cpInput = document.createElement('input');
+		
 
 		cprojectId.textContent = taskListObjs[i].projectCode + taskListObjs[i].projectId;
 		cprojectDesc.textContent = taskListObjs[i].projectDesc;
 		cprojectCategory.textContent = taskListObjs[i].projectCategory;
+		cpInput.value = taskListObjs[i].projectId;
 
 		$("#taskTable").append(
-			$('<tr>', { id: "data" + taskListObjs[i].projectId }).append(cprojectId, cprojectDesc, cprojectCategory)
+			$('<tr>', { id: "data" + taskListObjs[i].projectId }).append(cprojectId, cprojectDesc, cprojectCategory)			
+		);
+		$("#taskTable").append(
+			$('<tr>', { class: taskListObjs[i].projectId }).append(cpInput)	
 		);
 
 		var count = 0
 		while (count < 9) {
-			$("#" + "data" + taskListObjs[i].projectId).append("<td><input size='2'></td>");
+			$("#" + "data" + taskListObjs[i].projectId).append("<td><input class='" + taskListObjs[i].projectId + "' size='2'></td>");
 			count++;
 		}
-
-
 	}
 	taskList = [];
 	taskListObjs = [];
