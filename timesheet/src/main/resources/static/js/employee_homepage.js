@@ -107,4 +107,5 @@ function insert() {
 	data = data.replace(/[\[\]']+/g,'');
 	var projects = data.split("|");
 	
+	//Tama na muna
 }
