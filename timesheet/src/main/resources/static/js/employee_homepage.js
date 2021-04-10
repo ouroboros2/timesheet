@@ -33,17 +33,16 @@ function addToTimesheet() {
 		cprojectDesc.textContent = taskListObjs[i].projectDesc;
 		cprojectCategory.textContent = taskListObjs[i].projectCategory;
 		cpInput.value = taskListObjs[i].projectId;
+		cpInput.className = "parse" + taskListObjs[i].projectId;
+		cpInput.hidden = true;
 
 		$("#taskTable").append(
-			$('<tr>', { id: "data" + taskListObjs[i].projectId }).append(cprojectId, cprojectDesc, cprojectCategory)			
+			$('<tr>', { id: "data" + taskListObjs[i].projectId }).append(cprojectId, cprojectDesc, cprojectCategory,cpInput)			
 		);
-		$("#taskTable").append(
-			$('<tr>', { class: taskListObjs[i].projectId }).append(cpInput)	
-		);
-
+		
 		var count = 0
 		while (count < 9) {
-			$("#" + "data" + taskListObjs[i].projectId).append("<td><input class='" + taskListObjs[i].projectId + "' size='2'></td>");
+			$("#" + "data" + taskListObjs[i].projectId).append("<td><input class='" + "parse" + taskListObjs[i].projectId + "' size='2'></td>");
 			count++;
 		}
 	}
@@ -89,4 +88,14 @@ function displayWeek() {
 	//formatted date for db
 	console.log(begin.toString("yyyy-MM-dd"));
 	console.log(end.toString("yyyy-MM-dd"));
+}
+
+function insert() {
+	var entry = {};
+	var time = [];
+	$('[class^="parse"]').map(function() {		
+		time.push($(this).val());
+	});
+	
+	alert(JSON.stringify(time));
 }
