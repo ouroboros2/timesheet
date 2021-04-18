@@ -7,6 +7,7 @@ import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.java.timesheet.model.Project;
 import com.java.timesheet.model.TimeEntry;
 import com.java.timesheet.repository.TimeEntryRepository;
 
@@ -22,14 +23,17 @@ public class TimeEntryService {
 		return timeEntries;
 	}
 	
-	public void saveTimeEntry(TimeEntry timeEntry) {
+	public void saveTimeEntry(TimeEntry timeEntry, Project project) {
 		
-		timeEntry.setTimeEntryId(5);
-		timeEntry.setCategory("Billable");
-		//timeEntry.setEmployeeId(1);
-		//timeEntry.setManagerId(5554);
-		//timeEntry.setCategory("Billable");
-		//timeEntry.setStatus("pending");
+		String projectCode = project.getProjectCode() + Integer.toString(project.getProjectId());
+		
+		timeEntry.setCategory(project.getCategory());
+		timeEntry.setStartDate(project.getStartDate());
+		timeEntry.setEndDate(project.getEndDate());
+		timeEntry.setManagerId(5554);
+		timeEntry.setEmployeeId(5556);
+		timeEntry.setStatus("pending");
+		timeEntry.setProjectCode(projectCode);
 		
 		timeEntryRepository.save(timeEntry);
 		

@@ -26,8 +26,11 @@ public class ProjectService {
 	public Project findByProjectId(int projectId) {
 		
 		Project project = projectRepository.findByProjectId(projectId);
-		
 		return project;
+	}
+	
+	public void saveProject() {
+		
 	}
 
 }
