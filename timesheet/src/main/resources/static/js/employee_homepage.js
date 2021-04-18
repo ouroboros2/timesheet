@@ -105,11 +105,26 @@ function insert() {
 	var data = JSON.stringify(time);
 	data = data.replace(/\"/g, "");
 	data = data.replace(/[\[\]']+/g,'');
-	var projects = data.split("|");
+	var projects = data.split(",|,");
 	
-	//alert(projects);
-	//returnJson();
-	saveSomething();
+	for(var i = 0; i < projects.length; i++) {
+		var entries = projects[i].split(",");
+		var timeEntry;
+		
+		for(var n = 0; n < entries.length; n++) {
+			timeEntry = {	
+				projectCode: entries[0],
+				sunday: entries[1],
+				monday: entries[2],
+				tuesday: entries[3],
+				wednesday: entries[4],
+				thursday: entries[5],
+				friday: entries[6],
+				saturday: entries[7]
+			}			
+		}
+		saveTimeEntry(timeEntry);
+	}
 }
 
 
@@ -133,20 +148,17 @@ function returnJson() {
 }
 
 
-function saveSomething() {
-	var contextPath = "[[@{/}]]";
+function saveTimeEntry(timeEntry) {	
 	
 	var url = "/viewTask/save";
-	var jsonData = {projectCode: "projectCode"};
-		
 	$.post({
 		type: "POST",
 		url: url,
-		data: JSON.stringify(jsonData),
+		data: JSON.stringify(timeEntry),
 		contentType: "application/json"
 	}).done(function(someString) {
-		alert("Your data was saved");
-		alert(someString);
+		//alert("Your data was saved");
+		//alert(someString);
 	}).fail(function(xhr, textStatus, errorThrown){
 		alert("xhr: " + xhr.responseText);
 		alert("textStatus: " + textStatus);

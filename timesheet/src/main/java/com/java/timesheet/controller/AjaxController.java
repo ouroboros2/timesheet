@@ -13,7 +13,9 @@ public class AjaxController {
 	@PostMapping("/viewTask/save")
 	public String save(@RequestBody TimeEntry timeEntry) {
 		
-		System.out.println("Display Text");
+		//System.out.println("Display Text");
+		
+		
 		
 		//ModelAndView model = new ModelAndView("blank");
 		String success = "sample";
