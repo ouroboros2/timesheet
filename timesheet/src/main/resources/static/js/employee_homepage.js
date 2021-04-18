@@ -157,12 +157,11 @@ function saveTimeEntry(timeEntry) {
 		data: JSON.stringify(timeEntry),
 		contentType: "application/json"
 	}).done(function(someString) {
-		//alert("Your data was saved");
-		//alert(someString);
+		alert(someString);
 	}).fail(function(xhr, textStatus, errorThrown){
 		alert("xhr: " + xhr.responseText);
-		alert("textStatus: " + textStatus);
-		alert("errorThrown: " + errorThrown);
+		//alert("textStatus: " + textStatus);
+		//alert("errorThrown: " + errorThrown);
 	});
 	
 }

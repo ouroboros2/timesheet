@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.java.timesheet.model.Employee;
 import com.java.timesheet.model.Project;
 import com.java.timesheet.repository.ProjectRepository;
 
@@ -12,14 +13,21 @@ import com.java.timesheet.repository.ProjectRepository;
 public class ProjectService {
 
 	@Autowired
-	ProjectRepository taskRepository;
+	ProjectRepository projectRepository;
 
 	public List<Project> getAllTasks() {
-		return taskRepository.findAll();
+		return projectRepository.findAll();
 	}
 
 	public void createProject(Project project) {
-		taskRepository.save(project);
+		projectRepository.save(project);
+	}
+	
+	public Project findByProjectId(int projectId) {
+		
+		Project project = projectRepository.findByProjectId(projectId);
+		
+		return project;
 	}
 
 }
