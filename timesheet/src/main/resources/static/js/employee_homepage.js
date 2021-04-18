@@ -107,5 +107,51 @@ function insert() {
 	data = data.replace(/[\[\]']+/g,'');
 	var projects = data.split("|");
 	
-	//Tama na muna
+	//alert(projects);
+	//returnJson();
+	saveSomething();
 }
+
+
+function returnJson() {
+	
+	alert("test");
+	
+	$.ajax({
+		type : "POST",
+		contentType: "application/json",
+		url : window.location + "/returnJson",
+		data: JSON.stringify(),
+		dataType: "json",
+		success: function(result) {
+			alert(result);
+		}
+	})
+	
+	alert("test2");
+	
+}
+
+
+function saveSomething() {
+	var contextPath = "[[@{/}]]";
+	
+	var url = "/viewTask/save";
+	var jsonData = {projectCode: "projectCode"};
+		
+	$.post({
+		type: "POST",
+		url: url,
+		data: JSON.stringify(jsonData),
+		contentType: "application/json"
+	}).done(function(someString) {
+		alert("Your data was saved");
+		alert(someString);
+	}).fail(function(xhr, textStatus, errorThrown){
+		alert("xhr: " + xhr.responseText);
+		alert("textStatus: " + textStatus);
+		alert("errorThrown: " + errorThrown);
+	});
+	
+}
+
