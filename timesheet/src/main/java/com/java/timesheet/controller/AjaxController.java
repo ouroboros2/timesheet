@@ -14,9 +14,6 @@ public class AjaxController {
 	public String save(@RequestBody TimeEntry timeEntry) {
 		
 		//System.out.println("Display Text");
-		
-		
-		
 		//ModelAndView model = new ModelAndView("blank");
 		String success = "sample";
 		return success;	
