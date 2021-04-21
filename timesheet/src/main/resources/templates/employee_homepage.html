@@ -22,8 +22,15 @@
 		<div class="container-fluid">
 			<a href="#" class="navbar-brand fw-bold">Timesheet Portal</a>
 			<ul class="navbar-nav">
-				<li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-					<i class="fas fa-user" style="padding-right: 10px;"></i>Username</a>
+				<li class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<i class="fas fa-user" style="padding-right: 10px;"></i>
+						Username
+						<!--
+						<span th:text="${employee.firstName}"></span>
+						<span th:text="${employee.lastName}"></span>
+						 -->
+					</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" id="logout">Logout</a>
 					</div>
@@ -31,11 +38,7 @@
 			</ul>
 		</div>
 	</nav>
-	
-	<!--  SESSION:
-	<div th:text="${employee.employeeid}">
-	</div>
-	-->
+
 
 	<!-- SECONDARY NAVBAR -->
 	<div class="row shadow p-1 ps-3 mx-4 my-4 bg-body rounded" style="color: #4a4a4a">
@@ -44,7 +47,7 @@
 			<span class="align-middle fw-bold"><i class="far fa-calendar-alt pe-2"></i></span>
 			<span class="align-middle fw-bold" id="weekfromdate">Week</span>
 			
-			<span class="badge bg-secondary ms-2">Ongoing</span>
+			<span class="badge bg-secondary ms-2" id="badgeStatus">Ongoing</span>
             <!-- <span class="badge bg-success ms-2">Submitted</span> -->
 		</div>
 
@@ -134,7 +137,7 @@
 					</div>
 
 					<div class="d-flex justify-content-end py-1">
-						<button class="btn btn-secondary btn-sm"
+						<button class="btn btn-secondary btn-sm" id="btnAdd"
 							th:onclick="addToTimesheet()">Add to timesheet</button>
 					</div>
 				</div>
@@ -194,8 +197,7 @@
                     <p class="fw-bold">Time Card</p>
                     
                     <div class="ms-auto">
-                    	<button class="btn btn-secondary btn-sm">Save</button>
-                        <button class="btn btn-success btn-sm" th:onclick="insert()">Submit</button>
+                        <button class="btn btn-success btn-sm" id="btnSubmit" th:onclick="insert()">Submit</button>
                     </div>
                 </div>
 				
@@ -226,6 +228,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<script type="application/javascript" th:src="@{js/employee_homepage.js}"></script>
 </body>
 </html>

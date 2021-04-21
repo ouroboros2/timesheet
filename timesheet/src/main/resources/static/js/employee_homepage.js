@@ -46,9 +46,13 @@ function addToTimesheet() {
 		
 		var count = 0
 		while (count < 7) {
-			$("#" + "data" + taskListObjs[i].projectId).append("<td><input class='" + "parse" + taskListObjs[i].projectId + "' size='2'></td>");
+			$("#" + "data" + taskListObjs[i].projectId).append("<td><input class='" + "parse" + taskListObjs[i].projectId + "' type='number' oninput='addHours()' min='1' max='24'></td>");
 			count++;
 		}
+		
+		$("#" + "data" + taskListObjs[i].projectId).append("<td>0</td>"); //total
+		//insert delete button here
+		
 		$("#" + "data" + taskListObjs[i].projectId).append(separator);
 	}
 	taskList = [];
@@ -56,9 +60,13 @@ function addToTimesheet() {
 
 }
 
-//datejs for date range; see displayWeek() for formatted sql date
-//https://github.com/datejs/Datejs --> see for documentation
+function addHours() {
+	console.log('ggwp');
+}
 
+
+//datejs for date range --> see displayWeek() for formatted sql date
+//github.com/datejs/Datejs --> see for documentation
 var days = 0;
 var begin, end;
 
@@ -80,11 +88,13 @@ function previousWeek() {
 	displayWeek();
 }
 
+
 function nextWeek() {
 	begin = begin.addDays(7);
 	end = end.addDays(7);
 	displayWeek();
 }
+
 
 function displayWeek() {
 	$("#weekfromdate").text("Week " + begin.getWeek());
@@ -94,6 +104,7 @@ function displayWeek() {
 	console.log(begin.toString("yyyy-MM-dd"));
 	console.log(end.toString("yyyy-MM-dd"));
 }
+
 
 function insert() {
 	var time = [];
@@ -157,7 +168,14 @@ function saveTimeEntry(timeEntry) {
 		data: JSON.stringify(timeEntry),
 		contentType: "application/json"
 	}).done(function(someString) {
-		alert(someString);
+		$("#badgeStatus").removeClass('bg-secondary').addClass('bg-success');
+		$("#badgeStatus").text("Submitted");
+		
+		$("#btnAdd").attr('disabled',true);
+		$("#btnSubmit").attr('disabled',true);
+		$("#taskTable input[type='number']").attr("disabled", true);
+		
+		//alert(someString);
 	}).fail(function(xhr, textStatus, errorThrown){
 		alert("xhr: " + xhr.responseText);
 		//alert("textStatus: " + textStatus);

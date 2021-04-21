@@ -1,38 +1,32 @@
-$('#field_type').change(function() {
-	let role = $(this).val();
-	
-	if(role === 'admin' || role === 'manager') {
+function getRole(role) {
+	if (role.value === 'admin' || role.value === 'manager')
 		$("#field_manager").hide();
-	} else if(role === 'employee') {
+	else if (role.value === 'employee')
 		$("#field_manager").show();
-	}
-});
+}
 
-$('#field_confpass').focusout(function() {
-	let pass = $('#field_pass').val();
-	let pass2 = $('#field_confpass').val();
-	if (pass !== pass2) {
-		$.alert({
-			title: 'Alert',
-			content: 'Passwords doesn\'t match!',
-		});
+function comparePass() {
+	let pass = $("#pass").val();
+	let confpass = $("#confpass").val();
 
-		$(':input[type="submit"]').prop('disabled', true);
-	} else {
-		$(':input[type="submit"]').prop('disabled', false);
-	}
-});
-
-$('a.btn')
-	.confirm(
-		{
+	if (pass !== confpass) {
+		$.confirm({
 			title: '',
-			content: 'Are you sure you want to cancel? Your inputs will not be saved.',
-
+			content: 'Passwords doesn\'t match!',
+			type: 'red',
+			typeAnimated: true,
 			buttons: {
-				yes: function() {
-					location.href = this.$target.attr('href');
-				},
-				no: {}
+				tryAgain: {
+					text: 'Try again',
+					btnClass: 'btn-red',
+					action: function() {
+					}
+				}
 			}
 		});
+		
+		$("#submit").prop('disabled', true);
+	}
+	else
+		$("#submit").prop('disabled', false);
+}

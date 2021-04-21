@@ -18,17 +18,16 @@
 <body style="background-color: #eeeeee;">
 
 	<!-- NAVBAR -->
-	<nav class="navbar navbar-expand-lg navbar-dark"
-		style="background-color: #2b3e40;">
+	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b3e40;">
 		<div class="container-fluid">
-			<a href="admin.jsp" class="navbar-brand fw-bold">TimeSheet Portal</a>
+			<a href="#" class="navbar-brand fw-bold">Timesheet Portal</a>
 			<ul class="navbar-nav">
-				<li class="nav-item dropdown"><a href="#"
-					class="nav-link dropdown-toggle" data-toggle="dropdown"><i
-						class="fas fa-user" style="padding-right: 10px;"></i>${loggedUserName}</a>
+				<li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+					<i class="fas fa-user" style="padding-right: 10px;"></i>Username</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="<%=request.getContextPath()%>/login">Logout</a>
-					</div></li>
+						<a class="dropdown-item" href="#" id="logout">Logout</a>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</nav>
