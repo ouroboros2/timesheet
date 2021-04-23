@@ -31,7 +31,7 @@ public class ProjectController {
 		modelAndView.addObject("projects", project);
 
 		return modelAndView;
-
+ 
 	}
 
 	// Creating new Projects
