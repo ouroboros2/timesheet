@@ -22,8 +22,15 @@
 		<div class="container-fluid">
 			<a href="#" class="navbar-brand fw-bold">Timesheet Portal</a>
 			<ul class="navbar-nav">
-				<li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-					<i class="fas fa-user" style="padding-right: 10px;"></i>Username</a>
+				<li class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+						<i class="fas fa-user" style="padding-right: 10px;"></i>
+						Username
+						<!--
+						<span th:text="${employee.firstName}"></span>
+						<span th:text="${employee.lastName}"></span>
+						 -->
+					</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#" id="logout">Logout</a>
 					</div>
@@ -50,160 +57,113 @@
 					</div>
 
 					<!-- DATE -->
-					<div class="col-md d-flex justify-content-center">
-						<button type="button" onclick="previousDate()"
-							class="btn btn-link btn-sm align-middle" style="color: #212529;">
-							<i class="fas fa-chevron-left"></i>
-						</button>
-
-						<span id="daterange" class="align-middle mx-5 mt-1 fw-bold">Date
+					<div class="col-md text-center">
+						<span id="daterange" class="align-middle fw-bold">Date
 							Range</span>
-
-						<button type="button" onclick="nextDate()"
-							class="btn btn-link btn-sm align-middle" style="color: #212529;">
-							<i class="fas fa-chevron-right"></i>
-						</button>
 					</div>
 
-					<div class="col-md d-flex justify-content-end">
-						<button class="btn btn-sm btn-outline-none dropdown-toggle"
-							data-toggle="dropdown" style="color: #4a4a4a">
+					<div class="col-md dropdown text-end">
+						<button class="btn btn-sm btn-outline-none dropdown-toggle" type="button"
+							id="btnDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="color: #4a4a4a">
 							<i class="fas fa-cog me-1"></i>Settings
 						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item"
-								th:href="@{/getNewEmployeeForm}">Add
-								Profile</a> 
-							<a class="dropdown-item"
-								th:href="@{/newProject}">Add Project
-								</a>
-							<!-- TO DO -->
-							<!--  	
-							<a class="dropdown-item"
-								th:href="#">Edit Employee
-								</a>
-							<a class="dropdown-item"
-								th:href="#">Edit Project
-								</a>
-							-->
-						</div>
+						
+						<ul class="dropdown-menu" aria-labelledby="btnDropdown">
+							<li><a class="dropdown-item" th:href="@{/getNewEmployeeForm}">Add Profile</a></li>
+							<li><a class="dropdown-item" th:href="@{/newProject}">Add Project Task</a></li>
+						</ul>
 					</div>
 				</div>
+				
+				<!-- CONTAINER -->
+                <div class="row p-1 mx-1 my-5">
 
-				<!-- CARDS -->
-				<div class="row text-white mt-5 mb-4">
-					<div class="col-sm-2">
-						<div class="card shadow rounded bg-warning">
-							<div class="card-body">
-								<h6 class="card-title">
-									ONGOING<br />PROJECT TASKS
-								</h6>
-								<h3 class="card-text fw-bold text-end"></h3>
-							</div>
-						</div>
-					</div>
+                    <!-- NAVIGATION TABS -->
+                    <ul class="nav nav-tabs text-center" style="font-size: 15px;">
+                        <li class="nav-item">
+                            <a href="#tasks" class="nav-link active" data-toggle="tab" style="color:#4a4a4a;">Project Tasks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#employees" class="nav-link" data-toggle="tab" style="color:#4a4a4a;">Employees</a>
+                        </li>
+                    </ul>
 
-					<div class="col-sm-2">
-						<div class="card shadow rounded bg-success">
-							<div class="card-body">
-								<h6 class="card-title">
-									COMPLETED<br />PROJECT TASKS
-								</h6>
-								<h3 class="card-text fw-bold text-end"></h3>
-							</div>
-						</div>
-					</div>
+					<div class="tab-content overflow-auto bg-white" style="max-height: 70vh; color:#4a4a4a">
 
-					<div class="col-sm-2">
-						<div class="card shadow rounded bg-primary">
-							<div class="card-body">
-								<h6 class="card-title">
-									BILLABLE HOURS<br />WORKED THIS WEEK
-								</h6>
-								<h3 class="card-text fw-bold text-end">2</h3>
-							</div>
-						</div>
-					</div>
+                        <div class="d-flex justify-content-between my-2">
+                            <form class="d-flex input-group-sm">
+                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-sm" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                            
+                            <div>
+	                            <button class="btn btn-sm btn-outline-success">+ ADD</button>
+	                            
+	                            <!-- unhide these if selection was made -->
+	                            <button class="btn btn-sm btn-outline-primary" hidden="hidden">Edit</button>
+	                            <button class="btn btn-sm btn-outline-danger"  hidden="hidden">- Delete</button>
+	                    	</div>
+                        </div>
 
-					<div class="col-sm-2">
-						<div class="card shadow rounded bg-danger">
-							<div class="card-body">
-								<h6 class="card-title">
-									NON-BILLABLE HOURS<br />WORKED THIS WEEK
-								</h6>
-								<h3 class="card-text fw-bold text-end">5</h3>
-							</div>
-						</div>
-					</div>
+                        <!-- TASKS -->
+                        <div class="tab-pane fade show active" id="tasks">
 
-					<div class="col-sm-2">
-						<div class="card shadow rounded bg-secondary">
-							<div class="card-body">
-								<h6 class="card-title">
-									EMPLOYEES<br />WORKED THIS WEEK
-								</h6>
-								<h3 class="card-text fw-bold text-end">14</h3>
-							</div>
-						</div>
-					</div>
-				</div>
+                            <table class="table table-hover border" id="tableTasks" style="color:#4a4a4a;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%;">ID</th>
+                                        <th style="width: 30%;">Project Title</th>
+                                        <th style="width: 15%;">Type</th>
+                                        <th style="width: 15%;">Start Date</th>
+                                        <th style="width: 15%;">End Date</th>
+                                        <th style="width: 15%;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	<tr th:each="project: ${projects}">
+                                		<td th:text="'PRJTSK' + ${project.projectId}"></td>
+                                		<td th:text="${project.projectCode}"></td>
+                                		<td th:text="${project.category}"></td>
+                                		<td th:text="${project.startDate}"></td>
+                                		<td th:text="${project.endDate}"></td>
+                                		<td></td>
+                                	</tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-				<!--TABLE -->
-				<div class="table-responsive">
-					<table
-						class="table table-bordered table-hover table-sm shadow p-3 mb-5 bg-white rounded">
-						<thead>
-							<tr>
-								<th style="width: 14%;">ID</th>
-								<th style="width: 30%;">Project Title</th>
-								<th style="width: 15%;">Type</th>
-								<th style="width: 13%;">Start Date</th>
-								<th style="width: 13%;">End Date</th>
-								<th style="width: 15%"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td class="text-center"><a
-									href="#"
-									class="btn btn-sm btn-outline-primary w-25" id="editTask">Edit</a>
-									<a
-									href="#"
-									class="btn btn-sm btn-outline-danger" id="deleteTask">Delete</a></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+                        <!-- EMPLOYEES -->
+                        <div class="tab-pane fade" id="employees">
+
+                            <table class="table table-hover border" id="tableEmployees" style="color:#4a4a4a;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 12%;">ID</th>
+                                        <th style="width: 35%;">Name</th>
+                                        <th style="width: 17%;">Username</th>
+                                        <th style="width: 16%;">Password</th>
+                                        <th style="width: 20%;">Manager</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	<tr th:each="employee: ${employees}">
+                                		<td th:text="${employee.employeeid}"></td>
+                                		<td th:text="${employee.firstName} + ' ' + ${employee.lastName}"></td>
+                                		<td th:text="${employee.userName}"></td>
+                                		<td th:text="${employee.password}"></td>
+                                		<td th:text="${employee.managerId}"></td>
+                                	</tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- CONTAINER END -->
+                
 			</main>
 		</div>
 	</div>
-
-<!--  
-	<script>
-		$(document).ready(function() {
-
-			deletePrompt();
-		});
-
-		$(function deletePrompt() {
-			$("#deleteTask").confirm({
-				title : '',
-				content : 'Do you want to pemanently delete this task?',
-
-				buttons : {
-					yes : function() {
-						location.href = this.$target.attr('href');
-					},
-					no : {}
-				}
-			});
-		});
-	</script>
--->
+	
+	<script type="application/javascript" th:src="@{js/admin_homepage.js}"></script>
 </body>
 </html>
