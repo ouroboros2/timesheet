@@ -29,8 +29,8 @@ public class ProjectService {
 		return project;
 	}
 	
-	public void saveProject() {
-		
-	}
+	public List<Project> getManagerProjects(int managerId) {
+		return projectRepository.findByProjectOwner(managerId);
+	} 
 
 }
