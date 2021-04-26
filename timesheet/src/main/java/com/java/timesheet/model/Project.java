@@ -30,6 +30,9 @@ public class Project {
 
 	@Column(name = "category")
 	private String category;
+	
+	@Column(name = "projectOwner")
+	private int projectOwner;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "startDate")
@@ -85,5 +88,13 @@ public class Project {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public int getProjectOwner() {
+		return projectOwner;
+	}
+
+	public void setProjectOwner(int projectOwner) {
+		this.projectOwner = projectOwner;
 	}
 }

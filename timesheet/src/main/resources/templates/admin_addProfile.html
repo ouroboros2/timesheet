@@ -97,7 +97,7 @@ select
 										<select th:field="*{managerId}" id="field_manager"
 											class="form-control" name="userManager">
 											<option th:each="manager: ${managers}"
-												th:value="${manager.employeeid}"
+												th:value="${manager.employeeId}"
 												th:text="${manager.firstName} + ' ' + ${manager.lastName}">
 											</option>
 										</select>

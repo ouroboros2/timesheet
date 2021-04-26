@@ -1,6 +1,7 @@
 package com.java.timesheet.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.timesheet.model.Employee;
+import com.java.timesheet.model.Project;
 import com.java.timesheet.service.EmployeeService;
 import com.java.timesheet.service.ProjectService;
 import com.java.timesheet.service.TimeEntryService;
@@ -39,6 +41,8 @@ public class EmployeeController {
 
 		ModelAndView model;
 		employee = employeeService.findyByUsername(employee);
+		List<Project> projects = projectService.getManagerProjects(employee.getManagerId());
+		
 
 		if (employee.getRole().equalsIgnoreCase("admin")) {
 			model = new ModelAndView("admin_homepage");
@@ -46,6 +50,8 @@ public class EmployeeController {
 			model = new ModelAndView("employee_homepage");
 		}
 		model.addObject("employee", employee);
+		model.addObject("projects", projects);
+		
 		return model;
 	}
 

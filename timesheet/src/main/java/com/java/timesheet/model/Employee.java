@@ -16,7 +16,7 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_seq")
 	@SequenceGenerator(name = "task_seq", sequenceName = "task_seq", initialValue = 5550, allocationSize = 1)
 	@Column(name = "employeeid")
-	private int employeeid;
+	private int employeeId;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -36,12 +36,12 @@ public class Employee {
 	@Column(name = "role")
 	private String role;
 
-	public int getEmployeeid() {
-		return employeeid;
+	public int getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setEmployeeid(int employeeid) {
-		this.employeeid = employeeid;
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
 	}
 
 	public String getFirstName() {
