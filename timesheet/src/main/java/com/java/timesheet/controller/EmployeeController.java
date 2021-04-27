@@ -83,13 +83,11 @@ public class EmployeeController {
 		}
 	}
 	
-	@RequestMapping("/editAndSave")
-	public ModelAndView editAndSaveEmployee(@ModelAttribute Employee employee) {
-		
+	@RequestMapping("/deleteEmployee")
+	public ModelAndView deleteEmployee(@ModelAttribute Employee employee) {
+
 		ModelAndView model = new ModelAndView("admin_homepage");
-		
-		
+		employeeService.deleteEmployee(employee.getEmployeeId());
 		return model;
-		
 	}
 }

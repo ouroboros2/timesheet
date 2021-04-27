@@ -52,5 +52,9 @@ public class EmployeeService {
 		ArrayList<Employee> employees = employeeRepository.findByManagerId(managerId);
 		return employees;
 	}
+	
+	public void deleteEmployee(int employeeId) {
+		employeeRepository.deleteById(employeeId);
+	}
 
 }
