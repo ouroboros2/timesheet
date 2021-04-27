@@ -9,6 +9,6 @@ import com.java.timesheet.model.TimeEntry;
 
 public interface TimeEntryRepository extends JpaRepository<TimeEntry, Integer> {
 
-	@Query("select t from TimeEntry t where t.employeeId = ?1 and t.managerId= ?2")
-	ArrayList<TimeEntry> getTimeSheetDetails(int employeeId, int managerId);
+	@Query("select t from TimeEntry t where t.managerId = ?1")
+	ArrayList<TimeEntry> getTimeSheetDetails(int managerId);
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,12 +26,13 @@ public class TaskController {
 	@Autowired
 	private TimeEntryService timeEntryService;
 
-	@RequestMapping("/getDirectReports")
-	public ModelAndView getDirectReports(Employee employee) {
+	@RequestMapping("/getDirectReports/{employeeId}")
+	public ModelAndView getDirectReports(@PathVariable("employeeId") int employeeId) {
 
 		ModelAndView model = new ModelAndView("manager_directReports");
-		ArrayList<Employee> employees = employeeService.getDirectReports(5554);
-		ArrayList<TimeEntry> timeEntries = timeEntryService.getEmployeeTimesheetDetails(5557, 5554);
+		//Get list of employees under that employeeId
+		ArrayList<Employee> employees = employeeService.getDirectReports(employeeId);
+		ArrayList<TimeEntry> timeEntries = timeEntryService.getEmployeeTimesheetDetails(employeeId);
 		model.addObject("employees", employees);
 		model.addObject("timeEntries", timeEntries);
 		return model;

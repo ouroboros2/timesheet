@@ -73,7 +73,7 @@ public class EmployeeController {
 
 		boolean success = employeeService.createEmployee(employee);
 		if (success) {
-			model = new ModelAndView("employee_homepage");
+			model = new ModelAndView("admin_homepage");
 			model.addObject("employee", employee);
 			return model;
 		} else {
@@ -81,5 +81,15 @@ public class EmployeeController {
 			model.addObject("employee", new Employee());
 			return model;
 		}
+	}
+	
+	@RequestMapping("/editAndSave")
+	public ModelAndView editAndSaveEmployee(@ModelAttribute Employee employee) {
+		
+		ModelAndView model = new ModelAndView("admin_homepage");
+		
+		
+		return model;
+		
 	}
 }

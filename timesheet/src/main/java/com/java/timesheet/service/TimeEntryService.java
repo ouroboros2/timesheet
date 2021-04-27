@@ -17,9 +17,9 @@ public class TimeEntryService {
 	@Autowired
 	private TimeEntryRepository timeEntryRepository;
 
-	public ArrayList<TimeEntry> getEmployeeTimesheetDetails(int employeeId, int managerId) {
+	public ArrayList<TimeEntry> getEmployeeTimesheetDetails(int managerId) {
 
-		ArrayList<TimeEntry> timeEntries = timeEntryRepository.getTimeSheetDetails(employeeId, managerId);
+		ArrayList<TimeEntry> timeEntries = timeEntryRepository.getTimeSheetDetails(managerId);
 		return timeEntries;
 	}
 	

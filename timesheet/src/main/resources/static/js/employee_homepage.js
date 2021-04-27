@@ -185,27 +185,6 @@ function insert() {
 	}
 }
 
-
-function returnJson() {
-
-	alert("test");
-
-	$.ajax({
-		type: "POST",
-		contentType: "application/json",
-		url: window.location + "/returnJson",
-		data: JSON.stringify(),
-		dataType: "json",
-		success: function(result) {
-			alert(result);
-		}
-	})
-
-	alert("test2");
-
-}
-
-
 function saveTimeEntry(timeEntry) {
 
 	var url = "/viewTask/save";
@@ -214,7 +193,7 @@ function saveTimeEntry(timeEntry) {
 		url: url,
 		data: JSON.stringify(timeEntry),
 		contentType: "application/json"
-	}).done(function(someString) {
+	}).done(function() {
 		$("#badgeStatus").removeClass('bg-secondary').addClass('bg-success');
 		$("#badgeStatus").text("Submitted");
 
