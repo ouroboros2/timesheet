@@ -10,5 +10,8 @@ import com.java.timesheet.model.Project;
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
 	Project findByProjectId(int projectId);
+	
 	List<Project> findByProjectOwner(int managerId);
+	
+	List<Project> findByProjectCodeContaining(String projectCode);
 }

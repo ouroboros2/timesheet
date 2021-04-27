@@ -32,5 +32,18 @@ public class ProjectService {
 	public List<Project> getManagerProjects(int managerId) {
 		return projectRepository.findByProjectOwner(managerId);
 	} 
+	
+	public List<Project> searchByProjectCode(String projectCode) {
+		
+		List<Project> projects;
+		
+		if(projectCode != null) {
+			projects = projectRepository.findByProjectCodeContaining(projectCode);
+		} else {
+			projects = projectRepository.findAll();
+		}
+		return projects;
+		
+	}
 
 }

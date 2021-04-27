@@ -1,6 +1,7 @@
 package com.java.timesheet.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -35,5 +36,19 @@ public class ResController {
 		timeEntryService.saveTimeEntry(timeEntry, project);
 		
 		return "200";	
+	}
+	
+	@PostMapping("/searchEmployee")
+	public List<Employee> searchEmployee(@RequestBody Employee employee) {
+		
+		List<Employee> employees = employeeService.searchByUsername(employee.getUserName());		
+		return employees;	
+	}
+	
+	@PostMapping("/searchProject")
+	public List<Project> searchByProject(@RequestBody Project project) {
+		
+		List<Project> projects = projectService.searchByProjectCode(project.getProjectCode());		
+		return projects;
 	}
 }
