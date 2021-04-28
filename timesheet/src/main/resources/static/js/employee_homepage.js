@@ -51,7 +51,7 @@ function addToTimesheet() {
 		}
 
 		$("#" + "data" + taskListObjs[i].projectId).append("<td>0</td>"); //total
-		$("#" + "data" + taskListObjs[i].projectId).append("<td><i class=\"fas fa-trash-alt\"></i></td>"); //delete button; no function yet
+		$("#" + "data" + taskListObjs[i].projectId).append("<td><button><i class=\"fas fa-trash-alt\"></i></td></button>"); //delete button; no function yet
 
 		$("#" + "data" + taskListObjs[i].projectId).append(separator);
 	}
@@ -64,6 +64,7 @@ function addHours() {
 	let col, rowsum;
 	let row = 0;
 	let colsum = [];
+	let tasksDonePerDay = [0,0,0,0,0,0,0]
 
 	$("#taskTable tr:gt(0)").each(function() {
 		col = 0;
@@ -72,14 +73,18 @@ function addHours() {
 
 		$(this).find("td:gt(2)").each(function() {
 			$(this).find("input").each(function() {
-				rowsum += Number($(this).val());
+				let hour = Number($(this).val());
+				rowsum += hour;
 
 				if (row === 1)
-					colsum[col] = Number($(this).val());
+					colsum[col] = hour;
 				else
-					colsum[col] += Number($(this).val());
+					colsum[col] += hour;
+				
+				if ($(this).val().trim() != '' &&  hour > 0)
+					tasksDonePerDay[col]++;
 
-				populateSum(colsum);
+				populateBreakdown(colsum, tasksDonePerDay);
 			});
 
 			col++;
@@ -89,7 +94,7 @@ function addHours() {
 	});
 }
 
-function populateSum(colsum) {
+function populateBreakdown(colsum, tasksDonePerDay) {
 	let sum = 0;
 	let col = 0;
 
@@ -104,6 +109,14 @@ function populateSum(colsum) {
 				$("#hoursBadge").text(sum + " hrs");
 			}
 
+			col++;
+		});
+	});
+	
+	$("#hoursBreakdownTable tr:nth-child(2)").each(function() {
+		col = 0;
+		$(this).find("td").each(function() {
+			$(this).text(tasksDonePerDay[col]);
 			col++;
 		});
 	});
