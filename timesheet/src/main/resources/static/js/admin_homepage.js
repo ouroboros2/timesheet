@@ -68,7 +68,22 @@ function findByEmployeeUserName(employee) {
 		contentType: "application/json"
 	}).done(function(employeeList) {
 		
-		alert(JSON.stringify(employeeList));
+		for(var i = 0; i < employeeList.length; i++) {
+			
+			//below are the variables to be used for the
+			//corresponding list in the table
+			//store in hidden inputBox variables which are not displayed,
+			//but to be sent when submitting. You can use alert or console to check the values
+			var employeeId = employeeList[i].employeeId;
+			var firstName = employeeList[i].firstName;
+			var lastName = employeeList[i].lastName;
+			var userName = employeeList[i].userName;
+			var managerId = employeeList[i].managerId;
+			var role = employeeList[i].role;
+		}
+		
+		//uncomment below to check what is returned from backend
+		//alert(JSON.stringify(employeeList));
 		
 	}).fail(function(xhr, textStatus, errorThrown){
 		alert("xhr: " + xhr.responseText);
@@ -85,7 +100,25 @@ function findByProjectCode(project) {
 		data: JSON.stringify(project),
 		contentType: "application/json"
 	}).done(function(projectList) {
-		alert(JSON.stringify(projectList));
+		
+		for(var i = 0; i < projectList.length; i++) {
+			
+			//below are the variables to be used for the
+			//corresponding list in the table
+			//store in hidden inputBox variables which are not displayed,
+			//but to be sent when submitting. You can use alert or console to check the values
+			var projectId = projectList[i].projectId;
+			var projectCode = projectList[i].projectCode;
+			var projectDesc = projectList[i].projectDesc;
+			var category = projectList[i].category;
+			var projectOwner = projectList[i].projectOwner;
+			var startDate = projectList[i].startDate;
+			var endDate = projectList[i].endDate;
+			
+		}
+		
+		//uncomment below to check what is returned from backend
+		//alert(JSON.stringify(projectList));
 		
 	}).fail(function(xhr, textStatus, errorThrown){
 		alert("xhr: " + xhr.responseText);
