@@ -47,10 +47,12 @@ public class EmployeeController {
 
 		if (employee.getRole().equalsIgnoreCase("admin")) {
 			model = new ModelAndView("admin_homepage");
+			model.addObject("employee", new Employee());
 		} else {
 			model = new ModelAndView("employee_homepage");
+			model.addObject("employee", employee);
 		}
-		model.addObject("employee", employee);
+		
 		model.addObject("projects", projects);
 		
 		return model;
