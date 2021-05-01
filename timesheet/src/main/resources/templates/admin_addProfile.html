@@ -15,18 +15,12 @@
 
 <script type="application/javascript" th:src="@{js/add_validation.js}"></script>
 <script type="application/javascript" th:src="@{js/addProfile.js}"></script>
-<style>
-body {
-	background-color: #eeeeee;
-}
 
+<link th:href="@{css/style.css}" rel="stylesheet" />
+<style>
 select
 	{
 	cursor: pointer;
-}
-
-.container-fluid {
-	color: #4a4a4a;
 }
 
 .form-group {
@@ -39,14 +33,14 @@ select
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-lg navbar-dark"
 		style="background-color: #2b3e40;">
-		<div class="container-fluid">
+		<div class="container-fluid gray-text-color">
 			<a th:href="@{#}" class="navbar-brand fw-bold" th:onclick="redirect()">Timesheet Portal</a>
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-					<i class="fas fa-user" style="padding-right: 10px;"></i>Username</a>
+					<i class="fas fa-user" style="padding-right: 10px;"></i>Admin</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Logout</a>
+						<a class="dropdown-item" th:href="@{/login}" id="logout">Logout</a>
 					</div>
 				</li>
 			</ul>
@@ -54,7 +48,7 @@ select
 	</nav>
 
 	<!-- CONTENT -->
-	<div class="container-fluid">
+	<div class="container-fluid gray-text-color">
 		<div class="row mx-2 mt-3">
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-12 pt-3 px-4">
 				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">

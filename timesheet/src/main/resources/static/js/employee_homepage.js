@@ -30,7 +30,7 @@ function addToTimesheet() {
 		const separator = document.createElement('input');
 
 
-		cprojectId.textContent = taskListObjs[i].projectCode + taskListObjs[i].projectId;
+		cprojectId.textContent = taskListObjs[i].projectCode + ' ' + taskListObjs[i].projectId;
 		cprojectDesc.textContent = taskListObjs[i].projectDesc;
 		cprojectCategory.textContent = taskListObjs[i].projectCategory;
 		cpInput.value = taskListObjs[i].projectId;
@@ -51,7 +51,8 @@ function addToTimesheet() {
 		}
 
 		$("#" + "data" + taskListObjs[i].projectId).append("<td>0</td>"); //total
-		$("#" + "data" + taskListObjs[i].projectId).append("<td><button><i class=\"fas fa-trash-alt\"></i></td></button>"); //delete button; no function yet
+		$("#" + "data" + taskListObjs[i].projectId).append("<td><button class='default-style delete-button gray-text-color' value='" + taskListObjs[i].projectId +
+			"' onclick='deleteTask(this.value)'><i class=\"fas fa-trash-alt\"></i></td></button>");
 
 		$("#" + "data" + taskListObjs[i].projectId).append(separator);
 	}
@@ -61,10 +62,10 @@ function addToTimesheet() {
 
 
 function addHours() {
-	let col, rowsum;
-	let row = 0;
-	let colsum = [];
-	let tasksDonePerDay = [0,0,0,0,0,0,0]
+	var col, rowsum;
+	var row = 0;
+	var colsum = [];
+	var tasksDonePerDay = [0, 0, 0, 0, 0, 0, 0];
 
 	$("#taskTable tr:gt(0)").each(function() {
 		col = 0;
@@ -80,8 +81,8 @@ function addHours() {
 					colsum[col] = hour;
 				else
 					colsum[col] += hour;
-				
-				if ($(this).val().trim() != '' &&  hour > 0)
+
+				if ($(this).val().trim() != '' && hour > 0)
 					tasksDonePerDay[col]++;
 
 				populateBreakdown(colsum, tasksDonePerDay);
@@ -94,9 +95,10 @@ function addHours() {
 	});
 }
 
+
 function populateBreakdown(colsum, tasksDonePerDay) {
-	let sum = 0;
-	let col = 0;
+	var sum = 0;
+	var col = 0;
 
 	$("#hoursBreakdownTable tr:nth-child(1)").each(function() {
 		$(this).find("td").each(function() {
@@ -105,18 +107,32 @@ function populateBreakdown(colsum, tasksDonePerDay) {
 				$(this).text(colsum[col]);
 				sum += colsum[col];
 			} else {
-				$(this).text("Project Tasks (" + sum + " hrs)");
-				$("#hoursBadge").text(sum + " hrs");
+				if (sum === 1) {
+					$(this).text("Project Tasks (" + sum + " hr)");
+					$("#hoursBadge").text(sum + " hr");
+				} else {
+					$(this).text("Project Tasks (" + sum + " hrs)");
+					$("#hoursBadge").text(sum + " hrs");
+				}
 			}
 
 			col++;
 		});
 	});
-	
+
 	$("#hoursBreakdownTable tr:nth-child(2)").each(function() {
 		col = 0;
 		$(this).find("td").each(function() {
-			$(this).text(tasksDonePerDay[col]);
+			const task = Number(tasksDonePerDay[col]);
+
+			if (!isNaN(task)) {
+
+				if (task === 1)
+					$(this).text(task + " task");
+				else
+					$(this).text(task + " tasks");
+			}
+
 			col++;
 		});
 	});
@@ -163,6 +179,27 @@ function displayWeek() {
 	//formatted date for db
 	console.log(begin.toString("yyyy-MM-dd"));
 	console.log(end.toString("yyyy-MM-dd"));
+}
+
+
+function deleteTask(taskId) {
+	$.confirm({
+		title: '',
+		content: 'Are you sure you want to remove this from your timesheet?',
+		type: 'red',
+		typeAnimated: true,
+		buttons: {
+			yes: {
+				text: 'Yes',
+				action: function() {
+					$("#task" + taskId).show();
+					$("#data" + taskId).remove();	
+					addHours();
+				}
+			},
+			no: {}
+		}
+	});
 }
 
 
@@ -226,5 +263,4 @@ function saveTimeEntry(timeEntry) {
 
 initDate();
 addHours();
-
 

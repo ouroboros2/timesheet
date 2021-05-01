@@ -13,25 +13,13 @@
 <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css}" rel="stylesheet" />
 <script type="application/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js}"></script>
 
-<!--
-<link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css}" rel="stylesheet"/>
-<script	type="@{application/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js}"></script>
- -->
-
+<link th:href="@{css/style.css}" rel="stylesheet" />
 <script type="application/javascript" th:src="@{js/add_validation.js}"></script>
 
 <style>
-body {
-	background-color: #eeeeee;
-}ca
-
 form>:nth-child(2)>.form-control, form>:nth-child(3)>.form-control, form>:nth-child(4)>.form-control
 	{
 	cursor: pointer;
-}
-
-.container-fluid {
-	color: #4a4a4a;
 }
 
 .form-group {
@@ -44,14 +32,14 @@ form>:nth-child(2)>.form-control, form>:nth-child(3)>.form-control, form>:nth-ch
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-lg navbar-dark"
 		style="background-color: #2b3e40;">
-		<div class="container-fluid">
+		<div class="container-fluid gray-text-color">
 			<a th:href="@{#}" class="navbar-brand fw-bold" th:onclick="redirect()">Timesheet Portal</a>
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-					<i class="fas fa-user" style="padding-right: 10px;"></i>Username</a>
+					<i class="fas fa-user" style="padding-right: 10px;"></i>Admin</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#">Logout</a>
+						<a class="dropdown-item" th:href="@{/login}" id="logout">Logout</a>
 					</div>
 				</li>
 			</ul>
@@ -59,7 +47,7 @@ form>:nth-child(2)>.form-control, form>:nth-child(3)>.form-control, form>:nth-ch
 	</nav>
 
 	<!-- CONTENT -->
-	<div class="container-fluid">
+	<div class="container-fluid gray-text-color">
 		<div class="row mx-2 mt-3">
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-12 pt-3 px-4">
 				<div

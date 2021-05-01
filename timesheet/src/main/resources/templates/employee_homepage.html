@@ -3,7 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Homepage</title>
-<link th:href="@{css/style.css}" rel="stylesheet" />
+
 <link th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" rel="stylesheet" />
 <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css}" rel="stylesheet" />
 
@@ -14,6 +14,8 @@
 
 <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css}" rel="stylesheet" />
 <script type="application/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js}"></script>
+
+<link th:href="@{css/style.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -30,7 +32,7 @@
 						<span th:text="${employee.firstName} + ' ' + ${employee.lastName}"></span>
 					</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" id="logout">Logout</a>
+						<a class="dropdown-item" th:href="@{/login}" id="logout">Logout</a>
 					</div>
 				</li>
 			</ul>
@@ -39,7 +41,7 @@
 
 
 	<!-- SECONDARY NAVBAR -->
-	<div class="row shadow p-1 ps-3 mx-4 my-4 bg-body rounded" style="color: #4a4a4a">
+	<div class="row shadow p-1 ps-3 mx-4 my-4 gray-text-color bg-body rounded">
 
 		<div class="col-md">
 			<span class="align-middle fw-bold"><i class="far fa-calendar-alt pe-2"></i></span>
@@ -65,7 +67,7 @@
 
 		<div class="col-md d-flex justify-content-end">
 			<!-- Button will only display if role is manager -->
-			<a th:href="@{/getDirectReports}" th:if="${employee.role == 'manager'}" class="btn btn-success btn-sm" style="background-color: #246358;">
+			<a th:href="@{/getDirectReports/} + ${employee.employeeId}" th:if="${employee.role == 'manager'}" class="btn btn-success btn-sm" style="background-color: #246358;">
 				<i class="fas fa-users"></i> View employees
 			</a>
 			
@@ -80,22 +82,22 @@
         <div class="col-md-3 g-0">
             <ul class="nav nav-tabs text-center small-text">
                 <li class="nav-item w-50">
-                    <a href="#billable" class="nav-link active" data-toggle="tab" style="color:#4a4a4a;">Billable</a>
+                    <a href="#billable" class="nav-link gray-text-color active" data-toggle="tab">Billable</a>
                 </li>
                 <li class="nav-item w-50">
-                    <a href="#nonbillable" class="nav-link" data-toggle="tab" style="color:#4a4a4a;">Non-Billable</a>
+                    <a href="#nonbillable" class="nav-link gray-text-color" data-toggle="tab">Non-Billable</a>
                 </li>
             </ul>
 
-            <div class="tab-content overflow-auto mt-4" style="max-height: 68vh; color:#4a4a4a">
+            <div class="tab-content overflow-auto gray-text-color mt-4" style="max-height: 68vh;">
 
 				<!-- TASKS CONTAINER -->
 				<div class="tab-pane fade show active" id="billable">
 
 					<div th:each="project: ${projects}" th:if="${project.category} == 'Billable'">
-						<div class="row pt-2 m-1 mb-3 bg-body rounded" id="task + ${project.projectId}">
+						<div class="row pt-2 m-1 mb-3 bg-body rounded" th:id="task + ${project.projectId}">
 							<h6>
-								<input type="checkbox" id="${project.projectId}" th:name="tasks"
+								<input type="checkbox" th:id="${project.projectId}" th:name="tasks"
 									th:value="${project.projectCode} + '|' + ${project.projectId} + '|' + ${project.projectDesc} + '|' + ${project.category}">
 
 								<span th:text="${project.projectCode}"></span>
@@ -115,23 +117,18 @@
 				<!-- GROUP TASKS CONTAINER -->
 				<div class="tab-pane fade" id="nonbillable">
 
-					<div th:each="project: ${projects}"
-						th:if="${project.category} == 'Non-Billable'">
-						<div class="row pt-2 m-1 mb-3 bg-body rounded"
-							id="task + ${project.projectId}">
+					<div th:each="project: ${projects}" th:if="${project.category} == 'Non-Billable'">
+						<div class="row pt-2 m-1 mb-3 bg-body rounded" th:id="task + ${project.projectId}">
 							<h6>
-								<input type="checkbox" id="${project.projectId}" th:name="tasks"
+								<input type="checkbox" th:id="${project.projectId}" th:name="tasks"
 									th:value="${project.projectCode} + '|' + ${project.projectId} + '|' + ${project.projectDesc} + '|' + ${project.category}">
 
 								<span th:text="${project.projectCode}"></span>
 							</h6>
 							<span th:text="${project.projectDesc}" class="fst-italic small-text"></span>
-								<span
-								th:text="${'Start: ' + project.startDate + ' | End: ' + project.endDate}"
-								class="fst-italic small-text pb-2"></span>
+							<span th:text="${'Start: ' + project.startDate + ' | End: ' + project.endDate}" class="fst-italic small-text pb-2"></span>
 							<hr class="m-0 p-0" />
-							<span th:text="'PRJTSK' + ${project.projectId}"
-								class="fw-bold small-text py-1"></span>
+							<span th:text="'PRJTSK' + ${project.projectId}" class="fw-bold small-text py-1"></span>
 						</div>
 					</div>
 
@@ -149,7 +146,7 @@
 			<div class="container">
 			
                 <!-- TIMESHEET BREAKDOWN -->
-                <table class="table text-center small-text bg-light" id="hoursBreakdownTable" style="color: #4a4a4a;">
+                <table class="table bg-white text-center small-text gray-text-color" id="hoursBreakdownTable">
                     <thead>
                         <tr>
                             <th>Sun</th>
@@ -177,7 +174,7 @@
                             <td class="text-light text-center small-text" style="background-color: #246358;">
                                 Project Tasks<br>(0 hrs)</td>
                         </tr>
-                        <tr class="bg-secondary text-light" style="font-size: smaller;">
+                        <tr class="bg-secondary smaller-text text-light">
                             <td>0 tasks</td>
                             <td>0 tasks</td>
                             <td>0 tasks</td>
@@ -201,12 +198,11 @@
                 </div>
 				
 				<div class="overflow-auto" style="max-height: 50vh;">
-					<table class="table table-hover text-center small-text bg-light" id="taskTable"
-						style="color: #4a4a4a;">
+					<table class="table table-hover bg-white text-center small-text gray-text-color" id="taskTable">
 						<thead>
 							<tr>
 								<th>ProjectID</th>
-								<th>Project</th>
+								<th>Description</th>
 								<th>Category</th>
 								<th>Sun</th>
 								<th>Mon</th>

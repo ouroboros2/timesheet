@@ -3,6 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Dashboard</title>
+
 <link th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" rel="stylesheet" />
 <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css}" rel="stylesheet" />
 
@@ -13,9 +14,13 @@
 
 <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css}" rel="stylesheet" />
 <script type="application/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js}"></script>
+
+<link th:href="@{css/style.css}" rel="stylesheet" />
+<script type="application/javascript" th:src="@{js/add_validation.js}"></script>
+<script type="application/javascript" th:src="@{js/addProfile.js}"></script>
 </head>
 
-<body style="background-color: #eeeeee;">
+<body>
 
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b3e40;">
@@ -24,15 +29,9 @@
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-						<i class="fas fa-user" style="padding-right: 10px;"></i>
-						Username
-						<!--
-						<span th:text="${employee.firstName}"></span>
-						<span th:text="${employee.lastName}"></span>
-						 -->
-					</a>
+					<i class="fas fa-user" style="padding-right: 10px;"></i>Admin</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="#" id="logout">Logout</a>
+						<a class="dropdown-item" th:href="@{/login}" id="logout">Logout</a>
 					</div>
 				</li>
 			</ul>
@@ -40,7 +39,7 @@
 	</nav>
 
 	<!-- CONTENT -->
-	<div class="container-fluid" style="color: #4a4a4a">
+	<div class="container-fluid gray-text-color">
 		<div class="row mx-2 mt-3">
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-12 pt-3 px-4">
 				<div
@@ -49,8 +48,7 @@
 				</div>
 
 				<!-- HEADER -->
-				<div class="row shadow p-1 ps-4 mx-1 my-4 bg-body rounded"
-					style="color: #4a4a4a">
+				<div class="row shadow gray-text-color p-1 ps-4 mx-1 my-4 bg-body rounded" >
 
 					<div class="col-md">
 						<span class="align-middle fw-bold" id="weekfromdate">Week 1</span>
@@ -62,14 +60,15 @@
 					</div>
 
 					<div class="col-md dropdown text-end">
-						<a class="btn btn-sm btn-outline-none dropdown-toggle"
-							id="btnDropdown" data-toggle="dropdown" aria-expanded="false" style="color: #4a4a4a">
+						<a class="btn btn-sm btn-outline-none gray-text-color dropdown-toggle"
+							id="btnDropdown" data-toggle="dropdown" aria-expanded="false">
 							<i class="fas fa-cog me-1"></i>Settings
 						</a>
 						
 						<ul class="dropdown-menu" aria-labelledby="btnDropdown">
 							<li><a class="dropdown-item" data-toggle="modal" th:href="@{#addProfileModal}">Add Profile</a></li>
-							<li><a class="dropdown-item" th:href="@{/newProject}">Add Project Task</a></li>
+							<li><a class="dropdown-item" data-toggle="modal" th:href="@{#addTaskModal}">Add Project Task</a></li>
+							<!--<li><a class="dropdown-item" th:href="@{/newProject}">Add Project Task</a></li> -->
 						</ul>
 					</div>
 				</div>
@@ -78,12 +77,12 @@
 				<div class="modal fade bd-example-modal-lg" tabindex="-1"
 					role="dialog" id="addProfileModal"
 					aria-hidden="true">
-					<div class="modal-dialog modal-lg">
+					<div class="modal-dialog modal-dialog-centered  modal-lg">
 						<div class="modal-content">
 
 							<div class="row p-3 overflow-auto">
-								<form th:action="@{/saveNewEmployee}" method="post"
-									th:object="${employee}">
+								
+								<form th:action="@{/saveNewEmployee}" method="post" th:object="${employee}">
 									<div class="form-group">
 										<label for="userFname">First Name</label>
 										<input th:field="*{firstName}" class="form-control" type="text"
@@ -162,21 +161,88 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<!-- ADD TASK MODAL -->
+				<!-- <div class="modal fade bd-example-modal-lg" tabindex="-1"
+					role="dialog" id="addTaskModal"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered  modal-lg">
+						<div class="modal-content">
 
+							<div class="row p-3 overflow-auto">
+
+								<form th:action="@{/saveProject}" method="post" th:object="${project}">
+									<div class="form-group">
+										<label for="tskTitle">Project Code</label> <input
+											th:field="*{projectCode}" class="form-control" type="text"
+											name="tskTitle" placeholder="Title" required>
+									</div>
+
+									<div class="form-group">
+										<label for="type">Project Owner</label>
+										<select class="form-control" th:field="*{projectOwner}" name="projectOwner" required>
+											<option th:each="manager: ${managers}" th:value="${manager.employeeId}"
+												th:text="${manager.firstName} + ' ' + ${manager.lastName}">
+											</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="tskType">Type</label>
+										<select th:field="*{category}" class="form-control" name="tskType" required>
+											<option th:value="Billable" th:text="Billable"></option>
+											<option th:value="Non-Billable" th:text="Non-Billable"></option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="tskStartDate">Start Date</label> <input
+											th:field="*{startDate}" type="date" class="form-control"
+											id="tskStartDate" name="tskStartDate"
+											data-toggle="datepicker" placeholder="YYYY-MM-DD" required>
+										<div data-toggle="datepicker"></div>
+									</div>
+
+									<div class="form-group">
+										<label for="tskEndDate">End Date</label> <input
+											th:field="*{endDate}" type="date" class="form-control"
+											id="tskEndDate" name="tskEndDate" data-toggle="datepicker"
+											placeholder="YYYY-MM-DD" required>
+										<div data-toggle="datepicker"></div>
+									</div>
+
+									<div class="form-group">
+										<label for="tskDesc">Description</label>
+										<textarea th:field="*{projectDesc}" class="form-control"
+											name="tskDesc" rows="3" maxlength="300"></textarea>
+									</div>
+								</form>
+
+								<div class="col-md d-flex justify-content-end mt-4">
+									<button class="btn btn-sm btn-success  me-2" id="submit"
+										th:onclick="validate()" style="background-color: #246358;">Submit</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				-->
+				
 				<!-- CONTAINER -->
                 <div class="row p-1 mx-1 my-5">
 
                     <!-- NAVIGATION TABS -->
                     <ul class="nav nav-tabs text-center" style="font-size: 15px;">
                         <li class="nav-item">
-                            <a href="#tasks" class="nav-link active" data-toggle="tab" style="color:#4a4a4a;">Project Tasks</a>
+                            <a href="#tasks" class="nav-link gray-text-color active" data-toggle="tab">Project Tasks</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#employees" class="nav-link" data-toggle="tab" style="color:#4a4a4a;">Employees</a>
+                            <a href="#employees" class="nav-link gray-text-color" data-toggle="tab">Employees</a>
                         </li>
                     </ul>
 
-					<div class="tab-content overflow-auto bg-white" style="max-height: 70vh; color:#4a4a4a">
+					<div class="tab-content overflow-auto gray-text-color" style="max-height: 70vh;">
 
                         <div class="d-flex justify-content-between my-2">
                         
@@ -198,7 +264,7 @@
                         <!-- TASKS -->
                         <div class="tab-pane fade show active" id="tasks">
 
-                            <table class="table table-hover border" id="tableTasks" style="color:#4a4a4a;">
+                            <table class="table table-hover border gray-text-color" id="tableTasks">
                                 <thead>
                                     <tr>
                                         <th style="width: 10%;">ID</th>
@@ -225,7 +291,7 @@
                         <!-- EMPLOYEES -->
                         <div class="tab-pane fade" id="employees">
 
-                            <table class="table table-hover border" id="tableEmployees" style="color:#4a4a4a;">
+                            <table class="table table-hover border gray-text-color" id="tableEmployees">
                                 <thead>
                                     <tr>
                                         <th style="width: 12%;">ID</th>
@@ -237,7 +303,7 @@
                                 </thead>
                                 <tbody>
                                 	<tr th:each="employee: ${employees}">
-                                		<td th:text="${employee.employeeid}"></td>
+                                		<td th:text="${employee.employeeId}"></td>
                                 		<td th:text="${employee.firstName} + ' ' + ${employee.lastName}"></td>
                                 		<td th:text="${employee.userName}"></td>
                                 		<td th:text="${employee.password}"></td>
@@ -248,8 +314,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- CONTAINER END -->
-                
 			</main>
 		</div>
 	</div>

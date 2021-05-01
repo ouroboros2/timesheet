@@ -2,8 +2,10 @@ function hasEmpty() {
 	var empty = false;
 	
 	$("form :input, textarea").each(function() {
-		if ($.trim($(this).val()) === '')
-			empty = true;
+		if ($.trim($(this).val()) === '') {
+			if (this.id !== "field_manager")
+				empty = true;
+		}
 	});
 	
 	return empty;

@@ -7,3 +7,25 @@ body {
 .small-text {
 	font-size: small;
 }
+
+.smaller-text {
+	font-size: smaller;
+}
+
+.nav-tabs .nav-link,
+.gray-text-color {
+	color: #4a4a4a;
+}
+
+.default-style {
+	border: none;
+	background: none;
+}
+
+.delete-button:hover {
+	color: #d33d49;
+}
+
+.form-group {
+	margin-bottom: 10px;
+}
