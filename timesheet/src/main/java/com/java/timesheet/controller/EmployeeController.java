@@ -79,7 +79,10 @@ public class EmployeeController {
 		boolean success = employeeService.createEmployee(employee);
 		if (success) {
 			model = new ModelAndView("admin_homepage");
-			model.addObject("employee", employee);
+			ArrayList<Employee> managers = employeeService.getManagerList();
+			model.addObject("employee", new Employee());
+			model.addObject("managers", managers);	
+			model.addObject("project", new Project());
 			return model;
 		} else {
 			model = new ModelAndView("blank");
