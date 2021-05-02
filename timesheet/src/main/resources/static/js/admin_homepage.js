@@ -1,4 +1,3 @@
-
 searchProject();
 searchEmployee();
 displayWeek();
@@ -29,11 +28,11 @@ function searchEmployee() {
 	var entry = "";
 
 	//convert entry to Employee object
-
 	var employee = {
 		userName: entry
 	}
 
+	$("#employeeTable tbody").empty();
 	//call corresponding Ajax and pass the object
 	findByEmployeeUserName(employee);
 
@@ -53,6 +52,7 @@ function searchProject() {
 	}
 
 
+	$("#taskTable tbody").empty();
 	//call corresponding Ajax and pass the object
 	findByProjectCode(project);
 
@@ -79,6 +79,22 @@ function findByEmployeeUserName(employee) {
 			var userName = employeeList[i].userName;
 			var managerId = employeeList[i].managerId;
 			var role = employeeList[i].role;
+			
+			var cempId = document.createElement('td');
+			var cempName = document.createElement('td');
+			var cempUsername= document.createElement('td');
+			var cmanager= document.createElement('td');
+			var cempRole = document.createElement('td');
+			
+			cempId.textContent = employeeId;
+			cempName.textContent = firstName + ' ' + lastName;
+			cempUsername.textContent = userName;
+			cmanager.textContent = managerId;
+			cempRole.textContent = role;
+
+			$("#employeeTable tbody").append(
+				$('<tr>').append(cempId, cempName, cempUsername, cmanager, cempRole)
+			);
 		}
 
 		//uncomment below to check what is returned from backend
@@ -113,7 +129,24 @@ function findByProjectCode(project) {
 			var projectOwner = projectList[i].projectOwner;
 			var startDate = projectList[i].startDate;
 			var endDate = projectList[i].endDate;
+			
+			var cprojectId = document.createElement('td');
+			var cprojectCode = document.createElement('td');
+			var cprojectDesc= document.createElement('td');
+			var cprojectCat= document.createElement('td');
+			var cprojectStartDate = document.createElement('td');
+			var cprojectEndDate = document.createElement('td');
+			
+			cprojectId.textContent = projectId;
+			cprojectCode.textContent = projectCode;
+			cprojectDesc.textContent = projectDesc;
+			cprojectCat.textContent = category;
+			cprojectStartDate.textContent = startDate;
+			cprojectEndDate.textContent = endDate;
 
+			$("#taskTable tbody").append(
+				$('<tr>').append(cprojectId, cprojectCode, cprojectDesc, cprojectCat, cprojectStartDate, cprojectEndDate)
+			);
 		}
 
 		//uncomment below to check what is returned from backend

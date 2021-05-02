@@ -151,12 +151,13 @@
 											</div>
 										</div>
 									</div>
+								<input type="submit" class="btn" value="Submit">
 								</form>
 
-								<div class="col-md d-flex justify-content-end mt-4">
+								<!--  <div class="col-md d-flex justify-content-end mt-4">
 									<button class="btn btn-sm btn-success  me-2" id="submit"
 										th:onclick="validate()" style="background-color: #246358;">Submit</button>
-								</div>
+								</div>-->
 							</div>
 						</div>
 					</div>
@@ -174,8 +175,9 @@
 
 								<form th:action="@{/saveProject}" method="post" th:object="${project}">
 									<div class="form-group">
-										<label for="tskTitle">Project Code</label> 
-										<input th:field="*{projectCode}" class="form-control" type="text" name="tskTitle" placeholder="Title" required>
+										<label for="tskTitle">Project Code</label> <input
+											th:field="*{projectCode}" class="form-control" type="text"
+											name="tskTitle" placeholder="Title" required>
 									</div>
 
 									<div class="form-group">
@@ -216,12 +218,14 @@
 										<textarea th:field="*{projectDesc}" class="form-control"
 											name="tskDesc" rows="3" maxlength="300"></textarea>
 									</div>
+									
+								<input type="submit" class="btn" value="Submit">
 								</form>
 
-								<div class="col-md d-flex justify-content-end mt-4">
+								<!--  <div class="col-md d-flex justify-content-end mt-4">
 									<button class="btn btn-sm btn-success  me-2" id="submit"
 										th:onclick="validate()" style="background-color: #246358;">Submit</button>
-								</div>
+								</div>-->
 							</div>
 						</div>
 					</div>
@@ -269,26 +273,18 @@
 								</div>
 							</div>
 
-							<table class="table table-hover border bg-white gray-text-color" id="tableTasks">
+							<table class="table table-hover border bg-white gray-text-color" id="taskTable">
 								<thead>
 									<tr>
 										<th style="width: 10%;">ID</th>
-										<th style="width: 30%;">Project Code</th>
+										<th style="width: 25%;">Project Code</th>
+										<th style="width: 20%;">Description</th>
 										<th style="width: 15%;">Category</th>
 										<th style="width: 15%;">Start Date</th>
 										<th style="width: 15%;">End Date</th>
-										<th style="width: 15%;">Assigned to</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="project: ${projects}">
-										<td th:text="'PRJTSK' + ${project.projectId}"></td>
-										<td th:text="${project.projectCode}"></td>
-										<td th:text="${project.category}"></td>
-										<td th:text="${project.startDate}"></td>
-										<td th:text="${project.endDate}"></td>
-										<td></td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -298,7 +294,7 @@
 
 							<div class="row mt-4 mb-2">
 								<div class="col">
-									<button class="btn btn-sm btn-outline-success me-1">+ Add</button>
+									<button class="btn btn-sm btn-outline-success me-1" th:href="@{#addProfileModal}">+ Add</button>
 									<!-- unhide these if selection was made -->
 									<button class="btn btn-sm btn-outline-primary me-1">Edit</button>
 									<button class="btn btn-sm btn-outline-danger me-1">- Delete</button>
@@ -319,24 +315,17 @@
 								</div>
 							</div>
 							
-							<table class="table table-hover border bg-white gray-text-color" id="tableEmployees">
+							<table class="table table-hover border bg-white gray-text-color" id="employeeTable">
                                 <thead>
                                     <tr>
                                         <th style="width: 12%;">ID</th>
                                         <th style="width: 35%;">Name</th>
                                         <th style="width: 17%;">Username</th>
-                                        <th style="width: 16%;">Password</th>
-                                        <th style="width: 20%;">Manager</th>
+                                        <th style="width: 16%;">Manager</th>
+                                        <th style="width: 20%;">Role</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                	<tr th:each="employee: ${employees}">
-                                		<td th:text="${employee.employeeId}"></td>
-                                		<td th:text="${employee.firstName} + ' ' + ${employee.lastName}"></td>
-                                		<td th:text="${employee.userName}"></td>
-                                		<td th:text="${employee.password}"></td>
-                                		<td th:text="${employee.managerId}"></td>
-                                	</tr>
                                 </tbody>
                             </table>
                         </div>
