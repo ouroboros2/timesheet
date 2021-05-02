@@ -85,7 +85,7 @@ function addHours() {
 				if ($(this).val().trim() != '' && hour > 0)
 					tasksDonePerDay[col]++;
 
-				populateBreakdown(colsum, tasksDonePerDay);
+				displayBreakdown(colsum, tasksDonePerDay);
 			});
 
 			col++;
@@ -96,7 +96,7 @@ function addHours() {
 }
 
 
-function populateBreakdown(colsum, tasksDonePerDay) {
+function displayBreakdown(colsum, tasksDonePerDay) {
 	var sum = 0;
 	var col = 0;
 
@@ -134,6 +134,31 @@ function populateBreakdown(colsum, tasksDonePerDay) {
 			}
 
 			col++;
+		});
+	});
+}
+
+function resetBreakdown() {
+	var col = 0;
+
+	$("#hoursBreakdownTable tr:nth-child(1)").each(function() {
+		$(this).find("td").each(function() {
+			
+			if (col < 7)
+				$(this).text(0);
+			else {
+				$(this).text("Project Tasks (0 hrs)");
+				$("#hoursBadge").text("0 hrs");
+			}
+			
+			col++
+		});
+	});
+
+	$("#hoursBreakdownTable tr:nth-child(2)").each(function() {
+		$(this).find("td").each(function() {
+
+			$(this).text("0 tasks");
 		});
 	});
 }
@@ -193,8 +218,12 @@ function deleteTask(taskId) {
 				text: 'Yes',
 				action: function() {
 					$("#task" + taskId).show();
-					$("#data" + taskId).remove();	
-					addHours();
+					$("#data" + taskId).remove();
+
+					if ($("#taskTable tbody").children().length !== 0)
+						addHours();
+					else
+						resetBreakdown();
 				}
 			},
 			no: {}
@@ -247,9 +276,11 @@ function saveTimeEntry(timeEntry) {
 		$("#badgeStatus").removeClass('bg-secondary').addClass('bg-success');
 		$("#badgeStatus").text("Submitted");
 
-		$("#btnAdd").attr('disabled', true);
-		$("#btnSubmit").attr('disabled', true);
-		$("#taskTable input[type='number']").attr("disabled", true);
+		$("#billable button").prop('disabled', true);
+		$("#nonbillable button").prop('disabled', true);
+		$("#btnSubmit").prop('disabled', true);
+		$("#taskTable").find("input,button").prop('disabled', true);
+		$('#taskTable').removeClass('table-hover');
 
 		//alert(someString);
 	}).fail(function(xhr, textStatus, errorThrown) {

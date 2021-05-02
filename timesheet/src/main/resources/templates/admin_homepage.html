@@ -242,56 +242,86 @@
                         </li>
                     </ul>
 
-					<div class="tab-content overflow-auto gray-text-color" style="max-height: 70vh;">
+					<div class="tab-content overflow-auto gray-text-color"
+						style="max-height: 70vh;">
 
-                        <div class="d-flex justify-content-between my-2">
-                        
-                           <!-- Form commented since Ajax will be used -->
-                           <!-- <form class="d-flex input-group-sm"> -->
-                                <input id="empEntry" class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-sm" th:onclick="	Employee()"><i class="fas fa-search"></i></button>
-                           <!-- </form> -->
-                            
-                            <div>
-	                            <button class="btn btn-sm btn-outline-success">+ ADD</button>
-	                            
-	                            <!-- unhide these if selection was made -->
-	                            <button class="btn btn-sm btn-outline-primary" hidden="hidden">Edit</button>
-	                            <button class="btn btn-sm btn-outline-danger"  hidden="hidden">- Delete</button>
-	                    	</div>
-                        </div>
+					<!-- TASKS -->
+						<div class="tab-pane fade show active" id="tasks">
 
-                        <!-- TASKS -->
-                        <div class="tab-pane fade show active" id="tasks">
+							<div class="row mt-4 mb-2">
+								<div class="col">
+									<button class="btn btn-sm btn-outline-success me-1">+ Add</button>
+									<!-- unhide these if selection was made -->
+									<button class="btn btn-sm btn-outline-primary me-1">Edit</button>
+									<button class="btn btn-sm btn-outline-danger me-1">- Delete</button>
+									<!-- hidden="hidden" -->
+								</div>
 
-                            <table class="table table-hover border gray-text-color" id="tableTasks">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10%;">ID</th>
-                                        <th style="width: 30%;">Project Code</th>
-                                        <th style="width: 15%;">Category</th>
-                                        <th style="width: 15%;">Start Date</th>
-                                        <th style="width: 15%;">End Date</th>
-                                        <th style="width: 15%;">Assigned to</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<tr th:each="project: ${projects}">
-                                		<td th:text="'PRJTSK' + ${project.projectId}"></td>
-                                		<td th:text="${project.projectCode}"></td>
-                                		<td th:text="${project.category}"></td>
-                                		<td th:text="${project.startDate}"></td>
-                                		<td th:text="${project.endDate}"></td>
-                                		<td></td>
-                                	</tr>
-                                </tbody>
-                            </table>
-                        </div>
+								<div class="col d-flex justify-content-end">
+									<div class="input-group w-50">
+										<input type="search" id="empEntry" class="form-control small-text"
+											placeholder="Search..." aria-label="Search">
+										<div class="input-group-append">
+											<button class="btn btn-sm"
+												th:onclick="Employee()">
+												<i class="fas fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<table class="table table-hover border bg-white gray-text-color" id="tableTasks">
+								<thead>
+									<tr>
+										<th style="width: 10%;">ID</th>
+										<th style="width: 30%;">Project Code</th>
+										<th style="width: 15%;">Category</th>
+										<th style="width: 15%;">Start Date</th>
+										<th style="width: 15%;">End Date</th>
+										<th style="width: 15%;">Assigned to</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="project: ${projects}">
+										<td th:text="'PRJTSK' + ${project.projectId}"></td>
+										<td th:text="${project.projectCode}"></td>
+										<td th:text="${project.category}"></td>
+										<td th:text="${project.startDate}"></td>
+										<td th:text="${project.endDate}"></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 
                         <!-- EMPLOYEES -->
                         <div class="tab-pane fade" id="employees">
 
-                            <table class="table table-hover border gray-text-color" id="tableEmployees">
+							<div class="row mt-4 mb-2">
+								<div class="col">
+									<button class="btn btn-sm btn-outline-success me-1">+ Add</button>
+									<!-- unhide these if selection was made -->
+									<button class="btn btn-sm btn-outline-primary me-1">Edit</button>
+									<button class="btn btn-sm btn-outline-danger me-1">- Delete</button>
+									<!-- hidden="hidden" -->
+								</div>
+
+								<div class="col d-flex justify-content-end">
+									<div class="input-group w-50">
+										<input type="search" id="empEntry" class="form-control small-text"
+											placeholder="Search..." aria-label="Search">
+										<div class="input-group-append">
+											<button class="btn btn-sm"
+												th:onclick="Employee()">
+												<i class="fas fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<table class="table table-hover border bg-white gray-text-color" id="tableEmployees">
                                 <thead>
                                     <tr>
                                         <th style="width: 12%;">ID</th>
@@ -312,6 +342,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        
                     </div>
                 </div>
 			</main>
