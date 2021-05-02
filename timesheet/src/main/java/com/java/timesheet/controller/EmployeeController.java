@@ -43,11 +43,12 @@ public class EmployeeController {
 		ModelAndView model;
 		employee = employeeService.findyByUsername(employee);
 		List<Project> projects = projectService.getManagerProjects(employee.getManagerId());
-		
+		List<Employee> managers = employeeService.getManagerList();
 
 		if (employee.getRole().equalsIgnoreCase("admin")) {
 			model = new ModelAndView("admin_homepage");
 			model.addObject("employee", new Employee());
+			model.addObject("managers", managers);			
 		} else {
 			model = new ModelAndView("employee_homepage");
 			model.addObject("employee", employee);
