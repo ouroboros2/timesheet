@@ -1,3 +1,6 @@
+initDate();
+addHours();
+
 function addToTimesheet() {
 
 	var taskList = [];
@@ -58,6 +61,7 @@ function addToTimesheet() {
 	}
 	taskList = [];
 	taskListObjs = [];
+	$("#btnSubmit").prop('disabled', false);
 }
 
 
@@ -156,11 +160,12 @@ function resetBreakdown() {
 	});
 
 	$("#hoursBreakdownTable tr:nth-child(2)").each(function() {
-		$(this).find("td").each(function() {
-
+		$(this).find("td:not(:last-child)").each(function() {
 			$(this).text("0 tasks");
 		});
 	});
+	
+	$("#btnSubmit").prop('disabled', true);
 }
 
 
@@ -290,8 +295,4 @@ function saveTimeEntry(timeEntry) {
 	});
 
 }
-
-
-initDate();
-addHours();
 

@@ -33,6 +33,7 @@ function searchEmployee() {
 	}
 
 	$("#employeeTable tbody").empty();
+	
 	//call corresponding Ajax and pass the object
 	findByEmployeeUserName(employee);
 
@@ -51,8 +52,8 @@ function searchProject() {
 		projectCode: entry
 	}
 
-
 	$("#taskTable tbody").empty();
+	
 	//call corresponding Ajax and pass the object
 	findByProjectCode(project);
 
@@ -81,19 +82,21 @@ function findByEmployeeUserName(employee) {
 			var role = employeeList[i].role;
 			
 			var cempId = document.createElement('td');
-			var cempName = document.createElement('td');
+			var cempFname = document.createElement('td');
+			var cempLname = document.createElement('td');
 			var cempUsername= document.createElement('td');
 			var cmanager= document.createElement('td');
 			var cempRole = document.createElement('td');
 			
 			cempId.textContent = employeeId;
-			cempName.textContent = firstName + ' ' + lastName;
+			cempFname.textContent = firstName;
+			cempLname.textContent = lastName;
 			cempUsername.textContent = userName;
 			cmanager.textContent = managerId;
 			cempRole.textContent = role;
 
 			$("#employeeTable tbody").append(
-				$('<tr>').append(cempId, cempName, cempUsername, cmanager, cempRole)
+				$('<tr>').append(cempId, cempFname, cempLname, cempUsername, cmanager, cempRole)
 			);
 		}
 

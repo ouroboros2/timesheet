@@ -21,7 +21,6 @@
 </head>
 
 <body>
-
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b3e40;">
 		<div class="container-fluid">
@@ -48,13 +47,13 @@
 				</div>
 
 				<!-- HEADER -->
+				<!--
 				<div class="row shadow gray-text-color p-1 ps-4 mx-1 my-4 bg-body rounded" >
 
 					<div class="col-md">
 						<span class="align-middle fw-bold" id="weekfromdate">Week 1</span>
 					</div>
 
-					<!-- DATE -->
 					<div class="col-md text-center">
 						<span id="daterange" class="align-middle fw-bold">Date Range</span>
 					</div>
@@ -68,18 +67,17 @@
 						<ul class="dropdown-menu" aria-labelledby="btnDropdown">
 							<li><a class="dropdown-item" data-toggle="modal" th:href="@{#addProfileModal}">Add Profile</a></li>
 							<li><a class="dropdown-item" data-toggle="modal" th:href="@{#addTaskModal}">Add Project Task</a></li>
-							<!--<li><a class="dropdown-item" th:href="@{/newProject}">Add Project Task</a></li> -->
 						</ul>
-					</div>
+					</div>	
 				</div>
+				 -->
 				
 				<!-- ADD PROFILE MODAL -->
 				<div class="modal fade bd-example-modal-lg" tabindex="-1"
-					role="dialog" id="addProfileModal"
-					aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered  modal-lg">
+					role="dialog" id="addProfileModal" aria-hidden="true">
+					
+					<div class="modal-dialog modal-dialog-centered modal-lg">
 						<div class="modal-content">
-
 							<div class="row p-3 overflow-auto">
 								
 								<form th:action="@{/saveNewEmployee}" method="post" th:object="${employee}">
@@ -151,7 +149,10 @@
 											</div>
 										</div>
 									</div>
-								<input type="submit" class="btn" value="Submit">
+									
+									<div class="col-md d-flex justify-content-end mt-3">
+										<input type="submit" class="btn btn-sm btn-success" value="Submit">
+									</div>
 								</form>
 
 								<!--  <div class="col-md d-flex justify-content-end mt-4">
@@ -173,7 +174,8 @@
 
 							<div class="row p-3 overflow-auto">
 
-								<form th:action="@{/saveProject}" method="post" th:object="${project}">
+								<form th:action="@{/saveProject}" method="post"
+									th:object="${project}">
 									<div class="form-group">
 										<label for="tskTitle">Project Code</label> <input
 											th:field="*{projectCode}" class="form-control" type="text"
@@ -181,17 +183,20 @@
 									</div>
 
 									<div class="form-group">
-										<label for="type">Project Owner</label>
-										<select class="form-control" th:field="*{projectOwner}" name="projectOwner" required>
-											<option th:each="manager: ${managers}" th:value="${manager.employeeId}"
+										<label for="type">Project Owner</label> <select
+											class="form-control" th:field="*{projectOwner}"
+											name="projectOwner" required>
+											<option th:each="manager: ${managers}"
+												th:value="${manager.employeeId}"
 												th:text="${manager.firstName} + ' ' + ${manager.lastName}">
 											</option>
 										</select>
 									</div>
 
 									<div class="form-group">
-										<label for="tskType">Type</label>
-										<select th:field="*{category}" class="form-control" name="tskType" required>
+										<label for="tskType">Type</label> <select
+											th:field="*{category}" class="form-control" name="tskType"
+											required>
 											<option th:value="Billable" th:text="Billable"></option>
 											<option th:value="Non-Billable" th:text="Non-Billable"></option>
 										</select>
@@ -218,8 +223,10 @@
 										<textarea th:field="*{projectDesc}" class="form-control"
 											name="tskDesc" rows="3" maxlength="300"></textarea>
 									</div>
-									
-								<input type="submit" class="btn" value="Submit">
+
+									<div class="col-md d-flex justify-content-end mt-4">
+										<input type="submit" class="btn btn-sm btn-success" value="Submit">
+									</div>
 								</form>
 
 								<!--  <div class="col-md d-flex justify-content-end mt-4">
@@ -232,7 +239,7 @@
 				</div>
 				
 				<!-- CONTAINER -->
-                <div class="row p-1 mx-1 my-5">
+                <div class="row p-1 mx-1 mt-2 mb-5">
 
                     <!-- NAVIGATION TABS -->
                     <ul class="nav nav-tabs text-center" style="font-size: 15px;">
@@ -249,14 +256,13 @@
 
 					<!-- TASKS -->
 						<div class="tab-pane fade show active" id="tasks">
-
 							<div class="row mt-4 mb-2">
 								<div class="col">
-									<button class="btn btn-sm btn-outline-success me-1">+ Add</button>
-									<!-- unhide these if selection was made -->
+									<button class="btn btn-sm btn-success me-1" data-toggle="modal"
+									th:href="@{#addTaskModal}">+ Add</button>
+									<!-- hidden="hidden" -->
 									<button class="btn btn-sm btn-outline-primary me-1">Edit</button>
 									<button class="btn btn-sm btn-outline-danger me-1">- Delete</button>
-									<!-- hidden="hidden" -->
 								</div>
 
 								<div class="col d-flex justify-content-end">
@@ -277,28 +283,29 @@
 								<thead>
 									<tr>
 										<th style="width: 10%;">ID</th>
-										<th style="width: 25%;">Project Code</th>
-										<th style="width: 20%;">Description</th>
+										<th style="width: 20%;">Project Code</th>
+										<th style="width: 25%;">Description</th>
 										<th style="width: 15%;">Category</th>
 										<th style="width: 15%;">Start Date</th>
 										<th style="width: 15%;">End Date</th>
 									</tr>
 								</thead>
 								<tbody>
+									<!-- projects go here -->
 								</tbody>
 							</table>
 						</div>
 
-                        <!-- EMPLOYEES -->
-                        <div class="tab-pane fade" id="employees">
 
+					<!-- EMPLOYEES -->
+                        <div class="tab-pane fade" id="employees">
 							<div class="row mt-4 mb-2">
 								<div class="col">
-									<button class="btn btn-sm btn-outline-success me-1" th:href="@{#addProfileModal}">+ Add</button>
-									<!-- unhide these if selection was made -->
+									<button class="btn btn-sm btn-success me-1" data-toggle="modal"
+									th:href="@{#addProfileModal}">+ Add</button>
+									<!-- hidden="hidden" -->
 									<button class="btn btn-sm btn-outline-primary me-1">Edit</button>
 									<button class="btn btn-sm btn-outline-danger me-1">- Delete</button>
-									<!-- hidden="hidden" -->
 								</div>
 
 								<div class="col d-flex justify-content-end">
@@ -319,17 +326,18 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 12%;">ID</th>
-                                        <th style="width: 35%;">Name</th>
-                                        <th style="width: 17%;">Username</th>
+                                        <th style="width: 18%;">First Name</th>
+                                        <th style="width: 18%;">Last Name</th>
+                                        <th style="width: 16%;">Username</th>
                                         <th style="width: 16%;">Manager</th>
                                         <th style="width: 20%;">Role</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	<!-- employees go here -->
                                 </tbody>
                             </table>
                         </div>
-                        
                     </div>
                 </div>
 			</main>

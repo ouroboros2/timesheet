@@ -91,10 +91,11 @@
 
             <div class="tab-content overflow-auto gray-text-color mt-4" style="max-height: 68vh;">
 
-				<!-- TASKS CONTAINER -->
+				<!-- BILLABLE CONTAINER -->
 				<div class="tab-pane fade show active" id="billable">
 
-					<div th:each="project: ${projects}" th:if="${project.category} == 'Billable'">
+					<div th:each="project: ${projects}" th:if="${project.category=='Billable' && project.startDate.before(#dates.createNow()) && 
+					project.endDate.after(#dates.createNow())}">
 						<div class="row pt-2 m-1 mb-3 bg-body rounded" th:id="task + ${project.projectId}">
 							<h6>
 								<input type="checkbox" th:id="${project.projectId}" th:name="tasks"
@@ -114,10 +115,11 @@
 					</div>
 				</div>
 
-				<!-- GROUP TASKS CONTAINER -->
+				<!-- NONBILLABLE CONTAINER -->
 				<div class="tab-pane fade" id="nonbillable">
 
-					<div th:each="project: ${projects}" th:if="${project.category} == 'Non-Billable'">
+					<div th:each="project: ${projects}" th:if="${project.category=='Non-Billable' && project.startDate.before(#dates.createNow()) && 
+					project.endDate.after(#dates.createNow())}">
 						<div class="row pt-2 m-1 mb-3 bg-body rounded" th:id="task + ${project.projectId}">
 							<h6>
 								<input type="checkbox" th:id="${project.projectId}" th:name="tasks"
@@ -192,7 +194,7 @@
                     <p class="fw-bold">Time Card</p>
                     
                     <div class="ms-auto">
-                        <button class="btn btn-success btn-sm" id="btnSubmit" th:onclick="insert()">Submit</button>
+                        <button class="btn btn-success btn-sm" id="btnSubmit" th:onclick="insert()" disabled="disabled">Submit</button>
                     </div>
                 </div>
 				
