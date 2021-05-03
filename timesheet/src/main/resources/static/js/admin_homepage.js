@@ -1,6 +1,6 @@
 searchProject();
 searchEmployee();
-displayWeek();
+//displayWeek();
 
 function displayWeek() {
 	var begin, end;
@@ -14,7 +14,7 @@ function displayWeek() {
 		end = new Date();
 	else
 		end = new Date().next().saturday();
-		
+
 	$("#weekfromdate").text("Week " + begin.getWeek());
 	$("#daterange").text(begin.toDateString() + " - " + end.toDateString());
 }
@@ -33,7 +33,7 @@ function searchEmployee() {
 	}
 
 	$("#employeeTable tbody").empty();
-	
+
 	//call corresponding Ajax and pass the object
 	findByEmployeeUserName(employee);
 
@@ -53,7 +53,7 @@ function searchProject() {
 	}
 
 	$("#taskTable tbody").empty();
-	
+
 	//call corresponding Ajax and pass the object
 	findByProjectCode(project);
 
@@ -80,14 +80,14 @@ function findByEmployeeUserName(employee) {
 			var userName = employeeList[i].userName;
 			var managerId = employeeList[i].managerId;
 			var role = employeeList[i].role;
-			
+
 			var cempId = document.createElement('td');
 			var cempFname = document.createElement('td');
 			var cempLname = document.createElement('td');
-			var cempUsername= document.createElement('td');
-			var cmanager= document.createElement('td');
+			var cempUsername = document.createElement('td');
+			var cmanager = document.createElement('td');
 			var cempRole = document.createElement('td');
-			
+
 			cempId.textContent = employeeId;
 			cempFname.textContent = firstName;
 			cempLname.textContent = lastName;
@@ -132,14 +132,14 @@ function findByProjectCode(project) {
 			var projectOwner = projectList[i].projectOwner;
 			var startDate = projectList[i].startDate;
 			var endDate = projectList[i].endDate;
-			
+
 			var cprojectId = document.createElement('td');
 			var cprojectCode = document.createElement('td');
-			var cprojectDesc= document.createElement('td');
-			var cprojectCat= document.createElement('td');
+			var cprojectDesc = document.createElement('td');
+			var cprojectCat = document.createElement('td');
 			var cprojectStartDate = document.createElement('td');
 			var cprojectEndDate = document.createElement('td');
-			
+
 			cprojectId.textContent = projectId;
 			cprojectCode.textContent = projectCode;
 			cprojectDesc.textContent = projectDesc;
@@ -160,4 +160,42 @@ function findByProjectCode(project) {
 		//alert("textStatus: " + textStatus);
 		//alert("errorThrown: " + errorThrown);
 	});
+}
+
+//If a task was clicked
+$("#taskTable tbody").on("click", "tr", function() {
+	$("#btnEditTask").prop('hidden', false);
+	$("#btnDeleteTask").prop('hidden', false);
+	
+	$("#btnEditTask").val($(this).find("td:first").text());
+	$("#btnDeleteTask").val($(this).find("td:first").text());
+});
+
+function editProject() {
+	alert('Edit');
+}
+
+function deleteProject() {
+	$('a').attr("href", "/deleteProject/" + $("#btnDeleteEmployee").val());
+	//alert('Delete');
+}
+
+
+
+//If an employee was clicked
+$("#employeeTable tbody").on("click", "tr", function() {
+	$("#btnEditEmployee").prop('hidden', false);
+	$("#btnDeleteEmployee").prop('hidden', false);
+	
+	$("#btnEditEmployee").val($(this).find("td:first").text());
+	$("#btnDeleteEmployee").val($(this).find("td:first").text());
+});
+
+function editEmployee() {
+	alert('Edit');
+}
+
+function deleteEmployee() {
+	$('a').attr("href", "/deleteEmployee/" + $("#btnDeleteEmployee").val());
+	//alert('Delete');
 }

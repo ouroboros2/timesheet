@@ -261,8 +261,13 @@
 									<button class="btn btn-sm btn-success me-1" data-toggle="modal"
 									th:href="@{#addTaskModal}">+ Add</button>
 									<!-- hidden="hidden" -->
-									<button class="btn btn-sm btn-outline-primary me-1">Edit</button>
-									<button class="btn btn-sm btn-outline-danger me-1">- Delete</button>
+									<a href="#">
+										<button id="btnEditTask" class="btn btn-sm btn-outline-primary me-1"
+											onclick="editProject()" hidden="hidden">Edit</button></a>
+
+									<a href="#">
+										<button id="btnDeleteTask" class="btn btn-sm btn-outline-danger me-1"
+											onclick="deleteProject()" hidden="hidden">- Delete</button></a>
 								</div>
 
 								<div class="col d-flex justify-content-end">
@@ -291,7 +296,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<!-- projects go here -->
+									<!-- tasks go here -->
 								</tbody>
 							</table>
 						</div>
@@ -304,8 +309,13 @@
 									<button class="btn btn-sm btn-success me-1" data-toggle="modal"
 									th:href="@{#addProfileModal}">+ Add</button>
 									<!-- hidden="hidden" -->
-									<button class="btn btn-sm btn-outline-primary me-1">Edit</button>
-									<button class="btn btn-sm btn-outline-danger me-1">- Delete</button>
+									<a href="#">
+										<button id="btnEditEmployee" class="btn btn-sm btn-outline-primary me-1"
+											onclick="editEmployee()" hidden="hidden">Edit</button></a>
+
+									<a href="#">
+										<button id="btnDeleteEmployee" class="btn btn-sm btn-outline-danger me-1"
+											onclick="deleteEmployee()" hidden="hidden">- Delete</button></a>
 								</div>
 
 								<div class="col d-flex justify-content-end">
