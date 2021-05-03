@@ -32,8 +32,7 @@ public class EmployeeController {
 	public ModelAndView login() {
 
 		ModelAndView model = new ModelAndView("login");
-		Employee employee = new Employee();
-		model.addObject("employee", employee);
+		model.addObject("employee", new Employee());
 		return model;
 	}
 
@@ -97,6 +96,10 @@ public class EmployeeController {
 
 		ModelAndView model = new ModelAndView("admin_homepage");
 		employeeService.deleteEmployee(employeeId);
+		ArrayList<Employee> managers = employeeService.getManagerList();
+		model.addObject("employee", new Employee());
+		model.addObject("managers", managers);	
+		model.addObject("project", new Project());
 		return model;
 	}
 }

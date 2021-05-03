@@ -67,6 +67,9 @@ public class TimeEntry {
 	@Column(name = "status")
 	private String status;
 
+	@Column(name = "weekNumber")
+	private int weekNumber;
+	
 	public int getTimeEntryId() {
 		return timeEntryId;
 	}
@@ -185,5 +188,13 @@ public class TimeEntry {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public int getWeekNumber() {
+		return weekNumber;
+	}
+
+	public void setWeekNumber(int weekNumber) {
+		this.weekNumber = weekNumber;
 	}
 }

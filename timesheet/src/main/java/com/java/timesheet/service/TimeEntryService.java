@@ -34,6 +34,7 @@ public class TimeEntryService {
 		timeEntry.setEmployeeId(5556);
 		timeEntry.setStatus("pending");
 		timeEntry.setProjectCode(projectCode);
+		timeEntry.setWeekNumber(timeEntry.getWeekNumber());
 		
 		timeEntryRepository.save(timeEntry);
 		
