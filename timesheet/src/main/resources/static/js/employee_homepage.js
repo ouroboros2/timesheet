@@ -205,7 +205,13 @@ function nextWeek() {
 function displayWeek() {
 	$("#weekfromdate").text("Week " + begin.getWeek());
 	$("#daterange").text(begin.toDateString() + " - " + end.toDateString());
-
+	const weekNumber = document.createElement('input');
+	weekNumber.value = begin.getWeek();
+	weekNumber.className = "parse";
+	weekNumber.hidden = true;	
+	$("#weekfromdate").append(weekNumber);
+	
+	
 	//formatted date for db
 	console.log(begin.toString("yyyy-MM-dd"));
 	console.log(end.toString("yyyy-MM-dd"));
@@ -255,14 +261,15 @@ function insert() {
 
 		for (var n = 0; n < entries.length; n++) {
 			timeEntry = {
-				projectCode: entries[0],
-				sunday: entries[1],
-				monday: entries[2],
-				tuesday: entries[3],
-				wednesday: entries[4],
-				thursday: entries[5],
-				friday: entries[6],
-				saturday: entries[7]
+				weekNumber: entries[0],
+				projectCode: entries[1],
+				sunday: entries[2],
+				monday: entries[3],
+				tuesday: entries[4],
+				wednesday: entries[5],
+				thursday: entries[6],
+				friday: entries[7],
+				saturday: entries[8]
 			}
 		}
 		saveTimeEntry(timeEntry);
