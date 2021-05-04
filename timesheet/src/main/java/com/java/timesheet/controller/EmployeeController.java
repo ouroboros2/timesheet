@@ -40,8 +40,15 @@ public class EmployeeController {
 	public ModelAndView validateEmployee(@ModelAttribute Employee employee) {
 
 		ModelAndView model;
+		List<Project> projects = null;
+		
 		employee = employeeService.findyByUsername(employee);
-		List<Project> projects = projectService.getManagerProjects(employee.getManagerId());
+		if(employee.getRole().equalsIgnoreCase("manager")) {
+			projects = projectService.getManagerProjects(employee.getEmployeeId());
+		} else {
+			projects = projectService.getManagerProjects(employee.getManagerId());
+		}
+		
 		List<Employee> managers = employeeService.getManagerList();
 
 		if (employee.getRole().equalsIgnoreCase("admin")) {

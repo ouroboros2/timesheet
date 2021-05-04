@@ -269,7 +269,9 @@ function insert() {
 				wednesday: entries[5],
 				thursday: entries[6],
 				friday: entries[7],
-				saturday: entries[8]
+				saturday: entries[8],
+				employeeId: entries[9],
+				managerId: entries[10]
 			}
 		}
 		saveTimeEntry(timeEntry);

@@ -45,5 +45,14 @@ public class ProjectService {
 		return projects;
 		
 	}
+	
+	public boolean isManagerProjectOwner() {
+		
+		boolean projectOwnerInd = false;
+		
+		
+		
+		return false;
+	}
 
 }

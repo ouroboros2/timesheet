@@ -30,8 +30,6 @@ public class TimeEntryService {
 		timeEntry.setCategory(project.getCategory());
 		timeEntry.setStartDate(project.getStartDate());
 		timeEntry.setEndDate(project.getEndDate());
-		timeEntry.setManagerId(5554);
-		timeEntry.setEmployeeId(5556);
 		timeEntry.setStatus("pending");
 		timeEntry.setProjectCode(projectCode);
 		timeEntry.setWeekNumber(timeEntry.getWeekNumber());
