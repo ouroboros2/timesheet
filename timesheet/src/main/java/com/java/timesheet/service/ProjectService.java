@@ -46,13 +46,8 @@ public class ProjectService {
 		
 	}
 	
-	public boolean isManagerProjectOwner() {
-		
-		boolean projectOwnerInd = false;
-		
-		
-		
-		return false;
+	public void deleteProject(int projectId) {
+		projectRepository.deleteById(projectId);
 	}
 
 }

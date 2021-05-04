@@ -60,15 +60,23 @@ public class ProjectController {
 
 		ModelAndView model = new ModelAndView("admin_homepage");
 		projectService.createProject(project);
+		ArrayList<Employee> managers = employeeService.getManagerList();
+		model.addObject("employee", new Employee());
+		model.addObject("managers", managers);	
+		model.addObject("project", new Project());
 		
 		return model;
 	}
 		
-	@RequestMapping("/deleteEmployee/{projectId}")
-	public ModelAndView deleteEmployee(@PathVariable("projectId") int employeeId) {
+	@RequestMapping("/deleteProject/{projectId}")
+	public ModelAndView deleteEmployee(@PathVariable("projectId") int projectId) {
 
 		ModelAndView model = new ModelAndView("admin_homepage");
-		employeeService.deleteEmployee(employeeId);
+		projectService.deleteProject(projectId);
+		ArrayList<Employee> managers = employeeService.getManagerList();
+		model.addObject("employee", new Employee());
+		model.addObject("managers", managers);	
+		model.addObject("project", new Project());
 		return model;
 	}
 		
