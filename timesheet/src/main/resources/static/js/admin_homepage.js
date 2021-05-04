@@ -52,7 +52,7 @@ function searchProject() {
 		projectCode: entry
 	}
 
-	$("#taskTable tbody").empty();
+	$("#projectTable tbody").empty();
 
 	//call corresponding Ajax and pass the object
 	findByProjectCode(project);
@@ -78,6 +78,7 @@ function findByEmployeeUserName(employee) {
 			var firstName = employeeList[i].firstName;
 			var lastName = employeeList[i].lastName;
 			var userName = employeeList[i].userName;
+			var password = employeeList[i].password;
 			var managerId = employeeList[i].managerId;
 			var role = employeeList[i].role;
 
@@ -87,6 +88,8 @@ function findByEmployeeUserName(employee) {
 			var cempUsername = document.createElement('td');
 			var cmanager = document.createElement('td');
 			var cempRole = document.createElement('td');
+			var cempPass = document.createElement('td');
+			
 
 			cempId.textContent = employeeId;
 			cempFname.textContent = firstName;
@@ -94,9 +97,11 @@ function findByEmployeeUserName(employee) {
 			cempUsername.textContent = userName;
 			cmanager.textContent = managerId;
 			cempRole.textContent = role;
+			cempPass.textContent = password;
+			cempPass.hidden = true;
 
 			$("#employeeTable tbody").append(
-				$('<tr>').append(cempId, cempFname, cempLname, cempUsername, cmanager, cempRole)
+				$('<tr>').append(cempId, cempFname, cempLname, cempUsername, cmanager, cempRole, cempPass).attr("id", employeeId).attr('id', employeeId)
 			);
 		}
 
@@ -133,22 +138,26 @@ function findByProjectCode(project) {
 			var startDate = projectList[i].startDate;
 			var endDate = projectList[i].endDate;
 
+
 			var cprojectId = document.createElement('td');
 			var cprojectCode = document.createElement('td');
 			var cprojectDesc = document.createElement('td');
 			var cprojectCat = document.createElement('td');
 			var cprojectStartDate = document.createElement('td');
 			var cprojectEndDate = document.createElement('td');
+			var cprojectOwner = document.createElement('td');
 
 			cprojectId.textContent = projectId;
 			cprojectCode.textContent = projectCode;
 			cprojectDesc.textContent = projectDesc;
 			cprojectCat.textContent = category;
-			cprojectStartDate.textContent = startDate;
-			cprojectEndDate.textContent = endDate;
+			cprojectStartDate.textContent = startDate.substring(0, 10);
+			cprojectEndDate.textContent = endDate.substring(0, 10);
+			cprojectOwner.textContent = projectOwner;
+			cprojectOwner.hidden = true;
 
-			$("#taskTable tbody").append(
-				$('<tr>').append(cprojectId, cprojectCode, cprojectDesc, cprojectCat, cprojectStartDate, cprojectEndDate)
+			$("#projectTable tbody").append(
+				$('<tr>').append(cprojectId, cprojectCode, cprojectDesc, cprojectCat, cprojectStartDate, cprojectEndDate, cprojectOwner).attr('id', projectId)
 			);
 		}
 
@@ -162,40 +171,100 @@ function findByProjectCode(project) {
 	});
 }
 
-//If a task was clicked
-$("#taskTable tbody").on("click", "tr", function() {
-	$("#btnEditTask").prop('hidden', false);
-	$("#btnDeleteTask").prop('hidden', false);
-	
-	$("#btnEditTask").val($(this).find("td:first").text());
-	$("#btnDeleteTask").val($(this).find("td:first").text());
+//If a project was clicked; DONE
+//Note: Values here are based on table row indexes. Change these if indexes were altered.
+$("#projectTable tbody").on("click", "tr", function() {
+	const $btnEdit = $("#btnEditProject");
+	const $btnDelete = $("#btnDeleteProject");
+
+	if ($(this).hasClass('table-active')) {
+		
+		$(this).removeClass('table-active');
+		
+		$btnEdit.prop('disabled', true);
+		$btnDelete.prop('disabled', true);
+		$btnEdit.removeAttr('value');
+		$btnDelete.removeAttr('value');		
+	} else {
+		
+		$("#projectTable tr.table-active").filter(function() {
+			$(this).removeClass('table-active');
+		});
+
+		$(this).addClass('table-active');
+		$btnEdit.prop('disabled', false);
+		$btnDelete.prop('disabled', false);
+
+		$btnEdit.val($(this).find("td:first").text());
+		$btnDelete.val($(this).find("td:first").text());
+	}
 });
 
 function editProject() {
-	alert('Edit');
+	//$("#btnEditProject").attr("th:href", "@{#editProjectModal}");
+	const $selectedRow = $("#" + $("#btnEditProject").val());
+	
+	$("#prjId").val($selectedRow.find("td:eq(0)").text());
+	$("#prjCode").val($selectedRow.find("td:eq(1)").text());
+	$("#prjDesc").val($selectedRow.find("td:eq(2)").text());
+	$("#prjOwner").val($selectedRow.find("td:eq(6)").text());
+	$("#prjType").val($selectedRow.find("td:eq(3)").text());
+	$("#prjStart").val($selectedRow.find("td:eq(4)").text());
+	$("#prjEnd").val($selectedRow.find("td:eq(5)").text());
 }
 
 function deleteProject() {
-	$('a').attr("href", "/deleteProject/" + $("#btnDeleteEmployee").val());
-	//alert('Delete');
+	window.location.href = "/deleteProject/" + $("#btnDeleteProject").val(); //change to delete project mapping
 }
 
 
-
-//If an employee was clicked
+//If an employee was clicked; DONE
+//Note: Values here are based on table row indexes. Change these if indexes were altered.
 $("#employeeTable tbody").on("click", "tr", function() {
-	$("#btnEditEmployee").prop('hidden', false);
-	$("#btnDeleteEmployee").prop('hidden', false);
-	
-	$("#btnEditEmployee").val($(this).find("td:first").text());
-	$("#btnDeleteEmployee").val($(this).find("td:first").text());
+	const $btnEdit = $("#btnEditEmployee");
+	const $btnDelete = $("#btnDeleteEmployee");
+
+	if ($(this).hasClass('table-active')) {
+		
+		$(this).removeClass('table-active');
+		
+		$btnEdit.prop('disabled', true);
+		$btnDelete.prop('disabled', true);
+		$btnEdit.removeAttr('value');
+		$btnDelete.removeAttr('value');		
+	} else {
+		
+		$("#employeeTable tr.table-active").filter(function() {
+			$(this).removeClass('table-active');
+		});
+
+		$(this).addClass('table-active');
+		$btnEdit.prop('disabled', false);
+		$btnDelete.prop('disabled', false);
+
+		$btnEdit.val($(this).find("td:first").text());
+		$btnDelete.val($(this).find("td:first").text());
+	}
 });
 
 function editEmployee() {
-	alert('Edit');
+	const $selectedRow = $("#" + $("#btnEditEmployee").val());
+
+	$("#empId").val($selectedRow.find("td:eq(0)").text());
+	$("#empFname").val($selectedRow.find("td:eq(1)").text());
+	$("#empLname").val($selectedRow.find("td:eq(2)").text());
+	$("#empRole").val($selectedRow.find("td:eq(5)").text());
+	
+	if ($("#empRole").val() === 'admin' || $("#empRole").val() === 'manager')
+		$("#empManager").hide();
+	else
+		$("#empManager").val($selectedRow.find("td:eq(4)").text());
+	
+	$("#empUname").val($selectedRow.find("td:eq(3)").text());
+	$("#empPass").val($selectedRow.find("td:eq(6)").text());
+	$("#empConfPass").val($selectedRow.find("td:eq(6)").text());
 }
 
 function deleteEmployee() {
-	$('a').attr("href", "/deleteEmployee/" + $("#btnDeleteEmployee").val());
-	//alert('Delete');
+	window.location.href = "/deleteEmployee/" + $("#btnDeleteEmployee").val();
 }
