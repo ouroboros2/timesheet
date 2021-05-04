@@ -1,8 +1,11 @@
 function getRole(role) {
-	if (role.value === 'admin' || role.value === 'manager')
+	if (role.value === 'admin' || role.value === 'manager') {
 		$("#field_manager").hide();
-	else if (role.value === 'employee')
+		$("#field_manager2").hide();
+	} else if (role.value === 'employee') {
 		$("#field_manager").show();
+		$("#field_manager2").show();
+	}
 }
 
 function comparePass() {

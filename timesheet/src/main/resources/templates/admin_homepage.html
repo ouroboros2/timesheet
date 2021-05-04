@@ -21,7 +21,7 @@
 </head>
 
 <body>
-	<!-- NAVBAR -->
+<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b3e40;">
 		<div class="container-fluid">
 			<a href="#" class="navbar-brand fw-bold">Timesheet Portal</a>
@@ -37,7 +37,7 @@
 		</div>
 	</nav>
 
-	<!-- CONTENT -->
+<!-- CONTENT -->
 	<div class="container-fluid gray-text-color">
 		<div class="row mx-2 mt-3">
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-12 pt-3 px-4">
@@ -46,7 +46,7 @@
 					<h4>Dashboard</h4>
 				</div>
 
-				<!-- HEADER -->
+			<!-- HEADER -->
 				<!--
 				<div class="row shadow gray-text-color p-1 ps-4 mx-1 my-4 bg-body rounded" >
 
@@ -72,7 +72,7 @@
 				</div>
 				 -->
 				
-				<!-- ADD PROFILE MODAL -->
+			<!-- ADD PROFILE MODAL -->
 				<div class="modal fade bd-example-modal-lg" tabindex="-1"
 					role="dialog" id="addProfileModal" aria-hidden="true">
 					
@@ -82,25 +82,21 @@
 								
 								<form th:action="@{/saveNewEmployee}" method="post" th:object="${employee}">
 									<div class="form-group">
-										<label for="userFname">First Name</label>
-										<input th:field="*{firstName}" class="form-control" type="text"
-											name="userFname" placeholder="First Name" required>
+										<label>First Name</label>
+										<input th:field="*{firstName}" class="form-control" type="text" required>
 									</div>
 
 									<div class="form-group">
-										<label for="userLname">Last Name</label>
-										<input th:field="*{lastName}" class="form-control" type="text"
-											name="userLname" placeholder="Last Name" required>
+										<label>Last Name</label>
+										<input th:field="*{lastName}" class="form-control" type="text" required>
 									</div>
 
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="type">Role</label>
-												<select class="form-control"
-													th:field="*{role}"
-													th:onchange="getRole(this)"
-													name="userType" required>
+												<label>Role</label>
+												<select class="form-control" th:field="*{role}"
+													th:onchange="getRole(this)"required>
 													<option th:value="employee">Employee</option>
 													<option th:value="manager">Manager</option>
 													<option th:value="admin">Admin</option>
@@ -110,9 +106,8 @@
 
 										<div class="col-md-6">
 											<div class="form-group" id="field_manager">
-												<label for="userManager">Manager</label>
-												<select th:field="*{managerId}" id="field_manager"
-													class="form-control" name="userManager">
+												<label>Manager</label>
+												<select class="form-control" th:field="*{managerId}" name="userManager">
 													<option th:each="manager: ${managers}"
 														th:value="${manager.employeeId}"
 														th:text="${manager.firstName} + ' ' + ${manager.lastName}">
@@ -123,28 +118,26 @@
 									</div>
 
 									<div class="form-group">
-										<label for="userUname">Username</label> <input
-											th:field="*{userName}" class="form-control" type="text"
-											name="userUname" placeholder="Username" required>
+										<label>Username</label>
+										<input th:field="*{userName}" class="form-control" type="text" required>
 									</div>
 
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
 												<div class="form-group">
-													<label for="field_pass">Password</label> <input
-														th:field="*{password}" class="form-control"
-														type="password" id="pass" placeholder="Password" required>
+													<label>Password</label>
+													<input class="form-control" th:field="*{password}"
+														type="password" id="pass" required>
 												</div>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<div class="form-group">
-													<label for="confpass">Confirm Password</label> <input
-														class="form-control" type="password" id="confpass"
-														placeholder="Password" th:onchange="comparePass()"
-														required>
+													<label>Confirm Password</label>
+													<input class="form-control" type="password" id="confpass"
+														th:onchange="comparePass()" required>
 												</div>
 											</div>
 										</div>
@@ -164,28 +157,30 @@
 					</div>
 				</div>
 				
-				
-				<!-- ADD TASK MODAL -->
+			<!-- ADD PROJECT MODAL -->
 				<div class="modal fade bd-example-modal-lg" tabindex="-1"
-					role="dialog" id="addTaskModal"
-					aria-hidden="true">
+					role="dialog" id="addProjectModal" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered  modal-lg">
 						<div class="modal-content">
 
 							<div class="row p-3 overflow-auto">
 
-								<form th:action="@{/saveProject}" method="post"
-									th:object="${project}">
+								<form th:action="@{/saveProject}" method="post" th:object="${project}">
 									<div class="form-group">
-										<label for="tskTitle">Project Code</label> <input
-											th:field="*{projectCode}" class="form-control" type="text"
-											name="tskTitle" placeholder="Title" required>
+										<label>Project Code</label>
+										<input th:field="*{projectCode}" class="form-control" type="text"
+											placeholder="PRJTSK" required>
+									</div>
+									
+									<div class="form-group">
+										<label>Description</label>
+											<input th:field="*{projectDesc}" class="form-control"
+												type="text" maxlength=50 required>
 									</div>
 
 									<div class="form-group">
-										<label for="type">Project Owner</label> <select
-											class="form-control" th:field="*{projectOwner}"
-											name="projectOwner" required>
+										<label>Project Owner</label>
+										<select class="form-control" th:field="*{projectOwner}" required>
 											<option th:each="manager: ${managers}"
 												th:value="${manager.employeeId}"
 												th:text="${manager.firstName} + ' ' + ${manager.lastName}">
@@ -194,34 +189,25 @@
 									</div>
 
 									<div class="form-group">
-										<label for="tskType">Type</label> <select
-											th:field="*{category}" class="form-control" name="tskType"
-											required>
+										<label>Type</label>
+										<select th:field="*{category}" class="form-control" required>
 											<option th:value="Billable" th:text="Billable"></option>
 											<option th:value="Non-Billable" th:text="Non-Billable"></option>
 										</select>
 									</div>
 
 									<div class="form-group">
-										<label for="tskStartDate">Start Date</label> <input
-											th:field="*{startDate}" type="date" class="form-control"
-											id="tskStartDate" name="tskStartDate"
-											data-toggle="datepicker" placeholder="YYYY-MM-DD" required>
+										<label>Start Date</label>
+										<input th:field="*{startDate}" type="date" class="form-control"
+											data-toggle="datepicker" placeholder="MM/DD/YYYY" required>
 										<div data-toggle="datepicker"></div>
 									</div>
 
 									<div class="form-group">
-										<label for="tskEndDate">End Date</label> <input
-											th:field="*{endDate}" type="date" class="form-control"
-											id="tskEndDate" name="tskEndDate" data-toggle="datepicker"
-											placeholder="YYYY-MM-DD" required>
+										<label>End Date</label>
+										<input th:field="*{endDate}" type="date" class="form-control"
+											data-toggle="datepicker" placeholder="MM/DD/YYYY" required>
 										<div data-toggle="datepicker"></div>
-									</div>
-
-									<div class="form-group">
-										<label for="tskDesc">Description</label>
-										<textarea th:field="*{projectDesc}" class="form-control"
-											name="tskDesc" rows="3" maxlength="300"></textarea>
 									</div>
 
 									<div class="col-md d-flex justify-content-end mt-4">
@@ -238,13 +224,14 @@
 					</div>
 				</div>
 				
-				<!-- CONTAINER -->
+				
+			<!-- CONTAINER -->
                 <div class="row p-1 mx-1 mt-2 mb-5">
 
-                    <!-- NAVIGATION TABS -->
+				<!-- NAVIGATION TABS -->
                     <ul class="nav nav-tabs text-center" style="font-size: 15px;">
                         <li class="nav-item">
-                            <a href="#tasks" class="nav-link gray-text-color active" data-toggle="tab">Project Tasks</a>
+                            <a href="#projects" class="nav-link gray-text-color active" data-toggle="tab">Project Tasks</a>
                         </li>
                         <li class="nav-item">
                             <a href="#employees" class="nav-link gray-text-color" data-toggle="tab">Employees</a>
@@ -254,29 +241,26 @@
 					<div class="tab-content overflow-auto gray-text-color"
 						style="max-height: 70vh;">
 
-					<!-- TASKS -->
-						<div class="tab-pane fade show active" id="tasks">
+					<!-- PROJECTS -->
+						<div class="tab-pane fade show active" id="projects">
 							<div class="row mt-4 mb-2">
 								<div class="col">
 									<button class="btn btn-sm btn-success me-1" data-toggle="modal"
-									th:href="@{#addTaskModal}">+ Add</button>
-									<!-- hidden="hidden" -->
-									<a href="#">
-										<button id="btnEditTask" class="btn btn-sm btn-outline-primary me-1"
-											onclick="editProject()" hidden="hidden">Edit</button></a>
+										th:href="@{#addProjectModal}">+ Add</button>
 
-									<a href="#">
-										<button id="btnDeleteTask" class="btn btn-sm btn-outline-danger me-1"
-											onclick="deleteProject()" hidden="hidden">- Delete</button></a>
+									<button id="btnEditProject" class="btn btn-sm btn-secondary me-1"
+										 th:href="@{#editProjectModal}" onclick="editProject()" data-toggle="modal" disabled>Edit</button>
+										
+									<button id="btnDeleteProject" class="btn btn-sm btn-danger me-1"
+										onclick="deleteProject()" disabled>- Delete</button>
 								</div>
 
 								<div class="col d-flex justify-content-end">
 									<div class="input-group w-50">
-										<input type="search" id="empEntry" class="form-control small-text"
+										<input type="search" class="form-control small-text"
 											placeholder="Search..." aria-label="Search">
 										<div class="input-group-append">
-											<button class="btn btn-sm"
-												th:onclick="searchProject()">
+											<button class="btn btn-sm" th:onclick="searchProject()">
 												<i class="fas fa-search"></i>
 											</button>
 										</div>
@@ -284,7 +268,7 @@
 								</div>
 							</div>
 
-							<table class="table table-hover border bg-white gray-text-color" id="taskTable">
+							<table class="table table-hover border bg-white gray-text-color" id="projectTable">
 								<thead>
 									<tr>
 										<th style="width: 10%;">ID</th>
@@ -301,6 +285,77 @@
 							</table>
 						</div>
 
+					<!-- EDIT PROJECT MODAL -->
+						<div class="modal fade bd-example-modal-lg" tabindex="-1"
+							role="dialog" id="editProjectModal" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered  modal-lg">
+								<div class="modal-content">
+
+									<div class="row p-3 overflow-auto">
+									
+										<!-- change to edit task mapping -->
+										<form th:action="@{#}" method="post" th:object="${project}">
+											<div class="form-group">
+												<label>Project ID</label>
+												<input th:field="*{projectId}" class="form-control" type="text"
+													id="prjId" disabled required>
+											</div>
+											
+											<div class="form-group">
+												<label>Project Code</label>
+												<input th:field="*{projectCode}" class="form-control" id="prjCode"
+													type="text" placeholder="PRJTSK" required>
+											</div>
+											
+											<div class="form-group">
+												<label>Description</label>
+												<input th:field="*{projectDesc}" class="form-control" id="prjDesc"
+													type="text" maxlength=50 required>
+											</div>
+
+											<div class="form-group">
+												<label>Project Owner</label>
+												<select class="form-control" th:field="*{projectOwner}" id="prjOwner" required>
+													<option th:each="manager: ${managers}"
+														th:value="${manager.employeeId}"
+														th:text="${manager.firstName} + ' ' + ${manager.lastName}">
+													</option>
+												</select>
+											</div>
+
+											<div class="form-group">
+												<label>Type</label>
+												<select th:field="*{category}" class="form-control" id="prjType" required>
+													<option th:value="Billable" th:text="Billable"></option>
+													<option th:value="Non-Billable" th:text="Non-Billable"></option>
+												</select>
+											</div>
+
+											<div class="form-group">
+												<label>Start Date</label>
+												<input th:field="*{startDate}" type="date" class="form-control"
+													id="prjStart" data-toggle="datepicker" placeholder="MM/DD/YYYY" required>
+												<div data-toggle="datepicker"></div>
+											</div>
+
+											<div class="form-group">
+												<label>End Date</label>
+												<input th:field="*{endDate}" type="date" class="form-control"
+													id="prjEnd" data-toggle="datepicker" placeholder="MM/DD/YYYY" required>
+												<div data-toggle="datepicker"></div>
+											</div>
+											
+											<div class="col-md d-flex justify-content-end mt-4">
+												<input type="submit" class="btn btn-sm btn-success"
+													value="Update">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
 
 					<!-- EMPLOYEES -->
                         <div class="tab-pane fade" id="employees">
@@ -308,19 +363,17 @@
 								<div class="col">
 									<button class="btn btn-sm btn-success me-1" data-toggle="modal"
 									th:href="@{#addProfileModal}">+ Add</button>
-									<!-- hidden="hidden" -->
-									<a href="#">
-										<button id="btnEditEmployee" class="btn btn-sm btn-outline-primary me-1"
-											onclick="editEmployee()" hidden="hidden">Edit</button></a>
-
-									<a href="#">
-										<button id="btnDeleteEmployee" class="btn btn-sm btn-outline-danger me-1"
-											onclick="deleteEmployee()" hidden="hidden">- Delete</button></a>
+									
+									<button id="btnEditEmployee" class="btn btn-sm btn-secondary me-1"
+										data-toggle="modal" th:href="@{#editEmployeeModal}" onclick="editEmployee()" disabled>Edit</button>
+										
+									<button id="btnDeleteEmployee" class="btn btn-sm btn-danger me-1"
+										onclick="deleteEmployee()" disabled>- Delete</button>
 								</div>
 
 								<div class="col d-flex justify-content-end">
 									<div class="input-group w-50">
-										<input type="search" id="empEntry" class="form-control small-text"
+										<input type="search" class="form-control small-text"
 											placeholder="Search..." aria-label="Search">
 										<div class="input-group-append">
 											<button class="btn btn-sm"
@@ -348,6 +401,102 @@
                                 </tbody>
                             </table>
                         </div>
+                    
+                    <!-- EDIT PROFILE MODAL -->
+						<div class="modal fade bd-example-modal-lg" tabindex="-1"
+							role="dialog" id="editEmployeeModal" aria-hidden="true">
+							
+							<div class="modal-dialog modal-dialog-centered modal-lg">
+								<div class="modal-content">
+									<div class="row p-3 overflow-auto">
+										
+										<form th:action="@{#}" method="post" th:object="${employee}">
+											<div class="form-group">
+												<label>Project ID</label>
+												<input th:field="*{employeeId}" class="form-control" type="text"
+													id="empId" disabled required>
+											</div>
+										
+											<div class="form-group">
+												<label>First Name</label>
+												<input th:field="*{firstName}" class="form-control" type="text"
+													id="empFname" required>
+											</div>
+		
+											<div class="form-group">
+												<label>Last Name</label>
+												<input th:field="*{lastName}" class="form-control" type="text"
+													id="empLname" required>
+											</div>
+		
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Role</label>
+														<select class="form-control" th:field="*{role}"
+															th:onchange="getRole(this)" id="empRole" required>
+															<option th:value="employee">Employee</option>
+															<option th:value="manager">Manager</option>
+															<option th:value="admin">Admin</option>
+														</select>
+													</div>
+												</div>
+		
+												<div class="col-md-6">
+													<div class="form-group" id="field_manager2">
+														<label>Manager</label>
+														<select class="form-control" th:field="*{managerId}" id="empManager">
+															<option th:each="manager: ${managers}"
+																th:value="${manager.employeeId}"
+																th:text="${manager.firstName} + ' ' + ${manager.lastName}">
+															</option>
+														</select>
+													</div>
+												</div>
+											</div>
+		
+											<div class="form-group">
+												<label>Username</label>
+													<input th:field="*{userName}" class="form-control" type="text"
+													id="empUname" required>
+											</div>
+		
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<div class="form-group">
+															<label>Password</label>
+															<input class="form-control" th:field="*{password}"
+																id="empPass" type="password"  required>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<div class="form-group">
+															<label>Confirm Password</label>
+															<input class="form-control" type="password"  id="empConfPass"
+															th:onchange="comparePass()" required>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="col-md d-flex justify-content-end mt-3">
+												<input type="submit" class="btn btn-sm btn-success" value="Update">
+											</div>
+										</form>
+		
+										<!--  <div class="col-md d-flex justify-content-end mt-4">
+											<button class="btn btn-sm btn-success  me-2" id="submit"
+												th:onclick="validate()" style="background-color: #246358;">Submit</button>
+										</div>-->
+									</div>
+								</div>
+							</div>
+						</div>
+                    
+                    
                     </div>
                 </div>
 			</main>
