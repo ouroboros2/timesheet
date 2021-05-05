@@ -1,3 +1,4 @@
+alert("test1");
 searchProject();
 searchEmployee();
 //displayWeek();
@@ -21,11 +22,11 @@ function displayWeek() {
 
 //call this function through the searchIcon
 function searchEmployee() {
-
 	//If blank, will return all employees
 	//get employee Username from Input Box (wildcard search)
 	//var entry = input entered by user
-	var entry = "";
+	var entry = $("#empsearch").val();
+	alert(entry);
 
 	//convert entry to Employee object
 	var employee = {
@@ -44,8 +45,7 @@ function searchProject() {
 
 	//If blank, will return all employees
 	//get ProjectCode from Input Box (wildcard Search)
-	var entry = "";
-
+	var entry = $("#projsearch").val();
 	//convert entry to Project object
 
 	var project = {
