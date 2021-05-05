@@ -1,4 +1,3 @@
-alert("test1");
 searchProject();
 searchEmployee();
 //displayWeek();
@@ -26,7 +25,6 @@ function searchEmployee() {
 	//get employee Username from Input Box (wildcard search)
 	//var entry = input entered by user
 	var entry = $("#empsearch").val();
-	alert(entry);
 
 	//convert entry to Employee object
 	var employee = {
@@ -162,7 +160,7 @@ function findByProjectCode(project) {
 		}
 
 		//uncomment below to check what is returned from backend
-		//alert(JSON.stringify(projectList));
+		//(JSON.stringify(projectList));
 
 	}).fail(function(xhr, textStatus, errorThrown) {
 		alert("xhr: " + xhr.responseText);
