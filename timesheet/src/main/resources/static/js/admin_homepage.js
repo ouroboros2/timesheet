@@ -179,10 +179,10 @@ $("#projectTable tbody").on("click", "tr", function() {
 		
 		$(this).removeClass('table-active');
 		
-		$btnEdit.prop('disabled', true);
-		$btnDelete.prop('disabled', true);
+		$btnEdit.prop('hidden', true);
+		$btnDelete.prop('hidden', true);
 		$btnEdit.removeAttr('value');
-		$btnDelete.removeAttr('value');		
+		$btnDelete.removeAttr('value');	
 	} else {
 		
 		$("#projectTable tr.table-active").filter(function() {
@@ -190,8 +190,8 @@ $("#projectTable tbody").on("click", "tr", function() {
 		});
 
 		$(this).addClass('table-active');
-		$btnEdit.prop('disabled', false);
-		$btnDelete.prop('disabled', false);
+		$btnEdit.prop('hidden', false);
+		$btnDelete.prop('hidden', false);
 
 		$btnEdit.val($(this).find("td:first").text());
 		$btnDelete.val($(this).find("td:first").text());
@@ -199,7 +199,6 @@ $("#projectTable tbody").on("click", "tr", function() {
 });
 
 function editProject() {
-	//$("#btnEditProject").attr("th:href", "@{#editProjectModal}");
 	const $selectedRow = $("#" + $("#btnEditProject").val());
 	
 	$("#prjId").val($selectedRow.find("td:eq(0)").text());
@@ -212,7 +211,7 @@ function editProject() {
 }
 
 function deleteProject() {
-	window.location.href = "/deleteProject/" + $("#btnDeleteProject").val(); //change to delete project mapping
+	window.location.href = "/deleteProject/" + $("#btnDeleteProject").val();
 }
 
 
@@ -226,10 +225,10 @@ $("#employeeTable tbody").on("click", "tr", function() {
 		
 		$(this).removeClass('table-active');
 		
-		$btnEdit.prop('disabled', true);
-		$btnDelete.prop('disabled', true);
+		$btnEdit.prop('hidden', true);
+		$btnDelete.prop('hidden', true);
 		$btnEdit.removeAttr('value');
-		$btnDelete.removeAttr('value');		
+		$btnDelete.removeAttr('value');
 	} else {
 		
 		$("#employeeTable tr.table-active").filter(function() {
@@ -237,8 +236,8 @@ $("#employeeTable tbody").on("click", "tr", function() {
 		});
 
 		$(this).addClass('table-active');
-		$btnEdit.prop('disabled', false);
-		$btnDelete.prop('disabled', false);
+		$btnEdit.prop('hidden', false);
+		$btnDelete.prop('hidden', false);
 
 		$btnEdit.val($(this).find("td:first").text());
 		$btnDelete.val($(this).find("td:first").text());
@@ -252,12 +251,7 @@ function editEmployee() {
 	$("#empFname").val($selectedRow.find("td:eq(1)").text());
 	$("#empLname").val($selectedRow.find("td:eq(2)").text());
 	$("#empRole").val($selectedRow.find("td:eq(5)").text());
-	
-	if ($("#empRole").val() === 'admin' || $("#empRole").val() === 'manager')
-		$("#empManager").hide();
-	else
-		$("#empManager").val($selectedRow.find("td:eq(4)").text());
-	
+	$("#empManager").val($selectedRow.find("td:eq(4)").text());
 	$("#empUname").val($selectedRow.find("td:eq(3)").text());
 	$("#empPass").val($selectedRow.find("td:eq(6)").text());
 	$("#empConfPass").val($selectedRow.find("td:eq(6)").text());
