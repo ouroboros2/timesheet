@@ -73,7 +73,7 @@
                                     <button type="button" class="btn btn-sm btn-success" th:id="'entry' + ${customEmpSubStat.index}">Approve</button>
                                     <button type="button" class="btn btn-sm btn-danger" th:id="'entry' + ${customEmpSubStat.index}">Reject</button>
                                     <th:block th:each="timeEntry:${customEmpSub.timeEntries}">
-                                    	<span th:class="'entry' + ${customEmpSubStat.index} + "|" ${timeEntry.timeEntryId}" th:value="${timeEntry.timeEntryId}"></span>
+                                    	<span th:class="'entry|' +  ${customEmpSubStat.index} + '|' + ${timeEntry.timeEntryId}" th:value="${timeEntry.timeEntryId}"></span>
                                     </th:block>
                                 </td>
 							</tr>
