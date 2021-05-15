@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<meta http-equiv="pragma" content="no-cache" />
 <title>Direct Reports</title>
 
 <link th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" rel="stylesheet" />
@@ -62,13 +63,13 @@
 						</thead>
 						<tbody>
 							<!-- content goes here -->
-							<tr th:each="employee: ${employees}">
-								<td th:text="${employee.employeeId}"></td>
-								<td th:text="${employee.lastName}"></td>
-								<td th:text="${employee.firstName}"></td>
+							<tr th:each="customEmpSub,customEmpSubStat : ${customEmpSubs}">
+								<td th:text="${customEmpSub.employeeId}"></td>
+								<td th:text="${customEmpSub.lastName}"></td>
+								<td th:text="${customEmpSub.firstName}"></td>
 								<td>
                                     <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
-                                        data-target=".bd-example-modal-lg">View Details</button>
+                                        th:data-target="'#table' + ${customEmpSubStat.index}">View Details</button>
                                     <button type="button" class="btn btn-sm btn-success">Approve</button>
                                     <button type="button" class="btn btn-sm btn-danger">Reject</button>
                                 </td>
@@ -79,14 +80,15 @@
 			</main>
 		</div>
 	</div>
-	
-	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	<th:block th:each="customEmpSub,customEmpSubStat : ${customEmpSubs}">
+	<div class="modal fade" th:id="'table' + ${customEmpSubStat.index}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                 <table class="table table-hover small-text" id="taskTable" style="color: #4a4a4a;">
                     <thead>
                         <tr>
+                        	<th>Week Number</th>
                             <th>ProjectID</th>
                             <th>ProjectCode</th>
                             <th>Category</th>
@@ -100,26 +102,27 @@
                             <th>Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr th:each="timeEntry:${timeEntries}">
-                            <td th:text="${timeEntry.employeeId}"></td>
-                            <td th:text="${timeEntry.projectCode}"></td>
-                            <td th:text="${timeEntry.category}"></td>
-                            <td th:text="${timeEntry.sunday}"></td>
-                            <td th:text="${timeEntry.monday}"></td>
-                            <td th:text="${timeEntry.tuesday}"></td>
-                            <td th:text="${timeEntry.wednesday}"></td>
-                            <td th:text="${timeEntry.thursday}"></td>
-                            <td th:text="${timeEntry.friday}"></td>
-                            <td th:text="${timeEntry.saturday}"></td>
-                            <td> Some function to add</td>
-                        </tr>
+                    <tbody> 
+	                        <tr th:each="timeEntry:${customEmpSub.timeEntries}">
+	                            <td th:text="${timeEntry.weekNumber}"></td>
+	                            <td th:text="${timeEntry.employeeId}"></td>
+	                            <td th:text="${timeEntry.projectCode}"></td>
+	                            <td th:text="${timeEntry.category}"></td>
+	                            <td th:text="${timeEntry.sunday}"></td>
+	                            <td th:text="${timeEntry.monday}"></td>
+	                            <td th:text="${timeEntry.tuesday}"></td>
+	                            <td th:text="${timeEntry.wednesday}"></td>
+	                            <td th:text="${timeEntry.thursday}"></td>
+	                            <td th:text="${timeEntry.friday}"></td>
+	                            <td th:text="${timeEntry.saturday}"></td>
+	                            <td> Some function to add</td>
+	                        </tr>         
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
+	</th:block>
 <!--
 	<div th:each="timeEntry:${timeEntries}">
 

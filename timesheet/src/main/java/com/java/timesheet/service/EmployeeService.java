@@ -70,5 +70,9 @@ public class EmployeeService {
 		}
 		return employees;
 	}
+	
+	public void someMethod() {
+		System.out.println("hELLO");
+	}
 
 }
