@@ -255,11 +255,9 @@ function insert() {
 	});
 	
 	var data = JSON.stringify(time);
-	alert(data);
 	data = data.replace(/\"/g, "");
 	data = data.replace(/[\[\]']+/g, '');
 	var projects = data.split(",|,");
-	//alert("Projects: " + projects);
 
 	for (var i = 0; i < projects.length; i++) {
 		var entries = projects[i].split(",");
