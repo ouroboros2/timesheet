@@ -70,10 +70,10 @@
 								<td>
                                     <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
                                         th:data-target="'#table' + ${customEmpSubStat.index}">View Details</button>
-                                    <button type="button" class="btn btn-sm btn-success" th:id="'entry' + ${customEmpSubStat.index}">Approve</button>
-                                    <button type="button" class="btn btn-sm btn-danger" th:id="'entry' + ${customEmpSubStat.index}">Reject</button>
+                                    <button type="button" class="btn btn-sm btn-success" th:id="'entry|' + ${customEmpSubStat.index}">Approve</button>
+                                    <button type="button" class="btn btn-sm btn-danger" th:id="'entry|' + ${customEmpSubStat.index}">Reject</button>
                                     <th:block th:each="timeEntry:${customEmpSub.timeEntries}">
-                                    	<span th:class="'entry|' +  ${customEmpSubStat.index} + '|' + ${timeEntry.timeEntryId}" th:value="${timeEntry.timeEntryId}"></span>
+                                    	<input th:class="'entry|' +  ${customEmpSubStat.index} + '|' + ${timeEntry.timeEntryId}" th:value="${timeEntry.timeEntryId}">
                                     </th:block>
                                 </td>
 							</tr>
