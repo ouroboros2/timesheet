@@ -43,10 +43,12 @@ public class TimeEntryService {
 					
 					if(!map.containsKey(timeEntry.get(m).getWeekNumber())) {
 						empTimeEntry = new ArrayList<TimeEntry>();
+						timeEntry.get(m).setTotal();
 						empTimeEntry.add(timeEntry.get(m));
 						map.put(timeEntry.get(m).getWeekNumber(), empTimeEntry);
 					} else {
 						empTimeEntry = map.get(timeEntry.get(m).getWeekNumber());
+						timeEntry.get(m).setTotal();
 						empTimeEntry.add(timeEntry.get(m));
 						map.put(timeEntry.get(m).getWeekNumber(), empTimeEntry);
 					}

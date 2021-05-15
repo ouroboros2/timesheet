@@ -207,7 +207,7 @@ function displayWeek() {
 	$("#daterange").text(begin.toDateString() + " - " + end.toDateString());
 	const weekNumber = document.createElement('input');
 	weekNumber.value = begin.getWeek();
-	weekNumber.className = "parse";
+	weekNumber.className = "main003";
 	weekNumber.hidden = true;	
 	$("#weekfromdate").append(weekNumber);
 	
@@ -244,34 +244,41 @@ function deleteTask(taskId) {
 
 
 function insert() {
+	var main = []
 	var time = [];
-
 	$('[class^="parse"]').map(function() {
 		time.push($(this).val());
 	});
 
+	$('[class^="main"]').map(function() {
+		main.push($(this).val());
+	});
+	
 	var data = JSON.stringify(time);
+	alert(data);
 	data = data.replace(/\"/g, "");
 	data = data.replace(/[\[\]']+/g, '');
 	var projects = data.split(",|,");
+	//alert("Projects: " + projects);
 
 	for (var i = 0; i < projects.length; i++) {
 		var entries = projects[i].split(",");
 		var timeEntry;
-
 		for (var n = 0; n < entries.length; n++) {
-			timeEntry = {
-				weekNumber: entries[0],
-				projectCode: entries[1],
-				sunday: entries[2],
-				monday: entries[3],
-				tuesday: entries[4],
-				wednesday: entries[5],
-				thursday: entries[6],
-				friday: entries[7],
-				saturday: entries[8],
-				employeeId: entries[9],
-				managerId: entries[10]
+			
+			timeEntry = {				
+				projectCode: entries[0],
+				sunday: entries[1],
+				monday: entries[2],
+				tuesday: entries[3],
+				wednesday: entries[4],
+				thursday: entries[5],
+				friday: entries[6],
+				saturday: entries[7],
+				employeeId: main[0],
+				managerId: main[1],
+				weekNumber: main[2]
+				
 			}
 		}
 		saveTimeEntry(timeEntry);

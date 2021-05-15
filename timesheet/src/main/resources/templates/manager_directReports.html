@@ -70,8 +70,11 @@
 								<td>
                                     <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
                                         th:data-target="'#table' + ${customEmpSubStat.index}">View Details</button>
-                                    <button type="button" class="btn btn-sm btn-success">Approve</button>
-                                    <button type="button" class="btn btn-sm btn-danger">Reject</button>
+                                    <button type="button" class="btn btn-sm btn-success" th:id="'entry' + ${customEmpSubStat.index}">Approve</button>
+                                    <button type="button" class="btn btn-sm btn-danger" th:id="'entry' + ${customEmpSubStat.index}">Reject</button>
+                                    <th:block th:each="timeEntry:${customEmpSub.timeEntries}">
+                                    	<span th:class="'entry' + ${customEmpSubStat.index} + "|" ${timeEntry.timeEntryId}" th:value="${timeEntry.timeEntryId}"></span>
+                                    </th:block>
                                 </td>
 							</tr>
 						</tbody>
@@ -115,7 +118,7 @@
 	                            <td th:text="${timeEntry.thursday}"></td>
 	                            <td th:text="${timeEntry.friday}"></td>
 	                            <td th:text="${timeEntry.saturday}"></td>
-	                            <td> Some function to add</td>
+	                            <td th:text="${timeEntry.total}"></td>
 	                        </tr>         
                     </tbody>
                 </table>

@@ -1,3 +1,4 @@
+
 package com.java.timesheet.model;
 
 import java.util.Date;
@@ -69,6 +70,8 @@ public class TimeEntry {
 
 	@Column(name = "weekNumber")
 	private int weekNumber;
+	
+	private int total;
 	
 	public int getTimeEntryId() {
 		return timeEntryId;
@@ -196,5 +199,15 @@ public class TimeEntry {
 
 	public void setWeekNumber(int weekNumber) {
 		this.weekNumber = weekNumber;
+	}
+	
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal() {
+		int totalSum = getSunday() + getMonday() + getTuesday() + getWednesday() + getThursday()
+						+ getFriday() + getSaturday();
+		this.total = totalSum;
 	}
 }

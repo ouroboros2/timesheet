@@ -19,7 +19,8 @@
 </head>
 
 <body>
-
+	<input class="main001" th:value="${employee.employeeId}">
+	<input class="main002" th:value="${employee.managerId}">
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2b3e40;">
 		<div class="container-fluid">
@@ -38,7 +39,6 @@
 			</ul>
 		</div>
 	</nav>
-
 
 	<!-- SECONDARY NAVBAR -->
 	<div class="row shadow p-1 ps-3 mx-4 my-4 gray-text-color bg-body rounded">
@@ -224,8 +224,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="parse" hidden th:text="${employee.employeeId}"></div>
-	<div class="parse" hidden th:text="${employee.managerId}"></div>
+	
 	
 	<script type="application/javascript" th:src="@{js/employee_homepage.js}"></script>
 </body>
