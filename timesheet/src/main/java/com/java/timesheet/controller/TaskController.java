@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.java.timesheet.model.Employee;
-import com.java.timesheet.model.TimeEntry;
 import com.java.timesheet.service.EmployeeService;
 import com.java.timesheet.service.ProjectService;
 import com.java.timesheet.service.TimeEntryService;
@@ -18,9 +17,6 @@ import com.java.util.CustomEmpSub;
 
 @Controller
 public class TaskController {
-
-	@Autowired
-	private ProjectService projectService;
 
 	@Autowired
 	private EmployeeService employeeService;

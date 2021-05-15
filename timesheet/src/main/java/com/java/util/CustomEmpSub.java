@@ -2,8 +2,6 @@ package com.java.util;
 
 import java.util.List;
 
-import javax.persistence.Column;
-
 import com.java.timesheet.model.TimeEntry;
 
 public class CustomEmpSub {
