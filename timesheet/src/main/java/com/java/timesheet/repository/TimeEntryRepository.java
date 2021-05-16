@@ -13,7 +13,9 @@ public interface TimeEntryRepository extends JpaRepository<TimeEntry, Integer> {
 	@Query("select t from TimeEntry t where t.managerId = ?1")
 	ArrayList<TimeEntry> getTimeSheetDetails(int managerId);
 	
-	List<TimeEntry> findByManagerIdAndStatusOrEmployeeId(int managerId, String status, int employeeId);
+	@Query("select t from TimeEntry t where t.managerId = ?1 and t.status = ?2 and t.employeeId = ?3")
+	List<TimeEntry> findPendingApprovals(int managerId, String status, int employeeId);
+	
 	
 	List<TimeEntry> findByEmployeeIdAndWeekNumber(int employeeId, int weekNumber);
 }

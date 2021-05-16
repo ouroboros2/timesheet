@@ -36,17 +36,24 @@ function updateStatus(dto) {
 	var url = "/reject";
 	//alert(JSON.stringify(dto[0]));
 	//alert(JSON.stringify(dto[1]));
-	if("approve" === dto[1]) {
+	if ("approve" === dto[1]) {
 		url = "/approve";
 	}
-	
+
 	$.post({
 		type: "POST",
 		url: url,
 		data: JSON.stringify(dto[0]),
 		contentType: "application/json"
 	}).done(function() {
-		alert("success");
+
+		if ("approve" === dto[1]) {
+			alert("Entry was approved");
+		}else {
+			alert("Entry was rejected");
+		}
+		location.reload(); 
+		
 	}).fail(function(xhr, textStatus, errorThrown) {
 		alert("xhr: " + xhr.responseText);
 		//alert("textStatus: " + textStatus);
