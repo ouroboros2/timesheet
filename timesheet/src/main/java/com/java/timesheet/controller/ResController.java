@@ -53,7 +53,7 @@ public class ResController {
 	@PostMapping("/approve")
 	public String approve(@RequestBody CustomEmpSub customEmpSub) {
 		
-		TimeEntry timeEntry = timeEntryService.retrieveTimeEntry(customEmpSub);
+		List<TimeEntry> timeEntry = timeEntryService.retrieveTimeEntry(customEmpSub);
 		timeEntryService.approveStatus(timeEntry); 
 		
 		return "200";	
@@ -62,7 +62,7 @@ public class ResController {
 	@PostMapping("/reject")
 	public String reject(@RequestBody CustomEmpSub customEmpSub) {
 		
-		TimeEntry timeEntry = timeEntryService.retrieveTimeEntry(customEmpSub);
+		List<TimeEntry> timeEntry = timeEntryService.retrieveTimeEntry(customEmpSub);
 		timeEntryService.rejectStatus(timeEntry); 
 		
 		return "200";	

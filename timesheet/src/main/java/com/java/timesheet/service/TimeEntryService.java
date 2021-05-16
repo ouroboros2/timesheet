@@ -61,8 +61,10 @@ public class TimeEntryService {
 				 customEmpSub.setWeekNumber(entry.getValue().get(0).getWeekNumber());
 				 customEmpSub.setTimeEntries(entry.getValue());
 				 
-				 generalTimeEntry.add(customEmpSub);
-			    }
+				 if(!customEmpSub.getTimeEntries().isEmpty()) {
+					 generalTimeEntry.add(customEmpSub); 
+				 }
+			 }
 		}
 		
 		/*
@@ -86,7 +88,7 @@ public class TimeEntryService {
 		timeEntryRepository.save(timeEntry);
 	}
 	
-	public TimeEntry retrieveTimeEntry(CustomEmpSub customEmpSub) {
+	public List<TimeEntry> retrieveTimeEntry(CustomEmpSub customEmpSub) {
 		
 		int weekNumber = customEmpSub.getWeekNumber();
 		int employeeId = customEmpSub.getEmployeeId();
@@ -94,13 +96,18 @@ public class TimeEntryService {
 		return timeEntryRepository.findByEmployeeIdAndWeekNumber(employeeId, weekNumber);
 	}
 	
-	public void approveStatus(TimeEntry timeEntry) {
-		timeEntry.setStatus("approved");
-		timeEntryRepository.save(timeEntry);
+	public void approveStatus(List<TimeEntry> timeEntry) {
+		for(TimeEntry entry: timeEntry) {
+			entry.setStatus("approved");
+			timeEntryRepository.save(entry);
+		}
+		
 	}
 	
-	public void rejectStatus(TimeEntry timeEntry) {
-		timeEntry.setStatus("rejected");
-		timeEntryRepository.save(timeEntry);
+	public void rejectStatus(List<TimeEntry> timeEntry) {
+		for(TimeEntry entry: timeEntry) {
+			entry.setStatus("Rejected");
+			timeEntryRepository.save(entry);
+		}
 	}
 }

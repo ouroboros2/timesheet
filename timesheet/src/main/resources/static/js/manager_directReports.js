@@ -18,8 +18,8 @@ function approve(obj) {
 function reject(obj) {
 	var dto = [];
 	var data = obj.id;
-	
-	var taskIds = data.split(data);
+
+	var taskIds = data.split("|");
 	var customEmpSub = {
 		weekNumber: taskIds[1],
 		employeeId: taskIds[2]
