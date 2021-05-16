@@ -14,4 +14,6 @@ public interface TimeEntryRepository extends JpaRepository<TimeEntry, Integer> {
 	ArrayList<TimeEntry> getTimeSheetDetails(int managerId);
 	
 	List<TimeEntry> findByManagerIdAndStatusOrEmployeeId(int managerId, String status, int employeeId);
+	
+	TimeEntry findByEmployeeIdAndWeekNumber(int employeeId, int weekNumber);
 }

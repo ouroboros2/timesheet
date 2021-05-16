@@ -42,26 +42,38 @@ public class EmployeeController {
 		ModelAndView model;
 		List<Project> projects = null;
 		
-		employee = employeeService.findyByUsername(employee);
-		if(employee.getRole().equalsIgnoreCase("manager")) {
-			projects = projectService.getManagerProjects(employee.getEmployeeId());
-		} else {
-			projects = projectService.getManagerProjects(employee.getManagerId());
-		}
-		
-		List<Employee> managers = employeeService.getManagerList();
-
-		if (employee.getRole().equalsIgnoreCase("admin")) {
+		if(employee.getUserName().equalsIgnoreCase("admin")) {
+			
+			List<Employee> managers = employeeService.getManagerList();
+			
 			model = new ModelAndView("admin_homepage");
 			model.addObject("employee", new Employee());
 			model.addObject("managers", managers);	
 			model.addObject("project", new Project());
 		} else {
-			model = new ModelAndView("employee_homepage");
-			model.addObject("employee", employee);
+			employee = employeeService.findyByUsername(employee);
+			if(employee.getRole().equalsIgnoreCase("manager")) {
+				projects = projectService.getManagerProjects(employee.getEmployeeId());
+			} else {
+				projects = projectService.getManagerProjects(employee.getManagerId());
+			}
+			
+			List<Employee> managers = employeeService.getManagerList();
+
+			if (employee.getRole().equalsIgnoreCase("admin")) {
+				model = new ModelAndView("admin_homepage");
+				model.addObject("employee", new Employee());
+				model.addObject("managers", managers);	
+				model.addObject("project", new Project());
+			} else {
+				model = new ModelAndView("employee_homepage");
+				model.addObject("employee", employee);
+			}
+			
+			model.addObject("projects", projects);
 		}
 		
-		model.addObject("projects", projects);
+		
 		
 		return model;
 	}

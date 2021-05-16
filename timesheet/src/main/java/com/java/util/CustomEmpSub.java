@@ -9,6 +9,7 @@ public class CustomEmpSub {
 	private int employeeId;
 	private String firstName;
 	private String lastName;
+	private int weekNumber;
 	private List<TimeEntry> timeEntries;
 	
 	public int getEmployeeId() {
@@ -34,6 +35,12 @@ public class CustomEmpSub {
 	}
 	public void setTimeEntries(List<TimeEntry> timeEntries) {
 		this.timeEntries = timeEntries;
+	}
+	public int getWeekNumber() {
+		return weekNumber;
+	}
+	public void setWeekNumber(int weekNumber) {
+		this.weekNumber = weekNumber;
 	}
 	
 	

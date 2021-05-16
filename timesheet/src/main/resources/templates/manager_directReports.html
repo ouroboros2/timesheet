@@ -70,11 +70,8 @@
 								<td>
                                     <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
                                         th:data-target="'#table' + ${customEmpSubStat.index}">View Details</button>
-                                    <button type="button" class="btn btn-sm btn-success" th:id="'entry|' + ${customEmpSubStat.index}">Approve</button>
-                                    <button type="button" class="btn btn-sm btn-danger" th:id="'entry|' + ${customEmpSubStat.index}">Reject</button>
-                                    <th:block th:each="timeEntry:${customEmpSub.timeEntries}">
-                                    	<input hidden th:class="'entry|' +  ${customEmpSubStat.index} + '|' + ${timeEntry.timeEntryId}" th:value="${timeEntry.timeEntryId}">
-                                    </th:block>
+                                    <button type="button" onClick="approve(this)" class="btn btn-sm btn-success" th:id="'approve|' + ${customEmpSub.weekNumber} + '|' + ${customEmpSub.employeeId}">Approve</button>
+                                    <button type="button" onClick="reject(this)" class="btn btn-sm btn-danger" th:id="'reject|' +${customEmpSub.weekNumber} + '|' + ${customEmpSub.employeeId}">Reject</button>
                                 </td>
 							</tr>
 						</tbody>
@@ -201,6 +198,6 @@
 		</div>
 	</div>
 	 -->
-
+<script type="application/javascript" th:src="@{../js/manager_directReports.js}"></script>
 </body>
 </html>

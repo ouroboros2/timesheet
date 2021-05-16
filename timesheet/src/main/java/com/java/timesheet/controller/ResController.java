@@ -13,6 +13,7 @@ import com.java.timesheet.model.TimeEntry;
 import com.java.timesheet.service.EmployeeService;
 import com.java.timesheet.service.ProjectService;
 import com.java.timesheet.service.TimeEntryService;
+import com.java.util.CustomEmpSub;
 
 
 @RestController
@@ -50,21 +51,19 @@ public class ResController {
 	}
 	
 	@PostMapping("/approve")
-	public String approve(@RequestBody TimeEntry timeEntry) {
+	public String approve(@RequestBody CustomEmpSub customEmpSub) {
 		
-		int projectCode = Integer.parseInt(timeEntry.getProjectCode());
-		Project project = projectService.findByProjectId(projectCode);
-		timeEntryService.saveTimeEntry(timeEntry, project);
+		TimeEntry timeEntry = timeEntryService.retrieveTimeEntry(customEmpSub);
+		timeEntryService.approveStatus(timeEntry); 
 		
 		return "200";	
 	}
 	
 	@PostMapping("/reject")
-	public String reject(@RequestBody TimeEntry timeEntry) {
+	public String reject(@RequestBody CustomEmpSub customEmpSub) {
 		
-		int projectCode = Integer.parseInt(timeEntry.getProjectCode());
-		Project project = projectService.findByProjectId(projectCode);
-		timeEntryService.saveTimeEntry(timeEntry, project);
+		TimeEntry timeEntry = timeEntryService.retrieveTimeEntry(customEmpSub);
+		timeEntryService.rejectStatus(timeEntry); 
 		
 		return "200";	
 	}

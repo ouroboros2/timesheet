@@ -58,6 +58,7 @@ public class TimeEntryService {
 				 customEmpSub.setEmployeeId(employeeId);   
 				 customEmpSub.setFirstName(employees.get(i).getFirstName());
 				 customEmpSub.setLastName(employees.get(i).getLastName());
+				 customEmpSub.setWeekNumber(entry.getValue().get(0).getWeekNumber());
 				 customEmpSub.setTimeEntries(entry.getValue());
 				 
 				 generalTimeEntry.add(customEmpSub);
@@ -83,7 +84,23 @@ public class TimeEntryService {
 		timeEntry.setWeekNumber(timeEntry.getWeekNumber());
 		
 		timeEntryRepository.save(timeEntry);
+	}
+	
+	public TimeEntry retrieveTimeEntry(CustomEmpSub customEmpSub) {
 		
+		int weekNumber = customEmpSub.getWeekNumber();
+		int employeeId = customEmpSub.getEmployeeId();
 		
+		return timeEntryRepository.findByEmployeeIdAndWeekNumber(employeeId, weekNumber);
+	}
+	
+	public void approveStatus(TimeEntry timeEntry) {
+		timeEntry.setStatus("approved");
+		timeEntryRepository.save(timeEntry);
+	}
+	
+	public void rejectStatus(TimeEntry timeEntry) {
+		timeEntry.setStatus("rejected");
+		timeEntryRepository.save(timeEntry);
 	}
 }
